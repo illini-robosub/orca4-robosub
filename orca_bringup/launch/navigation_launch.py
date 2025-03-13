@@ -45,13 +45,24 @@ def generate_launch_description():
     use_respawn = LaunchConfiguration('use_respawn')
     log_level = LaunchConfiguration('log_level')
 
+    #esther: add new launch config for map
+    #orca_nav2_dir = get_package_share_directory('orca_nav2')
+    #default_map_path = os.path.join(orca_nav2_dir, 'test_maps', 'map.yaml')
+    default_map_path = os.path.join('test_maps', 'map.yaml')
+    map_yaml_file = DeclareLaunchArgument(
+        'map',
+        default_value=default_map_path,
+        description='Full path to map yaml file to load'
+    )
+
     # Don't launch velocity_smoother
     lifecycle_nodes = ['controller_server',
                        'smoother_server',
                        'planner_server',
                        'behavior_server',
                        'bt_navigator',
-                       'waypoint_follower']
+                       'waypoint_follower',
+                       'map_server'] #esther: add map server to lifecycle nodes
 
     # Map fully qualified names to relative ones so the node's namespace can be prepended.
     # In case of the transforms (tf), currently, there doesn't seem to be a better alternative
@@ -65,7 +76,8 @@ def generate_launch_description():
     # Create our own temporary YAML files that include substitutions
     param_substitutions = {
         'use_sim_time': use_sim_time,
-        'autostart': autostart}
+        'autostart': autostart,}
+        #'yaml_filename': map_yaml_file,} #esther: add map yaml
 
     configured_params = RewrittenYaml(
             source_file=params_file,
@@ -182,6 +194,16 @@ def generate_launch_description():
                 parameters=[{'use_sim_time': use_sim_time},
                             {'autostart': autostart},
                             {'node_names': lifecycle_nodes}]),
+            Node( #esther: add costmap 2d thingy
+                package='nav2_costmap_2d',
+                executable='nav2_costmap_2d',
+                name='costmap_server',
+                output='screen',
+                respawn=use_respawn,
+                respawn_delay=2.0,
+                parameters=[configured_params],
+                arguments=['--ros-args', '--log-level', log_level],
+                remappings=remappings),
         ]
     )
 
@@ -232,6 +254,12 @@ def generate_launch_description():
                 parameters=[{'use_sim_time': use_sim_time,
                              'autostart': autostart,
                              'node_names': lifecycle_nodes}]),
+            ComposableNode( #esther: add costmap setuff
+                package='nav2_costmap_2d',
+                plugin='nav2_costmap_2d::CostmapServer',
+                name='costmap_server',
+                parameters=[configured_params],
+                remappings=remappings),
         ],
     )
 
@@ -253,5 +281,8 @@ def generate_launch_description():
     # Add the actions to launch all of the navigation nodes
     ld.add_action(load_nodes)
     ld.add_action(load_composable_nodes)
+    #esther: add map
+    #ld.add_action(map_yaml_file)
+
 
     return ld

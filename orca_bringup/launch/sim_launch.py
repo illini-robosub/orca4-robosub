@@ -52,6 +52,7 @@ def generate_launch_description():
 
     sim_left_ini = os.path.join(orca_bringup_dir, 'cfg', 'sim_left.ini')
     sim_right_ini = os.path.join(orca_bringup_dir, 'cfg', 'sim_right.ini')
+
     return LaunchDescription([
         DeclareLaunchArgument(
             'ardusub',

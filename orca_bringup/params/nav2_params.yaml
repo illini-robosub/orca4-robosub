@@ -155,7 +155,11 @@ global_costmap:
       origin_y: -50.0
       resolution: 1.0
       robot_radius: 0.22
-      plugins: ["obstacle_layer", "inflation_layer"]
+      plugins: ["static_layer", "obstacle_layer", "inflation_layer"] #esther: added static layer
+      static_layer:
+        plugin: "nav2_costmap_2d::StaticLayer"
+        map_subscribe_transient_local: True
+        map_topic: "/costmap"  # Point to your custom costmap topic
       obstacle_layer:
         plugin: "nav2_costmap_2d::ObstacleLayer"
         enabled: True
@@ -176,15 +180,28 @@ global_costmap:
     ros__parameters:
       use_sim_time: False
 
+# planner_server:
+#   ros__parameters:
+#     use_sim_time: False
+#     planner_plugins: ["GridBased"]
+
+#     # OrcaPlanner parameters
+#     GridBased:
+#       plugin: "orca_nav2/StraightLinePlanner3D"
+#       planning_dist: 0.1  # Plan a pose every planning_dist meters
+
+#esther: changed planner server to theta star
 planner_server:
   ros__parameters:
-    use_sim_time: False
+    expected_planner_frequency: 20.0
+    use_sim_time: True
     planner_plugins: ["GridBased"]
-
-    # OrcaPlanner parameters
     GridBased:
-      plugin: "orca_nav2/StraightLinePlanner3D"
-      planning_dist: 0.1  # Plan a pose every planning_dist meters
+      plugin: "nav2_theta_star_planner::ThetaStarPlanner" # In Iron and older versions, "/" was used instead of "::"
+      how_many_corners: 8
+      w_euc_cost: 1.0
+      w_traversal_cost: 2.0
+      w_heuristic_cost: 1.0
 
 planner_server_rclcpp_node:
   ros__parameters:
