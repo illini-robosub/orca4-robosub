@@ -165,4 +165,18 @@ RUN echo "export PATH=/home/$USERNAME/.local/bin:\$PATH" >> /home/$USERNAME/.bas
   && echo "source /home/$USERNAME/colcon_ws/src/orca4/setup.bash" >> /home/$USERNAME/.bashrc
 
 # Required to use the --console option on sim_vehicle.py:
-# RUN pip3 install matplotlib
+# RUN pip3 install matplotlibUSER root
+
+#Install QgroundControl (Added This)
+WORKDIR /home/$USERNAME/colcon_ws
+RUN sudo apt install libfuse2
+RUN sudo usermod -a -G dialout $USER
+RUN sudo apt-get remove modemmanager -y
+RUN sudo apt install gstreamer1.0-plugins-bad gstreamer1.0-libav gstreamer1.0-gl -y
+RUN sudo apt install libfuse2 -y
+RUN sudo apt install libxcb-xinerama0 libxkbcommon-x11-0 libxcb-cursor-dev -y
+RUN wget https://d176tv9ibo4jno.cloudfront.net/latest/QGroundControl.AppImage
+RUN sudo chmod +x ./QGroundControl.AppImage
+# RUN ./QGroundControl.AppImage
+
+USER $USERNAME
