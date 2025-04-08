@@ -1,4 +1,4 @@
-FROM osrf/ros:humble-desktop AS base
+FROM arm64v8/ros:humble-ros-base-jammy
 
 ARG USERNAME=orca4
 ARG USER_UID=1000
@@ -24,14 +24,92 @@ RUN apt-get update \
     vim \
   && rm -rf /var/lib/apt/lists/*
 
+
+
 # Install Gazebo Harmonic for use with ROS2 Humble
-RUN wget https://packages.osrfoundation.org/gazebo.gpg -O /usr/share/keyrings/pkgs-osrf-archive-keyring.gpg
-RUN echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/pkgs-osrf-archive-keyring.gpg] http://packages.osrfoundation.org/gazebo/ubuntu-stable $(lsb_release -cs) main" | tee /etc/apt/sources.list.d/gazebo-stable.list > /dev/null
-RUN apt-get update \
-  && apt-get -y --quiet --no-install-recommends install \
-    gz-harmonic \
-    ros-humble-ros-gzharmonic \
-  && rm -rf /var/lib/apt/lists/*
+# RUN wget https://packages.osrfoundation.org/gazebo.gpg -O /usr/share/keyrings/pkgs-osrf-archive-keyring.gpg
+# RUN echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/pkgs-osrf-archive-keyring.gpg] http://packages.osrfoundation.org/gazebo/ubuntu-stable $(lsb_release -cs) main" | tee /etc/apt/sources.list.d/gazebo-stable.list > /dev/null
+# RUN apt-get update \
+#   && apt-get -y --quiet --no-install-recommends install \
+#     gz-harmonic \
+#     ros-humble-ros-gzharmonic \
+#   && rm -rf /var/lib/apt/lists/*
+
+
+# # Dillon Version of the above 
+# # # Install Gazebo Harmonic for use with ROS2 Humble
+# # RUN wget https://packages.osrfoundation.org/gazebo.gpg -O /usr/share/keyrings/pkgs-osrf-archive-keyring.gpg
+# # RUN echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/pkgs-osrf-archive-keyring.gpg] http://packages.osrfoundation.org/gazebo/ubuntu-stable $(lsb_release -cs) main" | tee /etc/apt/sources.list.d/gazebo-stable.list > /dev/null
+# # RUN apt-get update
+# # RUN apt-get install ros-humble-ros-gzharmonic
+
+# RUN /bin/bash -c "source /opt/ros/humble/setup.sh && apt-get update \
+#   && apt-get -y --quiet --no-install-recommends install \
+#     gz-harmonic \
+#     ros-humble-ros-gzharmonic \
+#   && rm -rf /var/lib/apt/lists/*"
+
+# # # Install necessary tools for adding repositories and downloading packages (Below is from GPT seeing if i can get it to work)
+# # RUN apt-get update && apt-get install -y \
+#     curl \
+#     ca-certificates
+
+#     # gnupg2 \
+  
+# # Add ROS 2 Humble repository for ARM64
+# RUN curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg && \
+#     mkdir -p /ros2_ws/src && \
+#     vcs import /ros2_ws/src < /tmp/ros2.repos
+
+# # Install ROS 2 Humble dependencies
+# RUN apt update && apt install -y \
+#     ros-humble-desktop \
+#     ros-humble-gazebo-ros-pkgs \
+#     ros-humble-gazebo-msgs \
+#     && rm -rf /var/lib/apt/lists/*
+
+# # Install Gazebo repository for ARM64
+# RUN wget https://packages.osrfoundation.org/gazebo.gpg -O /usr/share/keyrings/pkgs-osrf-archive-keyring.gpg
+# RUN echo "deb [arch=arm64 signed-by=/usr/share/keyrings/pkgs-osrf-archive-keyring.gpg] http://packages.osrfoundation.org/gazebo/ubuntu-stable $(lsb_release -cs) main" | tee /etc/apt/sources.list.d/gazebo-stable.list > /dev/null
+
+# # Install Gazebo Harmonic and related packages
+# RUN /bin/bash -c "source /opt/ros/humble/setup.sh && apt-get update && \
+#     apt-get -y --quiet --no-install-recommends install \
+#     gz-harmonic \
+#     ros-humble-gazebo-harmonic && \
+#     rm -rf /var/lib/apt/lists/*"
+
+# # Clean up unnecessary files
+# RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+
+
+#Esther: install gazebo from source
+USER $root 
+RUN apt-get update
+RUN apt-get -y install python3-pip python3-venv lsb-release gnupg curl git 
+RUN python3 -m venv $HOME/vcs_colcon_installation
+RUN . $HOME/vcs_colcon_installation/bin/activate
+RUN pip3 install vcstool colcon-common-extensions
+RUN sh -c 'echo "deb http://packages.ros.org/ros2/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros2-latest.list'
+RUN curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
+RUN apt-get update
+RUN apt-get install python3-vcstool python3-colcon-common-extensions
+RUN mkdir -p /home/${USERNAME}/workspace/src
+WORKDIR /home/${USERNAME}/workspace/src
+RUN curl -O https://raw.githubusercontent.com/gazebo-tooling/gazebodistro/master/collection-harmonic.yaml
+RUN vcs import < collection-harmonic.yaml
+RUN curl https://packages.osrfoundation.org/gazebo.gpg --output /usr/share/keyrings/pkgs-osrf-archive-keyring.gpg
+RUN echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/pkgs-osrf-archive-keyring.gpg] http://packages.osrfoundation.org/gazebo/ubuntu-stable $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/gazebo-stable.list > /dev/null
+WORKDIR /home/${USERNAME}/workspace/src
+RUN apt-get update
+RUN apt-get -y install binutils-dev build-essential cmake freeglut3-dev libassimp-dev libavcodec-dev libswscale-dev libavdevice-dev libavformat-dev libavutil-dev libbenchmark-dev libdart6.13-collision-bullet-dev libdart6.13-collision-ode-dev libdart6.13-dev libdart6.13-external-ikfast-dev libdart6.13-external-odelcpsolver-dev libdart6.13-utils-urdf-dev libeigen3-dev libfreeimage-dev libgdal-dev libgflags-dev libglew-dev libgts-dev libjsoncpp-dev libogre-1.9-dev libogre-next-2.3-dev libogre-next-dev libprotobuf-dev libprotoc-dev libpython3-dev libsqlite3-dev libtinyxml2-dev liburdfdom-dev libvulkan-dev libwebsockets-dev libxi-dev libxml2-utils libxmu-dev libyaml-dev libzip-dev libzmq3-dev mesa-utils pkg-config protobuf-compiler python3-dev python3-protobuf python3-psutil python3-pybind11 python3-pytest qml-module-qt-labs-folderlistmodel qml-module-qt-labs-platform qml-module-qt-labs-settings qml-module-qtcharts qml-module-qtgraphicaleffects qml-module-qtlocation qml-module-qtpositioning qml-module-qtqml-models2 qml-module-qtquick-controls qml-module-qtquick-dialogs qml-module-qtquick-layouts qml-module-qtquick-templates2 qml-module-qtquick-window2 qml-module-qtquick2 qtbase5-dev qtdeclarative5-dev qtquickcontrols2-5-dev rubocop ruby swig uuid-dev x11-utils xvfb
+#RUN apt -y install \ $(sort -u $(find . -iname 'packages-'`lsb_release -cs`'.apt' -o -iname 'packages.apt' | grep -v '/\.git/') | sed '/gz\|sdf\|binutils-dev\|build-essential\|cmake\|curl\|freeglut3-dev\|libassimp-dev\|libavcodec-dev\|libswscale-dev\|libavdevice-dev\|libavformat-dev\|libavutil-dev\|libbenchmark-dev\|libdart6.13-collision-bullet-dev\|libdart6.13-collision-ode-dev\|libdart6.13-dev\|libdart6.13-external-ikfast-dev\|libdart6.13-external-odelcpsolver-dev\|libdart6.13-utils-urdf-dev\|libeigen3-dev\|libfreeimage-dev\|libgdal-dev\|libgflags-dev\|libglew-dev\|libgts-dev\|libjsoncpp-dev\|libogre-1.9-dev\|libogre-next-2.3-dev\|libogre-next-dev\|libprotobuf-dev\|libprotoc-dev\|libpython3-dev\|libsqlite3-dev\|libtinyxml2-dev\|liburdfdom-dev\|libvulkan-dev\|libwebsockets-dev\|libxi-dev\|libxml2-utils\|libxmu-dev\|libyaml-dev\|libzip-dev\|libzmq3-dev\|mesa-utils\|pkg-config\|protobuf-compiler\|python3-dev\|python3-protobuf\|python3-psutil\|python3-pybind11\|python3-pytest\|qml-module-qt-labs-folderlistmodel\|qml-module-qt-labs-platform\|qml-module-qt-labs-settings\|qml-module-qtcharts\|qml-module-qtgraphicaleffects\|qml-module-qtlocation\|qml-module-qtpositioning\|qml-module-qtqml-models2\|qml-module-qtquick-controls\|qml-module-qtquick-dialogs\|qml-module-qtquick-layouts\|qml-module-qtquick-templates2\|qml-module-qtquick-window2\|qml-module-qtquick2\|qtbase5-dev\|qtdeclarative5-dev\|qtquickcontrols2-5-dev\|rubocop\|ruby\|swig\|uuid-dev\|x11-utils\|xvfb/d' | tr '\n' ' ')
+WORKDIR /home/${USERNAME}/workspace
+RUN colcon graph
+RUN colcon build --merge-install
+RUN . /home/${USERNAME}/workspace/install/setup.bash
+
+
 
 # Install NVIDIA software
 RUN apt-get update \
@@ -72,17 +150,23 @@ RUN groupadd --gid $USER_GID $USERNAME \
   && echo "source /usr/share/bash-completion/completions/git" >> /home/$USERNAME/.bashrc
 
 # Switch to our new user
+# esther: chown might not be necessary if we remove the part before gazebo that sets the user to root, though be wary when changing that stuff because it takes 2+ hrs to build gazebo
 USER $USERNAME
+RUN chown -R $USER:$USER /home/${USERNAME}
 ENV USER=$USERNAME
+
+
 
 # Clone ArduSub code
 WORKDIR /home/$USERNAME
 RUN git clone https://github.com/ArduPilot/ardupilot.git --recurse-submodules
 
+
 # Install ArduSub prereqs (this also appends to .bashrc)
 WORKDIR /home/$USERNAME/ardupilot
 ENV SKIP_AP_EXT_ENV=1 SKIP_AP_GRAPHIC_ENV=1 SKIP_AP_COV_ENV=1 SKIP_AP_GIT_CHECK=1
 RUN Tools/environment_install/install-prereqs-ubuntu.sh -y
+# RUN sudo pip3 install --upgrade pip packaging setuptools wheel
 
 # Build ArduSub
 # Note: waf will capture all of the environment variables in ardupilot/.lock-waf_linux_build.
@@ -166,3 +250,5 @@ RUN echo "export PATH=/home/$USERNAME/.local/bin:\$PATH" >> /home/$USERNAME/.bas
 
 # Required to use the --console option on sim_vehicle.py:
 # RUN pip3 install matplotlib
+
+USER $USERNAME
