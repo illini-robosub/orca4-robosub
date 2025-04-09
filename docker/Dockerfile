@@ -154,13 +154,25 @@ RUN groupadd --gid $USER_GID $USERNAME \
 USER $USERNAME
 RUN chown -R $USER:$USER /home/${USERNAME}
 ENV USER=$USERNAME
-
+ENV ROOT=/home/${USERNAME}
 
 
 # Clone ArduSub code
-WORKDIR /home/$USERNAME
+WORKDIR $ROOT
+
+# Martin: Set user back to $root? seemed to work
+USER root
+RUN mkdir -p $ROOT && chmod 777 $ROOT
 RUN git clone https://github.com/ArduPilot/ardupilot.git --recurse-submodules
 
+USER root
+
+RUN chown -R $USERNAME:$USERNAME /home/$USERNAME
+
+RUN chmod 644 /home/$USERNAME/.bashrc
+
+# Switch back to user
+USER $USERNAME
 
 # Install ArduSub prereqs (this also appends to .bashrc)
 WORKDIR /home/$USERNAME/ardupilot
@@ -212,6 +224,8 @@ RUN rosdep update \
   && rosdep install -y --from-paths . --ignore-src
 
 # Build everything so far
+# Martin: error here, i remember running into this issue before but i forgot how i fixed it -- i'll try to find it  
+RUN sudo apt-get install -y ros-humble-image-geometry ros-humble-ros-gz-image
 RUN [ "/bin/bash" , "-c" , "\
   source /opt/ros/humble/setup.bash \
   && colcon build" ]

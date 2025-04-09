@@ -28,6 +28,7 @@ docker run -it \
     -v "/etc/localtime:/etc/localtime:ro" \
     -v "/dev/input:/dev/input" \
     --privileged \
+    --runtime=nvidia \
     --security-opt seccomp=unconfined \
     --gpus all \
     orca4:latest
