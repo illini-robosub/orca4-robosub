@@ -83,8 +83,8 @@ RUN apt-get update \
 # RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 
-#Esther: install gazebo from source
-USER $root 
+#Esther: install gazebo from source # change this to USER root 
+USER root 
 RUN apt-get update
 RUN apt-get -y install python3-pip python3-venv lsb-release gnupg curl git 
 RUN python3 -m venv $HOME/vcs_colcon_installation
@@ -225,7 +225,8 @@ RUN rosdep update \
 
 # Build everything so far
 # Martin: error here, i remember running into this issue before but i forgot how i fixed it -- i'll try to find it  
-RUN sudo apt-get install -y ros-humble-image-geometry ros-humble-ros-gz-image
+RUN sudo apt-get update
+RUN sudo apt-get install -y ros-humble-image-geometry ros-humble-ros-gz-image ros-humble-rqt-graph ros-humble-rviz2
 RUN [ "/bin/bash" , "-c" , "\
   source /opt/ros/humble/setup.bash \
   && colcon build" ]
@@ -266,3 +267,27 @@ RUN echo "export PATH=/home/$USERNAME/.local/bin:\$PATH" >> /home/$USERNAME/.bas
 # RUN pip3 install matplotlib
 
 USER $USERNAME
+
+
+#lsusb stuff
+RUN sudo apt update && sudo apt install -y usbutils
+RUN sudo usermod -aG dialout orca4
+
+USER $USERNAME
+
+
+# Dillon Adding the ZedX wrapper stuff
+# WORKDIR /home/$USERNAME/colcon_ws/src
+# RUN git clone https://github.com/stereolabs/zed-ros2-wrapper.git
+# RUN sudo apt update && sudo apt install -y ros-humble-ament-cmake-auto ros-humble-ament-cmake
+# RUN colcon build --symlink-install --cmake-args=-DCMAKE_BUILD_TYPE=Release
+# WORKDIR /home/$USERNAME/colcon_ws
+# RUN sudo apt update
+# RUN rosdep install --from-paths src --ignore-src -r -y
+
+# RUN echo source $(pwd)/install/local_setup.bash >> ~/.bashrc
+# RUN source ~/.bashrc 
+# # may break
+
+
+
