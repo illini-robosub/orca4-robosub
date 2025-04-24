@@ -209,6 +209,22 @@ RUN [ "/bin/bash" , "-c" , " \
 # -- work that depends on orca4 package.xml files
 # -- everything else
 
+
+
+USER $USERNAME
+
+
+#lsusb stuff
+RUN sudo apt update && sudo apt install -y usbutils
+#RUN sudo usermod -aG dialout orca4
+
+#install gazebo again (idk why but it is necessary for it to work)
+RUN sudo apt-get install -y gz-harmonic
+
+
+
+
+
 # Create colcon workspace and copy workspace.repos file
 WORKDIR /home/$USERNAME
 RUN mkdir -p colcon_ws/src/orca4
@@ -224,7 +240,6 @@ RUN rosdep update \
   && rosdep install -y --from-paths . --ignore-src
 
 # Build everything so far
-# Martin: error here, i remember running into this issue before but i forgot how i fixed it -- i'll try to find it  
 RUN sudo apt-get update
 RUN sudo apt-get install -y ros-humble-image-geometry ros-humble-ros-gz-image ros-humble-rqt-graph ros-humble-rviz2
 RUN [ "/bin/bash" , "-c" , "\
@@ -243,6 +258,41 @@ COPY --chown=$USER_UID:$USER_GID orca_shared/package.xml src/orca4/orca_shared/
 RUN rosdep update \
   && rosdep install -y --from-paths . --ignore-src
 
+#Esther: get ZED SDK
+WORKDIR /home/$USERNAME
+RUN wget -q -O ZED_SDK_Linux_Ubuntu22.run https://download.stereolabs.com/zedsdk/5.0/l4t36.4/jetsons?_gl=1*10ot5cs*_gcl_au*MTY4NjY0MTQ5My4xNzQzNDcwODI2
+RUN chmod +x ZED_SDK_Linux_Ubuntu22.run 
+RUN sudo apt-get install -y zstd
+# RUN ./ZED_SDK_Linux_Ubuntu22.run -- silent runtime_only
+RUN ./ZED_SDK_Linux_Ubuntu22.run -- silent
+RUN rm ZED_SDK_Linux_Ubuntu22.run
+
+
+# Dillon Adding the ZedX wrapper stuff
+#WORKDIR /home/$USERNAME
+WORKDIR /home/$USERNAME/colcon_ws/src
+RUN git clone https://github.com/stereolabs/zed-ros2-wrapper.git
+RUN sudo apt update && sudo apt install -y ros-humble-ament-cmake-auto ros-humble-ament-cmake
+WORKDIR /home/$USERNAME/colcon_ws
+RUN python -m pip install -U ultralytics
+RUN yolo export model=yolov8s.pt format=onnx simplify=False imgsz=512
+
+#RUN colcon build --symlink-install 
+#WORKDIR /home/$USERNAME/colcon_ws
+#RUN sudo apt update
+#RUN rosdep install --from-paths src --ignore-src -r -y
+
+#Set cuda environment vars
+ENV CUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda
+ENV CUDA_HOME=/usr/local/cuda
+ENV PATH=${CUDA_HOME}/bin:${PATH}
+ENV LD_LIBRARY_PATH=${CUDA_HOME}/lib64:${LD_LIBRARY_PATH}
+
+# Make sure dependencies are installed
+WORKDIR /home/$USERNAME/colcon_ws
+RUN rosdep update \
+  && rosdep install -y --from-paths . --ignore-src
+
 # MAVROS depends on GeographicLib, and GeographicLib needs some datasets
 RUN [ "/bin/bash" , "-c" , "\
   wget https://raw.githubusercontent.com/mavlink/mavros/master/mavros/scripts/install_geographiclib_datasets.sh \
@@ -255,7 +305,7 @@ COPY --chown=$USER_UID:$USER_GID . src/orca4
 # Build everything
 RUN [ "/bin/bash" , "-c" , "\
   source /opt/ros/humble/setup.bash \
-  && colcon build" ]
+  && colcon build --packages-skip zed_components zed_interfaces zed_wrapper zed_ros2" ]
 
 # Set up the environment
 WORKDIR /home/$USERNAME/colcon_ws
@@ -263,27 +313,13 @@ RUN echo "export PATH=/home/$USERNAME/.local/bin:\$PATH" >> /home/$USERNAME/.bas
   && echo "export PATH=/home/$USERNAME/.local/lib/python3.10/site-packages:\$PATH" >> /home/$USERNAME/.bashrc \
   && echo "source /home/$USERNAME/colcon_ws/src/orca4/setup.bash" >> /home/$USERNAME/.bashrc
 
+#build zed stuff on launch
+RUN chmod +x /home/$USERNAME/colcon_ws/src/orca4/docker/build_colcon.sh
+RUN echo /home/$USERNAME/colcon_ws/src/orca4/docker/build_colcon.sh >> /home/$USERNAME/.bashrc
+
 # Required to use the --console option on sim_vehicle.py:
 # RUN pip3 install matplotlib
 
-USER $USERNAME
-
-
-#lsusb stuff
-RUN sudo apt update && sudo apt install -y usbutils
-RUN sudo usermod -aG dialout orca4
-
-USER $USERNAME
-
-
-# Dillon Adding the ZedX wrapper stuff
-# WORKDIR /home/$USERNAME/colcon_ws/src
-# RUN git clone https://github.com/stereolabs/zed-ros2-wrapper.git
-# RUN sudo apt update && sudo apt install -y ros-humble-ament-cmake-auto ros-humble-ament-cmake
-# RUN colcon build --symlink-install --cmake-args=-DCMAKE_BUILD_TYPE=Release
-# WORKDIR /home/$USERNAME/colcon_ws
-# RUN sudo apt update
-# RUN rosdep install --from-paths src --ignore-src -r -y
 
 # RUN echo source $(pwd)/install/local_setup.bash >> ~/.bashrc
 # RUN source ~/.bashrc 

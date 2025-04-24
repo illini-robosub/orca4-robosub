@@ -27,8 +27,28 @@ docker run -it \
     -v "/tmp/.X11-unix:/tmp/.X11-unix" \
     -v "/etc/localtime:/etc/localtime:ro" \
     -v "/dev/input:/dev/input" \
+    -v "/usr/local/cuda:/usr/local/cuda" \
+    -v "/usr/lib/aarch64-linux-gnu:/usr/lib/aarch64-linux-gnu" \
+    -v "/tmp:/tmp" \
     --privileged \
     --runtime=nvidia \
     --security-opt seccomp=unconfined \
     --gpus all \
+    --device=/dev/video0 \
+    --device=/dev/video1 \
+    --device=/dev/bus/usb \
+    --device=/dev/nvhost-vi \
+    --device=/dev/nvhost-nvmap \
+    --device=/dev/nvhost-vic \
+    --device=/dev/nvhost-isp \
+    --device=/dev/nvhost-t194-nvhost-ctxsw-gpu \
+    --device=/dev/nvhost-gpu \
+    --device=/dev/nvhost-as-gpu \
+    --device=/dev/nvmap \
+    --device=/dev/nvhost-nvdec \
+    --device=/dev/nvhost-nvenc \
+    --device=/dev/nvhost-nvcsi \
+    --device=/dev/nvhost-msenc \
+    --device=/dev/nvhost-ctrl \
+    --ipc=host \
     orca4:latest
