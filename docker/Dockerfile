@@ -274,8 +274,8 @@ WORKDIR /home/$USERNAME/colcon_ws/src
 RUN git clone https://github.com/stereolabs/zed-ros2-wrapper.git
 RUN sudo apt update && sudo apt install -y ros-humble-ament-cmake-auto ros-humble-ament-cmake
 WORKDIR /home/$USERNAME/colcon_ws
-RUN python -m pip install -U ultralytics
-RUN yolo export model=yolov8s.pt format=onnx simplify=False imgsz=512
+#RUN python -m pip install -U ultralytics
+#RUN yolo export model=yolov8s.pt format=onnx simplify=False imgsz=512
 
 #RUN colcon build --symlink-install 
 #WORKDIR /home/$USERNAME/colcon_ws
