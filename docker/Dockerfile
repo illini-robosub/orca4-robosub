@@ -167,6 +167,17 @@ RUN echo "export PATH=/home/$USERNAME/.local/bin:\$PATH" >> /home/$USERNAME/.bas
 # Required to use the --console option on sim_vehicle.py:
 # RUN pip3 install matplotlibUSER root
 
+# #Testing 
+# RUN sudo apt update && sudo apt install -y \
+#     openssl \
+#     libssl3 \
+#     libssl-dev
+RUN sudo apt-get update && sudo apt-get install -y \
+    libusb-1.0-0-dev \
+    libftdi-dev \
+    libserialport-dev
+
+
 #Install QgroundControl (Added This)
 WORKDIR /home/$USERNAME/colcon_ws
 RUN sudo apt install libfuse2
@@ -178,5 +189,87 @@ RUN sudo apt install libxcb-xinerama0 libxkbcommon-x11-0 libxcb-cursor-dev -y
 RUN wget https://d176tv9ibo4jno.cloudfront.net/latest/QGroundControl.AppImage
 RUN sudo chmod +x ./QGroundControl.AppImage
 # RUN ./QGroundControl.AppImage
+
+
+
+# WORKDIR /home/$USERNAME/colcon_ws
+
+# # Install dependencies
+# RUN apt-get update && apt-get install -y qt6-base-dev ninja-build cmake
+
+# # Clone QGroundControl
+# RUN git clone --recursive -j8 https://github.com/mavlink/qgroundcontrol.git \
+#  && cd qgroundcontrol \
+#  && git submodule update --init --recursive
+
+# WORKDIR /home/$USERNAME/colcon_ws/qgroundcontrol
+
+# # Build with Qt CMake
+# RUN /usr/lib/qt6/bin/qt-cmake -B build -G Ninja -DCMAKE_BUILD_TYPE=Debug \
+#  && cmake --build build --config Debug
+
+
+
+
+
+
+# # RUN git clone --recursive -j8 https://github.com/mavlink/qgroundcontrol.git
+# # RUN git submodule update --recursive
+# RUN git clone --recursive -j8 https://github.com/mavlink/qgroundcontrol.git \
+#  && cd qgroundcontrol \
+#  && git submodule update --recursive
+
+
+
+# # ARG QT_VERSION=6.8.3
+# # ARG QT_MODULES="qtcharts qtlocation qtpositioning qtspeech qt5compat qtmultimedia qtserialport qtimageformats qtshadertools qtconnectivity qtquick3d qtsensors"
+
+# # ENV DEBIAN_FRONTEND noninteractive
+
+# # ENV DISPLAY :99
+
+# # ENV QT_PATH /opt/Qt
+# # ENV QT_DESKTOP $QT_PATH/${QT_VERSION}/gcc_64
+
+# # ENV PATH /usr/lib/ccache:$QT_DESKTOP/bin:$PATH
+
+# # COPY tools/setup/install-dependencies-debian.sh /tmp/qt/
+# # RUN /tmp/qt/install-dependencies-debian.sh
+
+# # COPY tools/setup/install-qt-debian.sh /tmp/qt/
+# # RUN /tmp/qt/install-qt-debian.sh
+
+# # RUN locale-gen en_US.UTF-8 && dpkg-reconfigure locales
+
+# # RUN git config --global --add safe.directory /project/source
+
+# # WORKDIR /project/build
+# # CMD cmake -S /project/source -B . -G Ninja -DCMAKE_BUILD_TYPE=Release ; \
+# #     cmake --build . --target all --config Release ; \
+# #     cmake --install . --config Release
+
+
+
+# # RUN git clone --recursive -j8 https://github.com/mavlink/qgroundcontrol.git
+# # RUN git submodule update --recursive
+
+# # RUN wget "https://d13lb3tujbc8s0.cloudfront.net/onlineinstallers/qt-online-installer-linux-x64-4.9.0.run"
+
+
+# # RUN sudo bash ./qgroundcontrol/tools/setup/install-dependencies-debian.sh
+
+
+# RUN cd qgroundcontrol
+# # Change the directory for qt-cmake to match your install location for Qt and the kit you want to use.
+# # RUN ~/Qt/6.8.3/gcc_64/bin/qt-cmake -B build -G Ninja -DCMAKE_BUILD_TYPE=Debug 
+# RUN /home/$USERNAME/Qt/6.8.3/gcc_64/bin/qt-cmake -B build -G Ninja -DCMAKE_BUILD_TYPE=Debug
+# RUN cmake --build build --config Debug
+# # RUN ./build/Debug/QGroundControl
+
+# ADD usb utils so you can connect Q ground Control to Orange Cube
+# USER root
+RUN sudo apt update && sudo apt install -y usbutils
+
+RUN sudo usermod -aG dialout orca4
 
 USER $USERNAME
