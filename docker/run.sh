@@ -28,6 +28,9 @@ docker run -it \
     -v "/etc/localtime:/etc/localtime:ro" \
     -v "/dev/input:/dev/input" \
     --privileged \
+    -v /dev/bus/usb:/dev/bus/usb \
+    --device=/dev/ttyACM0 \
+    --group-add dialout \
     --security-opt seccomp=unconfined \
     --gpus all \
-    orca4:latest
+    orca4:latest 
