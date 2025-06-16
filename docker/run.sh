@@ -30,6 +30,7 @@ docker run -it \
     -v "/usr/local/cuda:/usr/local/cuda" \
     -v "/usr/lib/aarch64-linux-gnu:/usr/lib/aarch64-linux-gnu" \
     -v "/tmp:/tmp" \
+    --network=host \
     --privileged \
     --runtime=nvidia \
     --security-opt seccomp=unconfined \
@@ -52,3 +53,5 @@ docker run -it \
     --device=/dev/nvhost-ctrl \
     --ipc=host \
     orca4:latest
+
+#     -v "/home/robosub/colcon_ws:/home/orca4/colcon_ws" \

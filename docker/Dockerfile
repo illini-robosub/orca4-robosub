@@ -253,6 +253,25 @@ COPY --chown=$USER_UID:$USER_GID orca_description/package.xml src/orca4/orca_des
 COPY --chown=$USER_UID:$USER_GID orca_msgs/package.xml src/orca4/orca_msgs/
 COPY --chown=$USER_UID:$USER_GID orca_nav2/package.xml src/orca4/orca_nav2/
 COPY --chown=$USER_UID:$USER_GID orca_shared/package.xml src/orca4/orca_shared/
+COPY --chown=$USER_UID:$USER_GID illini_pose_estimator/package.xml src/orca4/illini_pose_estimator/
+# COPY --chown=$USER_UID:$USER_GID imu_tf_broadcaster/package.xml src/orca4/imu_tf_broadcaster/
+COPY --chown=$USER_UID:$USER_GID imu_tf_broadcaster/ src/orca4/imu_tf_broadcaster/
+
+#Need this bc the dep got deleted up stream
+# RUN git clone --branch 1.0.6 https://github.com/ros-geographic-info/geographic_info.git src/geographic_info
+
+RUN sudo apt-get update && sudo apt-get install -y \
+    ros-humble-nav2-core \
+    ros-humble-nav2-util \
+    ros-humble-nav2-msgs \
+    ros-humble-nav2-costmap-2d \
+    ros-humble-nav2-voxel-grid \
+    ros-humble-nav2-common \
+    ros-humble-angles \
+    ros-humble-bond \
+    ros-humble-bondcpp \
+    ros-humble-smclib
+
 
 # Run rosdep over orca4 package.xml files
 RUN rosdep update \
@@ -274,8 +293,17 @@ WORKDIR /home/$USERNAME/colcon_ws/src
 RUN git clone https://github.com/stereolabs/zed-ros2-wrapper.git
 RUN sudo apt update && sudo apt install -y ros-humble-ament-cmake-auto ros-humble-ament-cmake
 WORKDIR /home/$USERNAME/colcon_ws
-#RUN python -m pip install -U ultralytics
-#RUN yolo export model=yolov8s.pt format=onnx simplify=False imgsz=512
+
+#Esther: add ZedOdDisplay
+WORKDIR /home/$USERNAME/colcon_ws/src
+RUN git clone https://github.com/stereolabs/zed-ros2-examples.git
+WORKDIR /home/$USERNAME/colcon_ws
+
+
+RUN pip install --no-cache-dir ultralytics
+RUN ~/.local/bin/yolo export model=yolov8s.pt format=onnx simplify=False dynamic=False imgsz=512
+
+
 
 #RUN colcon build --symlink-install 
 #WORKDIR /home/$USERNAME/colcon_ws
@@ -290,10 +318,17 @@ ENV LD_LIBRARY_PATH=${CUDA_HOME}/lib64:${LD_LIBRARY_PATH}
 
 # Make sure dependencies are installed
 WORKDIR /home/$USERNAME/colcon_ws
-RUN rosdep update \
-  && rosdep install -y --from-paths . --ignore-src
+RUN rosdep init || true && rosdep update
+RUN sudo apt-get update
+# RUN rosdep update \
+#   && rosdep install -y --from-paths . --ignore-src 
 
-# MAVROS depends on GeographicLib, and GeographicLib needs some datasets
+#temporarily ignoring a dependency for testing purposes
+RUN rosdep update \
+ && rosdep install -y --from-paths . --ignore-src --skip-keys="scout_description"
+
+
+# MAVROS depends on Geographic--ignore-errors Lib, and GeographicLib needs some datasets
 RUN [ "/bin/bash" , "-c" , "\
   wget https://raw.githubusercontent.com/mavlink/mavros/master/mavros/scripts/install_geographiclib_datasets.sh \
   && chmod +x install_geographiclib_datasets.sh \
@@ -302,10 +337,14 @@ RUN [ "/bin/bash" , "-c" , "\
 # Copy everything
 COPY --chown=$USER_UID:$USER_GID . src/orca4
 
-# Build everything
+# # Build everything
+# RUN [ "/bin/bash" , "-c" , "\
+#   source /opt/ros/humble/setup.bash \
+#   && colcon build --packages-skip zed_components zed_interfaces zed_wrapper zed_ros2" ]
+# Build everything - Dillon testing version
 RUN [ "/bin/bash" , "-c" , "\
-  source /opt/ros/humble/setup.bash \
-  && colcon build --packages-skip zed_components zed_interfaces zed_wrapper zed_ros2" ]
+source /opt/ros/humble/setup.bash \
+&& colcon build --packages-skip zed_components zed_interfaces zed_wrapper zed_ros2 zed_multi_camera zed_aruco_localization zed_tutorial_depth zed_topic_benchmark_interfaces zed_tutorial_video zed_tutorial_pos_tracking rviz_plugin_zed_od zed_topic_benchmark_component zed_rgb_convert zed_depth_to_laserscan zed_display_rviz2 zed_robot_integration zed_topic_benchmark zed_ipc" ]
 
 # Set up the environment
 WORKDIR /home/$USERNAME/colcon_ws
@@ -321,8 +360,8 @@ RUN echo /home/$USERNAME/colcon_ws/src/orca4/docker/build_colcon.sh >> /home/$US
 # RUN pip3 install matplotlib
 
 
-# RUN echo source $(pwd)/install/local_setup.bash >> ~/.bashrc
-# RUN source ~/.bashrc 
+RUN echo source $(pwd)/install/local_setup.bash >> ~/.bashrc
+#RUN source ~/.bashrc 
 # # may break
 
 
