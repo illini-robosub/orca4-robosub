@@ -102,7 +102,7 @@ private:
     //Smooth the acceleration values to avoid noise and make things more stable/consistent
     const double alpha = 0.17;
     smoothed_accel_.setX(alpha * accel_world.getX() + (1 - alpha) * smoothed_accel_.getX());
-    smoothed_accel_.setY(alpha * accel_world.getY() + (1 - agit lpha) * smoothed_accel_.getY());
+    smoothed_accel_.setY(alpha * accel_world.getY() + (1 - alpha) * smoothed_accel_.getY());
     smoothed_accel_.setZ(alpha * accel_world.getZ() + (1 - alpha) * smoothed_accel_.getZ());
 
     std::cout<<"accel_x1 : "<<accel_world.getX()<<std::endl;
