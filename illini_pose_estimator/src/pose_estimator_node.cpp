@@ -88,7 +88,12 @@ private:
       last_imu_.linear_acceleration.z);
 
     // Rotate to world frame and subtract gravity
-    tf2::Vector3 accel_world = R * accel_body;
+    // tf2::Vector3 accel_world = R * accel_body;
+
+    // R * accel_body ==> applies (world-> body) rotation to body frame vector
+    // should do (body -> world) instead?
+    tf2::Vector3 accel_world = R.transpose() * accel_body;  
+
     // accel_world.setZ(accel_world.getZ() - 9.80665);
     tf2::Vector3 gravity_world(0.0, 0.0, 9.80665);
     accel_world = accel_world - gravity_world;
@@ -97,7 +102,7 @@ private:
     //Smooth the acceleration values to avoid noise and make things more stable/consistent
     const double alpha = 0.17;
     smoothed_accel_.setX(alpha * accel_world.getX() + (1 - alpha) * smoothed_accel_.getX());
-    smoothed_accel_.setY(alpha * accel_world.getY() + (1 - alpha) * smoothed_accel_.getY());
+    smoothed_accel_.setY(alpha * accel_world.getY() + (1 - agit lpha) * smoothed_accel_.getY());
     smoothed_accel_.setZ(alpha * accel_world.getZ() + (1 - alpha) * smoothed_accel_.getZ());
 
     std::cout<<"accel_x1 : "<<accel_world.getX()<<std::endl;
