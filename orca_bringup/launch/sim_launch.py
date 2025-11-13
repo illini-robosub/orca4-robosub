@@ -115,6 +115,7 @@ def generate_launch_description():
                 '/mavros/vision_pose/pose',
                 '/model/orca4/odometry',
                 '/motion',
+                '/pose_estimate',
                 '/odom',
                 '/orb_slam2_stereo_node/pose',
                 '/orb_slam2_stereo_node/status',

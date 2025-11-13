@@ -21,6 +21,7 @@ find_package(nav_msgs REQUIRED)
 find_package(orca_shared REQUIRED)
 
 add_executable(pose_estimator_node src/pose_estimator_node.cpp)
+add_executable(pose_estimator_ardusub src/pose_estimator_ardusub.cpp)
 add_executable(pose_republisher_node src/pose_republisher_node.cpp)
 ament_target_dependencies(pose_estimator_node
   rclcpp
@@ -35,8 +36,19 @@ ament_target_dependencies(pose_estimator_node
   orca_shared
 )
 ament_target_dependencies(pose_republisher_node rclcpp geometry_msgs orca_msgs)
+ament_target_dependencies(pose_estimator_ardusub
+  rclcpp
+  geometry_msgs
+  tf2
+  tf2_ros
+  tf2_geometry_msgs
+  std_msgs
+  orca_msgs
+  nav_msgs
+  orca_shared
+)
 
-install(TARGETS pose_estimator_node pose_republisher_node DESTINATION lib/${PROJECT_NAME})
+install(TARGETS pose_estimator_node pose_estimator_ardusub pose_republisher_node DESTINATION lib/${PROJECT_NAME})
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
