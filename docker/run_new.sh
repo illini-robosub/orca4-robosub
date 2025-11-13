@@ -17,7 +17,7 @@ fi
 # Specific for NVIDIA drivers, required for OpenGL >= 3.3
 docker run -it \
     --rm \
-    --name orca4 \
+    --name orca5 \
     -e DISPLAY \
     -e QT_X11_NO_MITSHM=1 \
     -e XAUTHORITY=$XAUTH \

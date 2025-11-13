@@ -290,13 +290,17 @@ RUN rm ZED_SDK_Linux_Ubuntu22.run
 # Dillon Adding the ZedX wrapper stuff
 #WORKDIR /home/$USERNAME
 WORKDIR /home/$USERNAME/colcon_ws/src
-RUN git clone https://github.com/stereolabs/zed-ros2-wrapper.git
+RUN git clone https://github.com/stereolabs/zed-ros2-wrapper.git \
+  && cd zed-ros2-wrapper \
+  && git checkout humble-v5.0.0
 RUN sudo apt update && sudo apt install -y ros-humble-ament-cmake-auto ros-humble-ament-cmake
 WORKDIR /home/$USERNAME/colcon_ws
 
 #Esther: add ZedOdDisplay
 WORKDIR /home/$USERNAME/colcon_ws/src
-RUN git clone https://github.com/stereolabs/zed-ros2-examples.git
+RUN git clone https://github.com/stereolabs/zed-ros2-examples.git \
+  && cd zed-ros2-examples \
+  && git checkout humble-v5.0.0
 WORKDIR /home/$USERNAME/colcon_ws
 
 
@@ -341,10 +345,10 @@ COPY --chown=$USER_UID:$USER_GID . src/orca4
 # RUN [ "/bin/bash" , "-c" , "\
 #   source /opt/ros/humble/setup.bash \
 #   && colcon build --packages-skip zed_components zed_interfaces zed_wrapper zed_ros2" ]
-# Build everything - Dillon testing version
+# Build everything - Dillon testing version - skip all zed packages using regex
 RUN [ "/bin/bash" , "-c" , "\
 source /opt/ros/humble/setup.bash \
-&& colcon build --packages-skip zed_components zed_interfaces zed_wrapper zed_ros2 zed_multi_camera zed_aruco_localization zed_tutorial_depth zed_topic_benchmark_interfaces zed_tutorial_video zed_tutorial_pos_tracking rviz_plugin_zed_od zed_topic_benchmark_component zed_rgb_convert zed_depth_to_laserscan zed_display_rviz2 zed_robot_integration zed_topic_benchmark zed_ipc" ]
+&& colcon build --packages-skip-regex '^zed_.*' --packages-skip rviz_plugin_zed_od" ]
 
 # Set up the environment
 WORKDIR /home/$USERNAME/colcon_ws

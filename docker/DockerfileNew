@@ -1,0 +1,190 @@
+FROM althack/ros2:humble-full
+# Set ARGs and ENVs at the top
+ARG USERNAME=robosub
+ARG USER_UID=1002
+ARG USER_GID=$USER_UID
+ARG DEBIAN_FRONTEND=noninteractive
+
+ENV NVIDIA_VISIBLE_DEVICES=all
+ENV NVIDIA_DRIVER_CAPABILITIES=graphics,utility,compute
+ENV QT_X11_NO_MITSHM=1
+ENV GZ_VERSION=harmonic
+ENV PATH="/home/${USERNAME}/.local/bin:${PATH}"
+
+# 1. System and Tooling Setup (as root)
+USER root
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl \
+    gnupg \
+    && curl -sSL 'http://keyserver.ubuntu.com/pks/lookup?op=get&search=0xC1CF6E31E6BADE8868B172B4F42ED6FBAB17C654' | gpg --dearmor -o /usr/share/keyrings/ros-archive-keyring.gpg \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install system dependencies, Gazebo, and ROS packages in a single layer
+RUN apt-get update && apt-get upgrade -y && \
+    apt-get install -y --no-install-recommends \
+    # Basic tools
+    bash-completion build-essential git gnupg iputils-ping lsb-release mlocate \
+    software-properties-common sudo wget vim curl ca-certificates usbutils xterm \
+    # NVIDIA libs
+    libglvnd0 libgl1 libglx0 libegl1 libxext6 libx11-6 \
+    # Ardupilot prereqs
+    python3-wxgtk4.0 rapidjson-dev libopencv-dev libgstreamer1.0-dev \
+    libgstreamer-plugins-base1.0-dev gstreamer1.0-plugins-bad \
+    gstreamer1.0-libav gstreamer1.0-gl python3-pip python3-venv \
+    # ROS dependencies for the workspace
+    ros-humble-image-geometry ros-humble-ros-gz-image ros-humble-rqt-graph ros-humble-rviz2 \
+    ros-humble-nav2-core ros-humble-nav2-util ros-humble-nav2-msgs ros-humble-nav2-costmap-2d \
+    ros-humble-nav2-voxel-grid ros-humble-nav2-common ros-humble-angles ros-humble-bond \
+    ros-humble-bondcpp ros-humble-smclib ros-humble-ament-cmake-auto ros-humble-ament-cmake \
+    # Cleanup
+    && rm -rf /var/lib/apt/lists/*
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libvulkan1 \
+    vulkan-tools \
+    libvulkan-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Gazebo repo key + list, then install
+RUN wget -q https://packages.osrfoundation.org/gazebo.gpg -O /usr/share/keyrings/pkgs-osrf-archive-keyring.gpg \
+    && echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/pkgs-osrf-archive-keyring.gpg] http://packages.osrfoundation.org/gazebo/ubuntu-stable $(lsb_release -cs) main" > /etc/apt/sources.list.d/gazebo-stable.list \
+    && apt-get update && apt-get install -q -y --no-install-recommends \
+    ros-humble-ros-gz \
+    libgz-cmake3-dev \
+    libgz-common5-dev \ 
+    libgz-rendering8-dev \
+    libgz-sim8-dev \
+    pkg-config \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install GeographicLib datasets for MAVROS
+RUN wget https://raw.githubusercontent.com/mavlink/mavros/master/mavros/scripts/install_geographiclib_datasets.sh && \
+    chmod +x install_geographiclib_datasets.sh && \
+    ./install_geographiclib_datasets.sh && \
+    rm install_geographiclib_datasets.sh
+
+# 2. User Creation and Ardupilot Build
+
+# # Create the non-root user
+RUN groupadd --gid $USER_GID $USERNAME \
+  && useradd -s /bin/bash --uid $USER_UID --gid $USER_GID -m $USERNAME \
+  && echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
+  && chmod 0440 /etc/sudoers.d/$USERNAME \
+  && echo "\n# Added by orca4 Dockerfile:" >> /home/$USERNAME/.bashrc \
+  && echo "source /usr/share/bash-completion/completions/git" >> /home/$USERNAME/.bashrc
+
+# # Switch to the new user
+USER $USERNAME
+WORKDIR /home/$USERNAME
+
+RUN git clone https://github.com/ArduPilot/ardupilot.git --recurse-submodules
+
+# Use WORKDIR to move into the repo for the next steps
+WORKDIR /home/${USERNAME}/ardupilot
+
+# Manually install dependencies
+RUN sudo apt-get update && sudo apt-get install -y --no-install-recommends \
+    g++ \
+    make \
+    libtool \
+    libxml2-dev \
+    libxslt1-dev \
+    python3-lxml \
+    python3-matplotlib \
+    python3-pygame \
+    python3-numpy \
+    python3-psutil \
+    zstd \
+    && sudo rm -rf /var/lib/apt/lists/* 
+
+# Install python packages using pip
+RUN pip3 install --no-cache-dir \
+    future \
+    pymavlink \
+    mavproxy \
+    pexpect
+
+# run the configure and build steps
+RUN modules/waf/waf-light configure --board sitl
+RUN modules/waf/waf-light build --target bin/ardusub
+
+# Clone and build ardupilot_gazebo
+RUN git clone https://github.com/ArduPilot/ardupilot_gazebo.git && \
+    cd ardupilot_gazebo && \
+    mkdir build && cd build && \
+    cmake .. -DCMAKE_BUILD_TYPE=RelWithDebInfo && \
+    make -j$(nproc)
+
+# 3. Colcon Workspace and ZED SDK
+
+# Create workspace structure
+WORKDIR /home/$USERNAME/colcon_ws
+COPY --chown=$USERNAME:$USERNAME workspace.repos src/orca4/
+WORKDIR /home/$USERNAME/colcon_ws/src
+RUN vcs import < orca4/workspace.repos
+
+# Install Python dependencies and YOLO model
+RUN pip3 install --no-cache-dir ultralytics && \
+    yolo export model=yolov8s.pt format=onnx simplify=False dynamic=False imgsz=512
+
+# Clone ZED wrappers
+RUN git clone https://github.com/stereolabs/zed-ros2-wrapper.git
+RUN git clone https://github.com/stereolabs/zed-ros2-examples.git
+
+# Install ZED SDK dependencies and download installer
+WORKDIR /home/$USERNAME
+RUN sudo apt-get update && \
+    sudo apt-get install -y --no-install-recommends zstd && \
+    sudo rm -rf /var/lib/apt/lists/*
+
+# Download and install ZED SDK
+# Note: Not skipping anything that might contain CMake config files
+RUN wget -q --show-progress -O ZED_SDK_Linux_Ubuntu22.run \
+    "https://download.stereolabs.com/zedsdk/5.0/l4t36.4/jetsons?_gl=1*10ot5cs*_gcl_au*MTY4NjY0MTQ5My4xNzQzNDcwODI2" && \
+    chmod +x ZED_SDK_Linux_Ubuntu22.run && \
+    echo "Installing ZED SDK with all components..." && \
+    ./ZED_SDK_Linux_Ubuntu22.run --quiet --accept && \
+    rm ZED_SDK_Linux_Ubuntu22.run
+
+# Set ZED environment variables for CMake
+ENV ZED_DIR=/usr/local/zed
+ENV CMAKE_PREFIX_PATH=/usr/local/zed
+ENV LD_LIBRARY_PATH=/usr/local/zed/lib
+
+# 4. Final Build and Configuration
+
+USER $USERNAME
+WORKDIR /home/$USERNAME/colcon_ws
+# Assuming build context is the directory containing all orca4 packages
+COPY --chown=$USERNAME:$USERNAME . src/orca4
+
+# Install ROS dependencies using rosdep
+WORKDIR /home/$USERNAME/colcon_ws
+RUN sudo apt-get update && \
+    rosdep init || true && rosdep update && \
+    rosdep install -y --from-paths . --ignore-src --rosdistro humble --skip-keys="scout_description" && \
+    sudo rm -rf /var/lib/apt/lists/*
+
+# Build the colcon workspace
+RUN [ "/bin/bash" , "-c" , "\
+source /opt/ros/humble/setup.bash \
+&& colcon build --packages-skip-regex '^zed_.*' --packages-skip rviz_plugin_zed_od" ]
+
+# Set up the environment
+WORKDIR /home/$USERNAME/colcon_ws
+RUN echo "export PATH=/home/$USERNAME/.local/bin:\$PATH" >> /home/$USERNAME/.bashrc \
+  && echo "export PATH=/home/$USERNAME/.local/lib/python3.10/site-packages:\$PATH" >> /home/$USERNAME/.bashrc \
+  && echo "source /home/$USERNAME/colcon_ws/src/orca4/setup.bash" >> /home/$USERNAME/.bashrc
+
+#build zed stuff on launch
+RUN chmod +x /home/$USERNAME/colcon_ws/src/orca4/docker/build_colcon.sh
+RUN echo /home/$USERNAME/colcon_ws/src/orca4/docker/build_colcon.sh >> /home/$USERNAME/.bashrc
+
+# Set default working directory
+WORKDIR /home/$USERNAME/colcon_ws
+
+RUN echo source $(pwd)/install/local_setup.bash >> ~/.bashrc
+
+# The CMD or ENTRYPOINT would go here
+# CMD ["ros2", "launch", "..."]
