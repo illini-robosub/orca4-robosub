@@ -175,8 +175,8 @@ RUN sudo apt-get remove modemmanager -y
 RUN sudo apt install gstreamer1.0-plugins-bad gstreamer1.0-libav gstreamer1.0-gl -y
 RUN sudo apt install libfuse2 -y
 RUN sudo apt install libxcb-xinerama0 libxkbcommon-x11-0 libxcb-cursor-dev -y
-RUN wget https://d176tv9ibo4jno.cloudfront.net/latest/QGroundControl.AppImage
-RUN sudo chmod +x ./QGroundControl.AppImage
+#RUN wget https://d176tv9ibo4jno.cloudfront.net/latest/QGroundControl.AppImage
+#RUN sudo chmod +x ./QGroundControl.AppImage
 # RUN ./QGroundControl.AppImage
 
 USER $USERNAME

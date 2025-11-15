@@ -18,7 +18,7 @@ fi
 docker run -it \
     --rm \
     --name orca4 \
-    -e DISPLAY \
+    -e DISPLAY=unix$DISPLAY\
     -e QT_X11_NO_MITSHM=1 \
     -e XAUTHORITY=$XAUTH \
     -e NVIDIA_VISIBLE_DEVICES=all \
@@ -30,4 +30,11 @@ docker run -it \
     --privileged \
     --security-opt seccomp=unconfined \
     --gpus all \
+    -v /mnt/wslg:/mnt/wslg \
+    -e WAYLAND_DISPLAY=$WAYLAND_DISPLAY \
+    --device=/dev/dxg \
+    -v /usr/lib/wsl:/usr/lib/wsl \
+    -e LD_LIBRARY_PATH=/usr/lib/wsl/lib \
+    --device /dev/dri:/dev/dri \
+    -e MESA_D3D12_DEFAULT_ADAPTER_NAME=NVIDIA \
     orca4:latest
