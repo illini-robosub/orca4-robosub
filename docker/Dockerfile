@@ -118,6 +118,12 @@ WORKDIR /home/$USERNAME
 RUN mkdir -p colcon_ws/src/orca4
 COPY --chown=$USER_UID:$USER_GID workspace.repos colcon_ws/src/orca4
 
+# Copy ONLY requirements early to avoid constant rebuild
+COPY --chown=$USER_UID:$USER_GID vision_testing/requirements.txt colcon_ws/src/orca4/vision_testing/
+
+# Install Python deps (cached unless requirements.txt changes)
+RUN pip3 install --no-cache-dir -r /home/$USERNAME/colcon_ws/src/orca4/vision_testing/requirements.txt
+
 # Get workspace repos
 WORKDIR /home/$USERNAME/colcon_ws/src
 RUN vcs import < orca4/workspace.repos
@@ -140,6 +146,10 @@ COPY --chown=$USER_UID:$USER_GID orca_msgs/package.xml src/orca4/orca_msgs/
 COPY --chown=$USER_UID:$USER_GID orca_nav2/package.xml src/orca4/orca_nav2/
 COPY --chown=$USER_UID:$USER_GID orca_shared/package.xml src/orca4/orca_shared/
 
+# Idk if this is needed or not
+# COPY --chown=$USER_UID:$USER_GID vision_testing/vision_pkg/package.xml src/orca4/vision_testing/vision_pkg
+
+
 # Run rosdep over orca4 package.xml files
 RUN rosdep update \
   && rosdep install -y --from-paths . --ignore-src
@@ -152,6 +162,8 @@ RUN [ "/bin/bash" , "-c" , "\
 
 # Copy everything
 COPY --chown=$USER_UID:$USER_GID . src/orca4
+
+
 
 # Build everything
 RUN [ "/bin/bash" , "-c" , "\
@@ -167,16 +179,18 @@ RUN echo "export PATH=/home/$USERNAME/.local/bin:\$PATH" >> /home/$USERNAME/.bas
 # Required to use the --console option on sim_vehicle.py:
 # RUN pip3 install matplotlibUSER root
 
-#Install QgroundControl (Added This)
-WORKDIR /home/$USERNAME/colcon_ws
-RUN sudo apt install libfuse2
-RUN sudo usermod -a -G dialout $USER
-RUN sudo apt-get remove modemmanager -y
-RUN sudo apt install gstreamer1.0-plugins-bad gstreamer1.0-libav gstreamer1.0-gl -y
-RUN sudo apt install libfuse2 -y
-RUN sudo apt install libxcb-xinerama0 libxkbcommon-x11-0 libxcb-cursor-dev -y
-RUN wget https://d176tv9ibo4jno.cloudfront.net/latest/QGroundControl.AppImage
-RUN sudo chmod +x ./QGroundControl.AppImage
-# RUN ./QGroundControl.AppImage
+# #Install QgroundControl (Added This)
+# WORKDIR /home/$USERNAME/colcon_ws
+# RUN sudo apt install libfuse2
+# RUN sudo usermod -a -G dialout $USER
+# RUN sudo apt-get remove modemmanager -y
+# RUN sudo apt install gstreamer1.0-plugins-bad gstreamer1.0-libav gstreamer1.0-gl -y
+# RUN sudo apt install libfuse2 -y
+# RUN sudo apt install libxcb-xinerama0 libxkbcommon-x11-0 libxcb-cursor-dev -y
+# RUN wget https://d176tv9ibo4jno.cloudfront.net/latest/QGroundControl.AppImage
+# RUN sudo chmod +x ./QGroundControl.AppImage
+# # RUN ./QGroundControl.AppImage
+
+# RUN pip3 install --no-cache-dir -r /home/$USERNAME/colcon_ws/src/orca4/vision_testing/requirements.txt
 
 USER $USERNAME
