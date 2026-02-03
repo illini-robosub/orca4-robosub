@@ -17,7 +17,9 @@ class VisionNode(Node):
         # self.cap.set(4, 720)
 
         # Video
-        self.cap = cv2.VideoCapture("../card_detection_test_video.mp4")
+        self.cap = cv2.VideoCapture("/home/orca4/colcon_ws/src/orca4/vision_testing/vision_pkg/card_detection_test_video.mp4")
+        if not self.cap.isOpened():
+            self.get_logger().error("Failed to open video file")
 
         # self.model = YOLO('./Yolo-Weights/playingCards.pt')
         self.model = YOLO('/home/orca4/colcon_ws/src/orca4/vision_testing/vision_pkg/vision_pkg/Yolo-Weights/playingCards.pt')
@@ -43,7 +45,8 @@ class VisionNode(Node):
         # key = cv2.waitKey(1) & 0xFF
         success, img = self.cap.read()
         if not success:
-            print("failed to read")
+            # print("failed to read")
+            self.get_logger().error("Failed to read video file")
             return
         results = self.model(img, stream=True)
         detected_objects = []
@@ -65,9 +68,10 @@ class VisionNode(Node):
                                 thickness=1)
         # Get rid of repeated detections of the same card
         detected_objects = list(set(detected_objects))
-        print(f"working : {detected_objects} ")
-        if len(detected_objects) != 0: # For debugging and testing
-            print(f"detected : {detected_objects} ")
+        self.get_logger().info(f"Detected objects: {detected_objects}")
+        # print(f"working : {detected_objects} ")
+        # if len(detected_objects) != 0: # For debugging and testing
+        #     print(f"detected : {detected_objects} ")
         # This handles the display state for inputting hole cards
         cvzone.putTextRect(img, f'Press c to do something',
                                 (50, 160), 1.5, 2,(255, 255, 255), (200, 0, 200))
