@@ -24,7 +24,6 @@ class VisionNode(Node):
         # self.model = YOLO('./Yolo-Weights/playingCards.pt')
         self.model = YOLO('/home/orca4/colcon_ws/src/orca4/vision_testing/vision_pkg/vision_pkg/Yolo-Weights/playingCards.pt')
 
-
         self.classNames = ['10C', '10D', '10H', '10S',
                     '2C', '2D', '2H', '2S',
                     '3C', '3D', '3H', '3S',
@@ -40,6 +39,7 @@ class VisionNode(Node):
                     'QC', 'QD', 'QH', 'QS']
         self.timer = self.create_timer(0.05, self.timer_callback)
         self.bridge = CvBridge()
+        self.image_pub = self.create_publisher(Image, '/vision/image', 10) # create a publisher for images for viewing
     def timer_callback(self):
     
         # key = cv2.waitKey(1) & 0xFF
@@ -85,6 +85,14 @@ class VisionNode(Node):
         # cv2.waitKey(1)
         # if key == ord('q'):
         #     break
+
+        
+        ros_img = self.bridge.cv2_to_imgmsg(img, encoding='bgr8') # convert form opencv style images to ros style formatting
+        ros_img.header.stamp = self.get_clock().now().to_msg()
+        ros_img.header.frame_id = "camera_frame"
+        self.image_pub.publish(ros_img) # publish the image as a topic
+
+
 def main(args=None):
     rclpy.init(args=args)
     node = VisionNode()
