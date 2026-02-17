@@ -44,10 +44,15 @@ class VisionNode(Node):
     
         # key = cv2.waitKey(1) & 0xFF
         success, img = self.cap.read()
+        # if not success:
+        #     # print("failed to read")
+        #     self.get_logger().error("Failed to read video file")
+        #     return
         if not success:
-            # print("failed to read")
-            self.get_logger().error("Failed to read video file")
+            self.get_logger().warn("End of video reached, restarting")
+            self.cap.set(cv2.CAP_PROP_POS_FRAMES, 0)
             return
+
         results = self.model(img, stream=True)
         detected_objects = []
         for r in results:
