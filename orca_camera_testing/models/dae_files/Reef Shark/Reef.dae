@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset>
+    <contributor>
+      <author>Assimp</author>
+      <authoring_tool>Blender (stable FBX IO) - 5.0.1 - 5.14.0</authoring_tool>
+    </contributor>
+    <created>2026-02-19T19:44:18</created>
+    <modified>2026-02-19T19:44:18</modified>
+    <unit name="meter" meter="1" />
+    <up_axis>Y_UP</up_axis>
+  </asset>
+  <library_cameras>
+    <camera id="Camera-camera" name="Camera" >
+      <optics>
+        <technique_common>
+          <perspective>
+            <xfov sid="xfov">19.7988777</xfov>
+            <aspect_ratio>1.77777779</aspect_ratio>
+            <znear sid="znear">10</znear>
+            <zfar sid="zfar">10000</zfar>
+          </perspective>
+        </technique_common>
+      </optics>
+    </camera>
+  </library_cameras>
+  <library_images>
+    <image id="Material.002-diffuse-image">
+      <init_from>C:\Users\ryan-\OneDrive\Pictures\Screenshots\Screenshot%202026-02-19%20191846.png</init_from>
+    </image>
+    <image id="Material.003-diffuse-image">
+      <init_from>C:\Users\ryan-\OneDrive\Pictures\Screenshots\Screenshot%202026-02-19%20191851.png</init_from>
+    </image>
+  </library_images>
+  <library_effects>
+    <effect id="Material.002-fx" name="Material.002">
+      <profile_COMMON>
+        <newparam sid="Material.002-diffuse-surface">
+          <surface type="2D">
+            <init_from>Material.002-diffuse-image</init_from>
+          </surface>
+        </newparam>
+        <newparam sid="Material.002-diffuse-sampler">
+          <sampler2D>
+            <source>Material.002-diffuse-surface</source>
+          </sampler2D>
+        </newparam>
+        <technique sid="standard">
+          <phong>
+            <emission>
+              <color sid="emission">0   0   0   1</color>
+            </emission>
+            <ambient>
+              <color sid="ambient">0   0   0   1</color>
+            </ambient>
+            <diffuse>
+              <texture texture="Material.002-diffuse-sampler" texcoord="CHANNEL0" />
+            </diffuse>
+            <specular>
+              <color sid="specular">0   0   0   1</color>
+            </specular>
+            <shininess>
+              <float sid="shininess">25</float>
+            </shininess>
+            <reflective>
+              <color sid="reflective">0   0   0   1</color>
+            </reflective>
+            <transparent>
+              <color sid="transparent">0   0   0   1</color>
+            </transparent>
+            <transparency>
+              <float sid="transparency">1</float>
+            </transparency>
+          </phong>
+        </technique>
+      </profile_COMMON>
+    </effect>
+    <effect id="Material.003-fx" name="Material.003">
+      <profile_COMMON>
+        <newparam sid="Material.003-diffuse-surface">
+          <surface type="2D">
+            <init_from>Material.003-diffuse-image</init_from>
+          </surface>
+        </newparam>
+        <newparam sid="Material.003-diffuse-sampler">
+          <sampler2D>
+            <source>Material.003-diffuse-surface</source>
+          </sampler2D>
+        </newparam>
+        <technique sid="standard">
+          <phong>
+            <emission>
+              <color sid="emission">0   0   0   1</color>
+            </emission>
+            <ambient>
+              <color sid="ambient">0   0   0   1</color>
+            </ambient>
+            <diffuse>
+              <texture texture="Material.003-diffuse-sampler" texcoord="CHANNEL0" />
+            </diffuse>
+            <specular>
+              <color sid="specular">0.800000012   0.800000012   0.800000012   1</color>
+            </specular>
+            <shininess>
+              <float sid="shininess">25</float>
+            </shininess>
+            <reflective>
+              <color sid="reflective">0.800000012   0.800000012   0.800000012   1</color>
+            </reflective>
+            <transparent>
+              <color sid="transparent">0   0   0   1</color>
+            </transparent>
+            <transparency>
+              <float sid="transparency">1</float>
+            </transparency>
+          </phong>
+        </technique>
+      </profile_COMMON>
+    </effect>
+  </library_effects>
+  <library_materials>
+    <material id="Material.002" name="Material.002">
+      <instance_effect url="#Material.002-fx"/>
+    </material>
+    <material id="Material.003" name="Material.003">
+      <instance_effect url="#Material.003-fx"/>
+    </material>
+  </library_materials>
+  <library_geometries>
+    <geometry id="Cube_1" name="Cube" >
+      <mesh>
+        <source id="Cube_1-positions" name="Cube_1-positions">
+          <float_array id="Cube_1-positions-array" count="72"> -1 -1 -1 -1 -1 1 -1 1 1 -1 1 -1 -1 1 -1 -1 1 1 1 1 1 1 1 -1 1 1 -1 1 1 1 1 -1 1 1 -1 -1 1 -1 -1 1 -1 1 -1 -1 1 -1 -1 -1 -1 1 -1 1 1 -1 1 -1 -1 -1 -1 -1 1 1 1 -1 1 1 -1 -1 1 1 -1 1 </float_array>
+          <technique_common>
+            <accessor count="24" offset="0" source="#Cube_1-positions-array" stride="3">
+              <param name="X" type="float" />
+              <param name="Y" type="float" />
+              <param name="Z" type="float" />
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Cube_1-normals" name="Cube_1-normals">
+          <float_array id="Cube_1-normals-array" count="72"> -1 0 0 -1 0 0 -1 0 0 -1 0 0 0 1 0 0 1 0 0 1 0 0 1 0 1 0 0 1 0 0 1 0 0 1 0 0 0 -1 0 0 -1 0 0 -1 0 0 -1 0 0 0 -1 0 0 -1 0 0 -1 0 0 -1 0 0 1 0 0 1 0 0 1 0 0 1 </float_array>
+          <technique_common>
+            <accessor count="24" offset="0" source="#Cube_1-normals-array" stride="3">
+              <param name="X" type="float" />
+              <param name="Y" type="float" />
+              <param name="Z" type="float" />
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Cube_1-tex0" name="Cube_1-tex0">
+          <float_array id="Cube_1-tex0-array" count="48"> 3.01047683 0.00444380427 3.01047683 1.00307488 2.00429511 1.00307477 2.00429511 0.00444386341 2.00429511 0.00444386341 2.00429511 1.00307477 0.998113215 1.00307477 0.998113275 0.00444380427 0.998113275 0.00444380427 0.998113215 1.00307477 -0.00806838274 1.00307465 -0.00806838274 0.00444368552 -0.00806838274 0.00444368552 -0.00806838274 1.00307465 -1.01425028 1.00307465 -1.01425052 0.00444380427 0.998113334 -0.994186759 0.998113275 0.00444380427 -0.00806838274 0.00444368552 -0.00806826353 -0.994186878 0.998113215 1.00307477 0.998113215 2.00170541 -0.00806850195 2.00170541 -0.00806838274 1.00307465 </float_array>
+          <technique_common>
+            <accessor count="24" offset="0" source="#Cube_1-tex0-array" stride="2">
+              <param name="S" type="float" />
+              <param name="T" type="float" />
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="Cube_1-vertices">
+          <input semantic="POSITION" source="#Cube_1-positions" />
+        </vertices>
+        <polylist count="6" material="defaultMaterial">
+          <input offset="0" semantic="VERTEX" source="#Cube_1-vertices" />
+          <input offset="0" semantic="NORMAL" source="#Cube_1-normals" />
+          <input offset="0" semantic="TEXCOORD" source="#Cube_1-tex0" set="0" />
+          <vcount>4 4 4 4 4 4 </vcount>
+          <p>0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 </p>
+        </polylist>
+      </mesh>
+    </geometry>
+    <geometry id="Cube.001_1" name="Cube.001" >
+      <mesh>
+        <source id="Cube.001_1-positions" name="Cube.001_1-positions">
+          <float_array id="Cube.001_1-positions-array" count="72"> -1 -1 -1 -1 -1 1 -1 1 1 -1 1 -1 -1 1 -1 -1 1 1 1 1 1 1 1 -1 1 1 -1 1 1 1 1 -1 1 1 -1 -1 1 -1 -1 1 -1 1 -1 -1 1 -1 -1 -1 -1 1 -1 1 1 -1 1 -1 -1 -1 -1 -1 1 1 1 -1 1 1 -1 -1 1 1 -1 1 </float_array>
+          <technique_common>
+            <accessor count="24" offset="0" source="#Cube.001_1-positions-array" stride="3">
+              <param name="X" type="float" />
+              <param name="Y" type="float" />
+              <param name="Z" type="float" />
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Cube.001_1-normals" name="Cube.001_1-normals">
+          <float_array id="Cube.001_1-normals-array" count="72"> -1 0 0 -1 0 0 -1 0 0 -1 0 0 0 1 0 0 1 0 0 1 0 0 1 0 1 0 0 1 0 0 1 0 0 1 0 0 0 -1 0 0 -1 0 0 -1 0 0 -1 0 0 0 -1 0 0 -1 0 0 -1 0 0 -1 0 0 1 0 0 1 0 0 1 0 0 1 </float_array>
+          <technique_common>
+            <accessor count="24" offset="0" source="#Cube.001_1-normals-array" stride="3">
+              <param name="X" type="float" />
+              <param name="Y" type="float" />
+              <param name="Z" type="float" />
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Cube.001_1-tex0" name="Cube.001_1-tex0">
+          <float_array id="Cube.001_1-tex0-array" count="48"> 3.01047683 0.00444380427 3.01047683 1.00307488 2.00429511 1.00307477 2.00429511 0.00444386341 2.00429511 0.00444386341 2.00429511 1.00307477 0.998113215 1.00307477 0.998113275 0.00444380427 0.998113275 0.00444380427 0.998113215 1.00307477 -0.00806838274 1.00307465 -0.00806838274 0.00444368552 -0.00806838274 0.00444368552 -0.00806838274 1.00307465 -1.01425028 1.00307465 -1.01425052 0.00444380427 0.998113334 -0.994186759 0.998113275 0.00444380427 -0.00806838274 0.00444368552 -0.00806826353 -0.994186878 0.998113215 1.00307477 0.998113215 2.00170541 -0.00806850195 2.00170541 -0.00806838274 1.00307465 </float_array>
+          <technique_common>
+            <accessor count="24" offset="0" source="#Cube.001_1-tex0-array" stride="2">
+              <param name="S" type="float" />
+              <param name="T" type="float" />
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="Cube.001_1-vertices">
+          <input semantic="POSITION" source="#Cube.001_1-positions" />
+        </vertices>
+        <polylist count="6" material="defaultMaterial">
+          <input offset="0" semantic="VERTEX" source="#Cube.001_1-vertices" />
+          <input offset="0" semantic="NORMAL" source="#Cube.001_1-normals" />
+          <input offset="0" semantic="TEXCOORD" source="#Cube.001_1-tex0" set="0" />
+          <vcount>4 4 4 4 4 4 </vcount>
+          <p>0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 </p>
+        </polylist>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_controllers>
+  </library_controllers>
+  <library_visual_scenes>
+    <visual_scene id="RootNode" name="RootNode">
+      <node id="Camera" name="Camera" type="NODE">
+        <matrix sid="matrix">-68.5920868 -32.4013481 -65.1557999 735.88916 -1.78813916e-05 89.5395737 -44.5271339 495.830933 72.7676086 -30.5420818 -61.4170685 692.579102 0 0 0 1</matrix>
+        <instance_camera url="#Camera-camera"/>
+      </node>
+      <node id="Cube" name="Cube" type="NODE">
+        <matrix sid="matrix">7.42716789 0 0 0 0 -1.62920678e-05 100 0 0 -100 -1.62920678e-05 0 0 0 0 1</matrix>
+        <instance_geometry url="#Cube_1">
+          <bind_material>
+            <technique_common>
+              <instance_material symbol="defaultMaterial" target="#Material.002">
+                <bind_vertex_input semantic="CHANNEL0" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
+            </technique_common>
+          </bind_material>
+        </instance_geometry>
+      </node>
+      <node id="Cube.001" name="Cube.001" type="NODE">
+        <matrix sid="matrix">7.42716789 0 0 0 0 -1.62920678e-05 100 96.2360535 0 -100 -1.62920678e-05 234.833939 0 0 0 1</matrix>
+        <instance_geometry url="#Cube.001_1">
+          <bind_material>
+            <technique_common>
+              <instance_material symbol="defaultMaterial" target="#Material.003">
+                <bind_vertex_input semantic="CHANNEL0" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
+            </technique_common>
+          </bind_material>
+        </instance_geometry>
+      </node>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene>
+    <instance_visual_scene url="#RootNode" />
+  </scene>
+</COLLADA>
