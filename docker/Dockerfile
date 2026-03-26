@@ -97,7 +97,12 @@ RUN apt-get install python3-vcstool python3-colcon-common-extensions
 RUN mkdir -p /home/${USERNAME}/workspace/src
 WORKDIR /home/${USERNAME}/workspace/src
 RUN curl -O https://raw.githubusercontent.com/gazebo-tooling/gazebodistro/master/collection-harmonic.yaml
-RUN vcs import < collection-harmonic.yaml
+
+# debugging
+# RUN ping -c 4 github.com
+# RUN curl -v https://github.com
+# RUN vcs import < collection-harmonic.yaml # debugging
+
 RUN curl https://packages.osrfoundation.org/gazebo.gpg --output /usr/share/keyrings/pkgs-osrf-archive-keyring.gpg
 RUN echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/pkgs-osrf-archive-keyring.gpg] http://packages.osrfoundation.org/gazebo/ubuntu-stable $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/gazebo-stable.list > /dev/null
 WORKDIR /home/${USERNAME}/workspace/src
@@ -222,7 +227,16 @@ RUN sudo apt update && sudo apt install -y usbutils
 RUN sudo apt-get install -y gz-harmonic
 
 
+# # Install Jetson-specific PyTorch (must come before requirements.txt install)
+# RUN pip3 install torch torchvision \
+#     --index-url https://developer.download.nvidia.com/compute/redist/jp/v60
 
+# Copy ONLY requirements early to avoid constant rebuild
+# added this 03/09/26
+COPY --chown=$USER_UID:$USER_GID vision_testing/requirements.txt colcon_ws/src/orca4/vision_testing/ 
+ 
+# Install Python deps (cached unless requirements.txt changes)
+RUN pip3 install --no-cache-dir -r /home/$USERNAME/colcon_ws/src/orca4/vision_testing/requirements.txt
 
 
 # Create colcon workspace and copy workspace.repos file
@@ -279,7 +293,7 @@ RUN rosdep update \
 
 #Esther: get ZED SDK
 WORKDIR /home/$USERNAME
-RUN wget -q -O ZED_SDK_Linux_Ubuntu22.run https://download.stereolabs.com/zedsdk/5.0/l4t36.4/jetsons?_gl=1*10ot5cs*_gcl_au*MTY4NjY0MTQ5My4xNzQzNDcwODI2
+RUN wget -q -O ZED_SDK_Linux_Ubuntu22.run https://download.stereolabs.com/zedsdk/5.0.0/l4t36.4/jetsons
 RUN chmod +x ZED_SDK_Linux_Ubuntu22.run 
 RUN sudo apt-get install -y zstd
 # RUN ./ZED_SDK_Linux_Ubuntu22.run -- silent runtime_only
@@ -348,6 +362,8 @@ COPY --chown=$USER_UID:$USER_GID . src/orca4
 # Build everything - Dillon testing version - skip all zed packages using regex
 RUN [ "/bin/bash" , "-c" , "\
 source /opt/ros/humble/setup.bash \
+&& colcon build --packages-select robosub_msgs \
+&& source install/setup.bash \
 && colcon build --packages-skip-regex '^zed_.*' --packages-skip rviz_plugin_zed_od" ]
 
 # Set up the environment
@@ -368,5 +384,6 @@ RUN echo source $(pwd)/install/local_setup.bash >> ~/.bashrc
 #RUN source ~/.bashrc 
 # # may break
 
-
-
+RUN sudo ln -sf /usr/lib/aarch64-linux-gnu/libopenblas.so \
+    /usr/lib/aarch64-linux-gnu/libopenblas.so.0
+RUN  sudo ldconfig

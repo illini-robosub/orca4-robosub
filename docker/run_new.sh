@@ -28,6 +28,8 @@ docker run -it \
     -v "/etc/localtime:/etc/localtime:ro" \
     -v "/dev/input:/dev/input" \
     -v "/usr/local/cuda:/usr/local/cuda" \
+    -v "/usr/local/zed/settings:/usr/local/zed/settings" \
+    -v "/usr/local/zed/resources:/usr/local/zed/resources" \
     -v "/usr/lib/aarch64-linux-gnu:/usr/lib/aarch64-linux-gnu" \
     -v "/tmp:/tmp" \
     --network=host \
@@ -53,6 +55,6 @@ docker run -it \
     --device=/dev/nvhost-msenc \
     --device=/dev/nvhost-ctrl \
     --ipc=host \
-    orca4:latest
+    orca5:latest
 
 #     -v "/home/robosub/colcon_ws:/home/orca4/colcon_ws" \

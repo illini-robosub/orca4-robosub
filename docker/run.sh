@@ -1,3 +1,53 @@
+# #!/usr/bin/env bash
+
+# XAUTH=/tmp/.docker.xauth
+# if [ ! -f $XAUTH ]; then
+#     xauth_list=$(xauth nlist $DISPLAY)
+#     xauth_list=$(sed -e 's/^..../ffff/' <<< "$xauth_list")
+#     if [ ! -z "$xauth_list" ]; then
+#         echo "$xauth_list" | xauth -f $XAUTH nmerge -
+#     else
+#         touch $XAUTH
+#     fi
+#     chmod a+r $XAUTH
+# fi
+
+# docker run -it --rm \
+#     --runtime nvidia \
+#     --name orca4_pytorch \
+#     -e DISPLAY \
+#     -e QT_X11_NO_MITSHM=1 \
+#     -e XAUTHORITY=$XAUTH \
+#     -v "$XAUTH:$XAUTH" \
+#     -v "/tmp/.X11-unix:/tmp/.X11-unix" \
+#     -v "/etc/localtime:/etc/localtime:ro" \
+#     -v "/home/robosub/colcon_ws:/home/orca4/colcon_ws" \
+#     -v "/usr/local/zed/settings:/usr/local/zed/settings" \
+#     -v "/usr/local/zed/resources:/usr/local/zed/resources" \
+#     --network host \
+#     --privileged \
+#     --device /dev/video0 \
+#     --device /dev/video1 \
+#     --device /dev/ttyACM0 \
+#     --ipc host \
+#     dustynv/l4t-pytorch:r36.2.0 \
+#     bash
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #!/usr/bin/env bash
 
 XAUTH=/tmp/.docker.xauth
@@ -28,6 +78,8 @@ docker run -it \
     -v "/etc/localtime:/etc/localtime:ro" \
     -v "/dev/input:/dev/input" \
     -v "/usr/local/cuda:/usr/local/cuda" \
+    -v "/usr/local/zed/settings:/usr/local/zed/settings" \
+    -v "/usr/local/zed/resources:/usr/local/zed/resources" \
     -v "/usr/lib/aarch64-linux-gnu:/usr/lib/aarch64-linux-gnu" \
     -v "/tmp:/tmp" \
     --network=host \

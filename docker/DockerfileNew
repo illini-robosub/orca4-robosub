@@ -129,8 +129,15 @@ RUN pip3 install --no-cache-dir ultralytics && \
     yolo export model=yolov8s.pt format=onnx simplify=False dynamic=False imgsz=512
 
 # Clone ZED wrappers
-RUN git clone https://github.com/stereolabs/zed-ros2-wrapper.git
-RUN git clone https://github.com/stereolabs/zed-ros2-examples.git
+# RUN git clone https://github.com/stereolabs/zed-ros2-wrapper.git
+# RUN git clone https://github.com/stereolabs/zed-ros2-examples.git
+
+RUN git clone https://github.com/stereolabs/zed-ros2-wrapper.git \
+    && cd zed-ros2-wrapper \
+    && git checkout humble-v5.0.0
+RUN git clone https://github.com/stereolabs/zed-ros2-examples.git \
+    && cd zed-ros2-examples \
+    && git checkout humble-v5.0.0
 
 # Install ZED SDK dependencies and download installer
 WORKDIR /home/$USERNAME
@@ -140,8 +147,12 @@ RUN sudo apt-get update && \
 
 # Download and install ZED SDK
 # Note: Not skipping anything that might contain CMake config files
+
+# "https://download.stereolabs.com/zedsdk/5.0/l4t36.4/jetsons?_gl=1*10ot5cs*_gcl_au*MTY4NjY0MTQ5My4xNzQzNDcwODI2" && \
+#./ZED_SDK_Linux_Ubuntu22.run --quiet --accept
+
 RUN wget -q --show-progress -O ZED_SDK_Linux_Ubuntu22.run \
-    "https://download.stereolabs.com/zedsdk/5.0/l4t36.4/jetsons?_gl=1*10ot5cs*_gcl_au*MTY4NjY0MTQ5My4xNzQzNDcwODI2" && \
+    "https://download.stereolabs.com/zedsdk/5.0.0/l4t36.4/jetsons" && \
     chmod +x ZED_SDK_Linux_Ubuntu22.run && \
     echo "Installing ZED SDK with all components..." && \
     ./ZED_SDK_Linux_Ubuntu22.run --quiet --accept && \
@@ -156,6 +167,17 @@ ENV LD_LIBRARY_PATH=/usr/local/zed/lib
 
 USER $USERNAME
 WORKDIR /home/$USERNAME/colcon_ws
+
+# Install Jetson-specific PyTorch (must come before requirements.txt install)
+RUN pip3 install torch torchvision \
+    --index-url https://developer.download.nvidia.com/compute/redist/jp/v60
+
+# Copy ONLY requirements early to avoid constant rebuild
+# added this 03/09/26 may need colcon_ws/
+COPY --chown=$USERNAME:$USERNAME vision_testing/requirements.txt src/orca4/vision_testing/ 
+# Install Python deps (cached unless requirements.txt changes)
+RUN pip3 install --no-cache-dir -r /home/$USERNAME/colcon_ws/src/orca4/vision_testing/requirements.txt
+
 # Assuming build context is the directory containing all orca4 packages
 COPY --chown=$USERNAME:$USERNAME . src/orca4
 
@@ -169,6 +191,8 @@ RUN sudo apt-get update && \
 # Build the colcon workspace
 RUN [ "/bin/bash" , "-c" , "\
 source /opt/ros/humble/setup.bash \
+&& colcon build --packages-select robosub_msgs \
+&& source install/setup.bash \
 && colcon build --packages-skip-regex '^zed_.*' --packages-skip rviz_plugin_zed_od" ]
 
 # Set up the environment
@@ -188,3 +212,7 @@ RUN echo source $(pwd)/install/local_setup.bash >> ~/.bashrc
 
 # The CMD or ENTRYPOINT would go here
 # CMD ["ros2", "launch", "..."]
+
+RUN ln -sf /usr/lib/aarch64-linux-gnu/libopenblas.so \
+    /usr/lib/aarch64-linux-gnu/libopenblas.so.0 && \
+    ldconfig
