@@ -227,9 +227,20 @@ RUN sudo apt update && sudo apt install -y usbutils
 RUN sudo apt-get install -y gz-harmonic
 
 
-# # Install Jetson-specific PyTorch (must come before requirements.txt install)
-# RUN pip3 install torch torchvision \
-#     --index-url https://developer.download.nvidia.com/compute/redist/jp/v60
+# # Copy pre-extracted Jetson torch/torchvision from dustynv container
+# COPY --chown=$USER_UID:$USER_GID wheels/torch.tar.gz wheels/torchvision.tar.gz /tmp/
+
+# # Extract directly into site-packages
+# RUN sudo tar xzf /tmp/torch.tar.gz -C /usr/local/lib/python3.10/dist-packages/ && \
+#     sudo tar xzf /tmp/torchvision.tar.gz -C /usr/local/lib/python3.10/dist-packages/ && \
+#     sudo rm /tmp/torch.tar.gz /tmp/torchvision.tar.gz
+
+# Copy pre-extracted Jetson torch/torchvision from dustynv container
+COPY --chown=$USER_UID:$USER_GID wheels/torch.tar.gz /tmp/
+
+# Extract directly into site-packages (torchgen is included in torch.tar.gz)
+RUN sudo tar xzf /tmp/torch.tar.gz -C /usr/local/lib/python3.10/dist-packages/ && \
+    sudo rm /tmp/torch.tar.gz
 
 # Copy ONLY requirements early to avoid constant rebuild
 # added this 03/09/26
@@ -319,8 +330,8 @@ WORKDIR /home/$USERNAME/colcon_ws
 
 
 RUN pip install --no-cache-dir ultralytics
-RUN ~/.local/bin/yolo export model=yolov8s.pt format=onnx simplify=False dynamic=False imgsz=512
-
+# RUN ~/.local/bin/yolo export model=yolov8s.pt format=onnx simplify=False dynamic=False imgsz=512
+# ^ This command seems strange
 
 
 #RUN colcon build --symlink-install 
@@ -387,3 +398,8 @@ RUN echo source $(pwd)/install/local_setup.bash >> ~/.bashrc
 RUN sudo ln -sf /usr/lib/aarch64-linux-gnu/libopenblas.so \
     /usr/lib/aarch64-linux-gnu/libopenblas.so.0
 RUN  sudo ldconfig
+
+# Remove all numpy versions then pin the correct one last
+RUN pip3 uninstall numpy -y || true && \
+    pip3 uninstall numpy -y || true && \
+    pip3 install --no-cache-dir "numpy==1.26.4"
