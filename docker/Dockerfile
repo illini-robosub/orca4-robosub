@@ -122,6 +122,11 @@ COPY --chown=$USER_UID:$USER_GID workspace.repos colcon_ws/src/orca4
 WORKDIR /home/$USERNAME/colcon_ws/src
 RUN vcs import < orca4/workspace.repos
 
+# ros-humble-mavros / mavros-extras / libmavconn are currently missing from
+# the ROS 2 apt repo for Jammy - see https://github.com/mavlink/mavros/issues/2293
+# Build them from source instead of relying on rosdep/apt.
+RUN git clone https://github.com/mavlink/mavros.git -b 2.15.1
+
 # Run rosdep over workspace repos
 WORKDIR /home/$USERNAME/colcon_ws
 RUN rosdep update \
@@ -142,7 +147,8 @@ COPY --chown=$USER_UID:$USER_GID orca_shared/package.xml src/orca4/orca_shared/
 
 # Run rosdep over orca4 package.xml files
 RUN rosdep update \
-  && rosdep install -y --from-paths . --ignore-src
+  && rosdep install -y --from-paths . --ignore-src \
+     --skip-keys "mavros mavros_extras libmavconn"
 
 # MAVROS depends on GeographicLib, and GeographicLib needs some datasets
 RUN [ "/bin/bash" , "-c" , "\
