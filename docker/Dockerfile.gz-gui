@@ -1,0 +1,53 @@
+# Native (non-emulated) Gazebo Harmonic GUI sidecar for the orca4 container.
+#
+# On Apple Silicon the orca4 image is linux/amd64 and runs under Rosetta,
+# which deadlocks gz-sim's GUI during QML startup (every thread parks in
+# rt_mutex_schedule right after "Create main window"). The server, ArduSub,
+# ROS and RViz are unaffected. This image runs only the GUI, natively on
+# linux/arm64, inside orca4's network namespace so gz-transport discovery and
+# the Xvfb display (abstract socket @/tmp/.X11-unix/X99) are both shared.
+# See run-gz-gui.sh.
+
+ARG ORCA4_IMAGE=orca4:latest
+FROM --platform=linux/amd64 ${ORCA4_IMAGE} AS orca4
+
+FROM ubuntu:22.04
+
+ARG DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update \
+  && apt-get -y --quiet --no-install-recommends install \
+    ca-certificates \
+    gnupg \
+    lsb-release \
+    wget \
+  && wget https://packages.osrfoundation.org/gazebo.gpg -O /usr/share/keyrings/pkgs-osrf-archive-keyring.gpg \
+  && echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/pkgs-osrf-archive-keyring.gpg] http://packages.osrfoundation.org/gazebo/ubuntu-stable $(lsb_release -cs) main" > /etc/apt/sources.list.d/gazebo-stable.list \
+  && apt-get update \
+  && apt-get -y --quiet --no-install-recommends install \
+    gz-harmonic \
+    libgl1-mesa-dri \
+  && rm -rf /var/lib/apt/lists/*
+
+# gz-transport's default partition is "<hostname>:<username>". The hostname is
+# shared with orca4 (same UTS/network namespace), so the username must match
+# too or the GUI never discovers the server.
+ARG USERNAME=orca4
+ARG USER_UID=1000
+ARG USER_GID=$USER_UID
+RUN groupadd --gid $USER_GID $USERNAME \
+  && useradd -s /bin/bash --uid $USER_UID --gid $USER_GID -m $USERNAME
+
+# The GUI resolves meshes/textures itself, so it needs the same model paths
+# the server uses. Copied from the (amd64) orca4 image; files only, no binaries.
+COPY --from=orca4 /home/orca4/colcon_ws/src/orca4/orca_description /home/orca4/colcon_ws/src/orca4/orca_description
+COPY --from=orca4 /home/orca4/colcon_ws/src/bluerov2_gz /home/orca4/colcon_ws/src/bluerov2_gz
+
+USER $USERNAME
+WORKDIR /home/$USERNAME
+
+ENV GZ_SIM_RESOURCE_PATH=/home/orca4/colcon_ws/src/orca4/orca_description/models:/home/orca4/colcon_ws/src/orca4/orca_description/worlds:/home/orca4/colcon_ws/src/bluerov2_gz/models:/home/orca4/colcon_ws/src/bluerov2_gz/worlds
+ENV DISPLAY=:99
+ENV QT_X11_NO_MITSHM=1
+
+CMD ["gz", "sim", "-g", "-v", "3"]

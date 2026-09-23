@@ -1,0 +1,138 @@
+DOCKER BUILD AND STARTUP ISSUES
+Updated: 2026-09-20
+Ordered by priority: confirmed build blocker first, then build risks and startup issues.
+This is a working diagnostic record. An applied fix is not a verified fix until
+the relevant rebuild or runtime check passes.
+
+1. BUILD BLOCKER: ros-humble-mavros is unavailable in the configured APT index.
+   Evidence: the original build failed at step 43/48, during the second rosdep
+   install, with "E: Unable to locate package ros-humble-mavros" and exit code 1.
+   apt-cache search in the build image found ros-humble-mavros-msgs but no
+   ros-humble-mavros runtime. Other Humble packages installed successfully.
+   This is a package availability problem, not a misspelled dependency or a
+   demonstrated consequence of the ARM host. The container uses AMD64 packages.
+   Why the upstream binary is absent has not been established.
+   Fix applied: workspace.repos builds MAVROS from source (vcs imports it before
+   rosdep --ignore-src), instead of requesting the missing runtime binary.
+   The pinned commit went through three revisions before it actually compiled
+   (see note below) against the ros-humble-mavlink apt package actually
+   resolved by rosdep, which is not version-pinned and moves independently of
+   any MAVROS source commit:
+     - b0da849a (2.8.0, 2024-06-07): fails, MAV_PROTOCOL_CAPABILITY had since
+       moved from mavlink::common to mavlink::standard upstream.
+     - b2c96553 (2025-09-09, the commit that adopted that move): fails on the
+       next thing that moved namespace the same way, GLOBAL_POSITION_INT.
+     - a5979a52 (ros2 branch tip, 2026-09-18): fails, references a
+       MAV_AUTOPILOT::FLIX enum value newer than the installed mavlink apt
+       package (ros-humble-mavlink 2026.8.8, dated 2026-08-10).
+     - 7f7e8fdd (2026-09-09, one commit before FLIX support was added): builds
+       clean. This is the current pin.
+   Status: VERIFIED. Full image built and tagged orca4:latest on 2026-09-20;
+   mavros, mavros_extras, mavros_examples, and the full orca4 workspace
+   (orca_base, orca_nav2, orca_shared, orca_bringup, orca_msgs,
+   orca_description) all compiled with zero errors.
+   Caveat: ros-humble-mavlink is not version-pinned, so this pin can go stale
+   again whenever that apt package updates. If the build breaks again on a
+   mavlink/mavros symbol mismatch, re-check this note's date range against the
+   apt package's dpkg version string in the build log.
+   Reference: https://github.com/mavlink/mavros/blob/ros2/docs/installation.md
+
+2. BUILD COMPATIBILITY RISK: ArduPilot upgrades setuptools beyond colcon's range.
+   Evidence: its prerequisite installer installed setuptools 84.0.0 and pip
+   reported that colcon-core 0.21.3 requires setuptools<80,>=30.3.0.
+   The original build still compiled the three supporting ROS packages, so
+   this warning was not the observed fatal failure.
+   Fix applied: Dockerfile installs setuptools<80 before the first colcon build.
+   Status: VERIFIED. The 2026-09-20 successful build downgraded
+   setuptools 84.0.0 -> 79.0.1 immediately before colcon build ran, no error.
+
+3. BUILD REPRODUCIBILITY RISK: upstream versions drift between rebuilds.
+   Locations: Dockerfile base image, apt-get upgrade, ArduPilot clone and
+   prerequisite installer; moving branches in workspace.repos.
+   The ROS desktop image is not digest-pinned; ArduPilot is cloned at its current
+   default branch. Package indexes and Python dependencies also change over time.
+   A previously successful build therefore does not guarantee a later one.
+   MAVROS is now commit-pinned. ardupilot_gazebo already checks out 4b30a3d8.
+   Remaining work: record and pin a tested dependency set after the full image
+   and simulation pass. No other version changes have been validated yet.
+
+4. HOST/BUILD TOOL ISSUE: AMD64 image on ARM64, and legacy cache restoration.
+   Evidence: Docker reports host linux/arm64/v8 and image linux/amd64.
+   Emulation works here: the first build compiled ArduSub and the Gazebo plugin.
+   docker/build.sh now explicitly requests --platform linux/amd64.
+   Native ARM64 operation is not provided by that flag; it still needs emulation.
+   Docker warns that its legacy builder is deprecated. A cache-from attempt using
+   the earlier intermediate image failed with "failed to read diff archive:
+   InvalidArgument: \"\" failed validation". The ordinary rebuild is proceeding.
+   These are separate from the missing MAVROS binary. No Docker daemon or
+   buildx installation changes have been made.
+
+5. RUNTIME DEFECT: a trailing backslash swallowed NVIDIA_VISIBLE_DEVICES.
+   Original Dockerfile joined the cleanup command to the following ENV line.
+   Build output showed:
+     rm -rf /var/lib/apt/lists/* ENV NVIDIA_VISIBLE_DEVICES=all
+   That makes ENV and NVIDIA_VISIBLE_DEVICES=all arguments to rm; it does not
+   set the intended image environment variable. It did not stop the build.
+   Fix applied: removed the trailing backslash before ENV NVIDIA_VISIBLE_DEVICES.
+   Status: syntax corrected; final image environment check pending.
+
+6. RUNTIME REQUIREMENT: GeographicLib's geoid dataset must actually be installed.
+   Original Dockerfile downloaded an unpinned script from MAVROS's master branch.
+   The inspected MAVROS 2.8.0 script can print an installation error without
+   reliably failing the Docker RUN, potentially leaving an unusable image.
+   Fix applied: run the script from the pinned MAVROS checkout and require a
+   nonempty /usr/share/GeographicLib/geoids/egm96-5.pgm afterward.
+   Status: VERIFIED at build time (script ran, egm96-5/egm96/emm2015 installed,
+   the nonempty-file check passed). MAVROS runtime behavior still unverified.
+   Reference: https://github.com/mavlink/mavros/blob/ros2/docs/installation.md
+
+7. HOST STARTUP REQUIREMENT: docker/run.sh assumes NVIDIA GPU and X11 access.
+   The script always passes --gpus all and mounts X11 and /dev/input.
+   DISPLAY is set on this host, but /dev/dri was absent. NVIDIA runtime support
+   has not been verified. The original build never reached container startup.
+   Planned validation: start without GUI using gzclient:=False rviz:=False,
+   check MAVROS discovery and simulator processes, then assess graphics support.
+   Do not interpret a successful image build as proof that the GUI works here.
+
+8. NONINTERACTIVE STARTUP LIMITATION: workspace setup is only in .bashrc.
+   Dockerfile appends project setup to the user's .bashrc. Noninteractive
+   docker run commands do not automatically source that file.
+   Runtime checks must explicitly source
+   /home/orca4/colcon_ws/src/orca4/setup.bash before using Orca ROS packages.
+   This is not the observed build failure; an interactive bash session normally
+   follows the documented workflow.
+
+9. RUNTIME DEFECT (2026-09-22): Gazebo GUI never appears over VNC on Apple Silicon.
+   a) The orca4:latest image was built (2026-09-20 20:10) before fluxbox was
+      added to the Dockerfile/entrypoint (20:16), so vnc-entrypoint.sh's
+      `fluxbox &` silently failed. With no window manager, RViz restored its
+      saved geometry entirely off the 1280x800 screen.
+   b) The emulated (amd64, Rosetta) gz-sim GUI deadlocks right after
+      "Create main window": every thread parks in rt_mutex_schedule with ~0 CPU,
+      while RViz under the same Rosetta idles normally in futex_wait. Not GL:
+      reproduced with LP_NUM_THREADS=0, QV4_FORCE_INTERPRETER=1,
+      QSG_RENDER_LOOP=basic, QT_QUICK_BACKEND=software, and ogre (v1).
+      The gz server, ArduSub, MAVROS, Nav2 and RViz all run fine emulated.
+      Note: killing the stuck GUI makes `gz sim` stop the server too.
+   Fix applied: launch with gzclient:=False and run a native arm64 GUI sidecar
+   (Dockerfile.gz-gui, run-gz-gui.sh) in orca4's network + IPC namespaces.
+   Needs: same username as the server (gz-transport partition is
+   hostname:user) and a shared IPC namespace (Mesa presents frames to Xvfb via
+   MIT-SHM), hence `--ipc shareable` in run.sh.
+   Status: VERIFIED on 2026-09-22 -- sand world, orca4 model and camera render
+   over VNC, RTF ~44%. Image rebuild with fluxbox/x11-xserver-utils pending;
+   the running container had them apt-installed by hand.
+
+CURRENT HANDOFF STATE
+  Modified: docker/Dockerfile, docker/build.sh, docker/README.md, workspace.repos.
+  `./build.sh` now completes: docker reports
+    Successfully built 85f1dac21a51
+    Successfully tagged orca4:latest
+  Build log: /tmp/robosub-docker-build-4.log (this machine). Three earlier
+  attempts and their logs (…-build.log, …-build-2.log, …-build-3.log) document
+  the MAVROS pin iterations in item 1 above.
+  Not yet verified: container startup / docker/run.sh (item 7), the GUI/GPU
+  path, MAVROS actually talking to ArduSub over SITL, and the Orca4 simulation
+  itself. Building the image only proves the code compiles.
+  Next: run docker/run.sh (or a headless variant per item 7) and confirm MAVROS
+  discovery, then the full simulation; update this record with actual results.

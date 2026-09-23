@@ -1,0 +1,137 @@
+BREAKING ISSUE: docker/build.sh failed compiling MAVROS.
+
+CAUSE: workspace.repos pinned MAVROS to the 2.8.0 tag (2024-06-07), which
+predates mavlink upstream moving several enums/messages (MAV_PROTOCOL_CAPABILITY,
+GLOBAL_POSITION_INT, ...) from the mavlink::common namespace to mavlink::standard.
+The ros-humble-mavlink apt package rosdep installs is not version-pinned and
+already reflects those moves, so the old MAVROS source no longer compiled
+against it.
+
+FIX: bumped the mavros commit pin in workspace.repos to
+7f7e8fdda872a13755ea3f5814b7a42ac2660eef (2026-09-09) -- the narrow window
+after those renames landed but before MAVROS started requiring a newer
+MAV_AUTOPILOT::FLIX enum value the installed apt mavlink package doesn't
+define yet.
+
+VERIFIED: docker/build.sh completes end to end; `Successfully tagged
+orca4:latest`; mavros, mavros_extras, and the full orca4 workspace all
+compile clean. No orca4 source files were changed.
+
+CAVEAT: ros-humble-mavlink can update again and break this pin. Full
+diagnostic history is in docker/ISSUES.txt.
+
+
+=====================================================================
+SESSION 2026-09-22: GAZEBO GUI OVER VNC ON APPLE SILICON
+=====================================================================
+
+GOAL: see the Gazebo sim in the VNC session (vnc://localhost:5900,
+password orca4pass) when running on an M-series Mac.
+
+STARTING STATE: no build was running; orca4:latest had been built
+successfully. The container was up in VNC mode and sim_launch.py was
+running, but the VNC screen was black.
+
+PROBLEM 1: NO WINDOW MANAGER
+  The image was built (2026-09-20 20:10) six minutes before fluxbox was
+  added to the Dockerfile and vnc-entrypoint.sh (20:16), so fluxbox was
+  never installed and `fluxbox &` in the entrypoint failed silently.
+  With no window manager, RViz restored its saved geometry
+  (1850x1980 at x=1952) completely off the 1280x800 screen.
+  FIX: Dockerfile VNC layer now installs fluxbox and x11-xserver-utils;
+  vnc-entrypoint.sh starts fluxbox and runs `xsetroot -solid "#2b2b2b"`
+  (without a root background, moved windows leave stale pixels behind).
+  STATUS: verified by hand in the running container; the image itself
+  has NOT been rebuilt yet.
+
+PROBLEM 2: THE EMULATED GAZEBO GUI DEADLOCKS UNDER ROSETTA
+  Symptom: the GUI log stops at "Create main window" and no window ever
+  appears. Every GUI thread sits in rt_mutex_schedule with ~0 CPU, while
+  RViz, under the same emulator, idles normally in futex_wait. The
+  Gazebo server, ArduSub, MAVROS, Nav2 and RViz all run fine emulated.
+  Ruled out (all still deadlocked): starting the GUI standalone with
+  `gz sim -g`, LP_NUM_THREADS=0, QV4_FORCE_INTERPRETER=1,
+  QSG_RENDER_LOOP=basic, QT_QUICK_BACKEND=software,
+  --render-engine-gui ogre. OpenGL itself works (Mesa llvmpipe, GL 4.5).
+  Conclusion: a Rosetta bug triggered by gz-gui's QML startup; no Gazebo
+  setting avoids it.
+  WARNING: killing the stuck GUI makes the `gz sim` launcher stop the
+  server too. Restart the sim with gzclient:=False instead.
+  FIX: run the Gazebo server only (gzclient:=False) and attach a native
+  arm64 GUI from a sidecar container:
+    - Dockerfile.gz-gui (new): Ubuntu 22.04 arm64 + gz-harmonic + Mesa.
+      Copies the model/world folders out of orca4:latest (files only, no
+      binaries) and sets GZ_SIM_RESOURCE_PATH. Runs as user orca4
+      (UID 1000) because gz-transport's default partition is
+      "hostname:username"; as root it never found the server.
+    - run-gz-gui.sh (new): starts the sidecar with
+        --network container:orca4  shared network, so gz-transport
+                                   discovery works; also exposes Xvfb's
+                                   abstract socket, so DISPLAY=:99 works
+        --ipc container:orca4      shared memory; Mesa hands frames to
+                                   Xvfb via MIT-SHM, so without this the
+                                   window stays blank/stale
+    - run.sh: VNC branch now passes `--ipc shareable`, which Docker
+      requires before another container can join orca4's IPC namespace.
+  STATUS: VERIFIED. Sand world, orca4 model and entity tree rendered
+  over VNC; RViz camera image live; MAVROS connected to ArduSub;
+  real-time factor ~44% (emulated server).
+
+HOW TO RUN (macOS / no NVIDIA)
+  1. ./run.sh
+  2. inside the container:
+       ros2 launch orca_bringup sim_launch.py gzclient:=False
+     (run this in the container shell, prompt orca4@<id>, not on the
+     host; the host has no rviz2/ardusub/ros_gz)
+  3. on the host, once:
+       docker build --platform linux/arm64 -f Dockerfile.gz-gui -t orca4-gz-gui:latest .
+     and each run:
+       ./run-gz-gui.sh
+  4. connect a VNC viewer to vnc://localhost:5900 (password orca4pass).
+     Until the image is rebuilt, first install the window manager by hand:
+       docker exec -u root orca4 bash -c 'apt-get update && apt-get install -y fluxbox x11-xserver-utils'
+       docker exec -d -e DISPLAY=:99 orca4 fluxbox
+
+WHAT A REBUILD CHANGES
+  Only fluxbox + x11-xserver-utils in the VNC layer and the two new lines
+  in vnc-entrypoint.sh. Because that layer is early in the Dockerfile,
+  every later step (ArduPilot, MAVROS, workspace) reruns under emulation;
+  expect a couple of hours. Stop running containers first.
+
+HOW THE x86 EMULATION WORKS
+  The Mac is ARM64. OrbStack runs an ARM64 Linux VM, and Docker runs in
+  it. build.sh builds orca4 as linux/amd64, so every program in the image
+  is an x86-64 binary. When the kernel is asked to run one, binfmt_misc
+  recognises the x86-64 ELF header and hands it to the registered
+  translator: Rosetta (QEMU is registered too, but Rosetta wins). Rosetta
+  translates x86 instructions to ARM as the program runs; system calls go
+  straight to the ARM64 kernel.
+  Why the old setup showed the terminal but not Gazebo: the old run.sh
+  forwarded X11 to XQuartz on the Mac and assumed an NVIDIA GPU. XQuartz
+  only offers old indirect OpenGL, which Gazebo's Ogre2 renderer can't
+  use; a terminal only needs text. VNC mode instead renders in-container
+  with Mesa llvmpipe (software OpenGL 4.5) into Xvfb and streams pixels,
+  which fixed OpenGL and then exposed the Rosetta deadlock above.
+  A fully native arm64 orca4 image would avoid emulation entirely
+  (faster sim, no Rosetta bugs); arm64 support of every dependency has
+  not been checked.
+
+FILES CHANGED THIS SESSION
+  New:      Dockerfile.gz-gui, run-gz-gui.sh
+  Modified: run.sh (--ipc shareable), Dockerfile (x11-xserver-utils),
+            vnc-entrypoint.sh (xsetroot), README.md (VNC/sidecar steps;
+            "MAVROS 2.8.0" -> "MAVROS"), ISSUES.txt (item 9)
+  Nothing committed yet.
+
+PROBLEM 3 (found after the rebuild): CTRL+C AT THE CONTAINER PROMPT KILLS VNC
+  vnc-entrypoint.sh started Xvfb/fluxbox/x11vnc as background jobs of the
+  same terminal, then `exec bash`. Ctrl+C at the bare prompt sends SIGINT
+  to that whole process group; Xvfb shuts down on SIGINT, x11vnc and all
+  GUIs follow, and the Mac VNC client reports "Connection failed".
+  (Ctrl+C while `ros2 launch` runs in the foreground is fine.)
+  FIX: vnc-entrypoint.sh starts all three with `setsid`, so they have
+  their own sessions. VERIFIED in a throwaway container: SIGINT to the
+  terminal's process group leaves all three running.
+  run.sh (VNC mode) now bind-mounts docker/vnc-entrypoint.sh over the
+  copy baked into the image, so this fix and any later entrypoint edit
+  apply on the next ./run.sh -- no rebuild needed.
