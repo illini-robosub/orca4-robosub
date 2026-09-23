@@ -1,5 +1,18 @@
 repositories:
 
+  # Build MAVROS from source: the Humble apt repository may only provide mavros_msgs.
+  mavros:
+    type: git
+    url: https://github.com/mavlink/mavros.git
+    # ros2 branch, 2026-09-09, the commit right before mavros added a mode parser
+    # for the "Flix" autopilot (needs a MAV_AUTOPILOT::FLIX enum value that
+    # ros-humble-mavlink, an apt package dated 2026-08-10, doesn't define yet).
+    # The 2.8.0 tag (2024-06-07) is too old in the other direction: it predates
+    # mavlink's moves of AUTOPILOT_VERSION and GLOBAL_POSITION_INT out of the
+    # "common" namespace into "standard", which the same apt mavlink expects.
+    # This commit sits between both breaks and compiles against that package.
+    version: 7f7e8fdda872a13755ea3f5814b7a42ac2660eef
+
   bluerov2_gz:
     type: git
     url: https://github.com/clydemcqueen/bluerov2_gz
