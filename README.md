@@ -36,6 +36,9 @@ See [orca_nav2](orca_nav2/README.md) for details.
 
 ## Installation
 
+For prebuilt Docker images, pull commands, and Apple Silicon Mac launch and
+testing steps, see the [Docker README](docker/README.md#download-the-published-images-no-build-needed).
+
 See the [Dockerfile](docker/Dockerfile) for installation details.
 
 Install these packages:

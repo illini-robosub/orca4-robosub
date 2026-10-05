@@ -26,10 +26,37 @@ Run all host commands from this `docker/` directory, in the terminal where
 the container" go in the container shell (prompt `orca4@<id>`), where
 `docker` is not available.
 
-### Build (once)
+### Download the published images (no build needed)
+
+Pull both images published for the `docker_fixes_mac` branch:
+
+~~~bash
+docker pull ghcr.io/illini-robosub/orca4:docker_fixes_mac
+docker pull ghcr.io/illini-robosub/orca4-gz-gui:docker_fixes_mac
+~~~
+
+If access is denied because the packages are private, first run
+`docker login ghcr.io -u YOUR_GITHUB_USERNAME` using a GitHub personal access
+token (classic) with `read:packages` and an account that can access the packages.
+
+Give the downloaded images the local names used by the launch scripts:
+
+~~~bash
+docker tag ghcr.io/illini-robosub/orca4:docker_fixes_mac orca4:latest
+docker tag ghcr.io/illini-robosub/orca4-gz-gui:docker_fixes_mac orca4-gz-gui:latest
+~~~
+
+No Dockerfile copy or build is needed. Tags are additional names for the same
+image data, not duplicate copies. Pulling again reuses layers already stored
+locally. If you already have these exact images, Docker will reuse them.
+The tag commands replace what the local `latest` names point to, so they select
+the published versions for the launch scripts.
+
+### Build from source (alternative to downloading)
+
 ~~~
 ./build.sh    # orca4 image (amd64, emulated; takes a few hours)
-docker build --platform linux/arm64 -f Dockerfile.gz-gui -t orca4-gz-gui:latest
+docker build --platform linux/arm64 -f Dockerfile.gz-gui -t orca4-gz-gui:latest .
 ~~~
 Rebuild the GUI image after rebuilding orca4 if models or worlds changed;
 it copies them from `orca4:latest`.
@@ -53,6 +80,24 @@ it copies them from `orca4:latest`.
    password `orca4pass`. RViz appears first; the Gazebo window fills in
    within a minute or so. Switch between them from the taskbar at the
    bottom, and drag or resize windows as needed.
+
+### Test the downloaded images
+
+After pulling and tagging, follow the launch steps above using the scripts in
+this checkout's `docker/` directory. You still need this directory because
+`run.sh` mounts `vnc-entrypoint.sh` from it; you do not need to rebuild an image.
+On Apple Silicon, enable AMD64 emulation in your Docker environment.
+
+Confirm that both containers are running from another host terminal:
+
+~~~bash
+docker ps --format 'table {{.Names}}\t{{.Image}}\t{{.Status}}'
+~~~
+
+Expect `orca4` and `orca4-gz-gui` to be listed. In the VNC viewer, confirm that
+RViz opens and Gazebo displays the simulation world. Container status alone
+does not verify that the simulation is working. Stop the test using the steps
+below; stopping the containers leaves the downloaded images available for reuse.
 
 ### Stop / exit
 
