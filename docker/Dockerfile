@@ -42,7 +42,7 @@ RUN apt-get update \
     libegl1 \
     libxext6 \
     libx11-6 \
-  && rm -rf /var/lib/apt/lists/* \
+  && rm -rf /var/lib/apt/lists/*
 ENV NVIDIA_VISIBLE_DEVICES=all
 ENV NVIDIA_DRIVER_CAPABILITIES=graphics,utility,compute
 ENV QT_X11_NO_MITSHM=1
@@ -61,6 +61,21 @@ RUN apt-get update \
     gstreamer1.0-libav \
     gstreamer1.0-gl \
   && rm -rf /var/lib/apt/lists/*
+
+# Software-rendering fallback for hosts with no GPU passthrough (e.g.
+# Docker Desktop/OrbStack on macOS, where XQuartz's indirect GLX can't
+# serve modern GL contexts): a virtual framebuffer plus a VNC server, so
+# run.sh can render in-container instead of forwarding X11. See run.sh and
+# vnc-entrypoint.sh.
+RUN apt-get update \
+  && apt-get -y --quiet --no-install-recommends install \
+    xvfb \
+    x11vnc \
+    fluxbox \
+    x11-xserver-utils \
+  && rm -rf /var/lib/apt/lists/*
+COPY docker/vnc-entrypoint.sh /usr/local/bin/vnc-entrypoint.sh
+RUN chmod +x /usr/local/bin/vnc-entrypoint.sh
 
 # Create a non-root user
 # Required for ArduSub install, but generally a good idea
@@ -128,6 +143,8 @@ RUN rosdep update \
   && rosdep install -y --from-paths . --ignore-src
 
 # Build everything so far
+# ArduPilot's installer upgrades setuptools beyond colcon's supported range.
+RUN python3 -m pip install --user 'setuptools<80'
 RUN [ "/bin/bash" , "-c" , "\
   source /opt/ros/humble/setup.bash \
   && colcon build" ]
@@ -146,9 +163,8 @@ RUN rosdep update \
 
 # MAVROS depends on GeographicLib, and GeographicLib needs some datasets
 RUN [ "/bin/bash" , "-c" , "\
-  wget https://raw.githubusercontent.com/mavlink/mavros/master/mavros/scripts/install_geographiclib_datasets.sh \
-  && chmod +x install_geographiclib_datasets.sh \
-  && sudo ./install_geographiclib_datasets.sh" ]
+  sudo bash src/mavros/mavros/scripts/install_geographiclib_datasets.sh \
+  && test -s /usr/share/GeographicLib/geoids/egm96-5.pgm" ]
 
 # Copy everything
 COPY --chown=$USER_UID:$USER_GID . src/orca4
