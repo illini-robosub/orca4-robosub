@@ -1,0 +1,474 @@
+[0.000000] (-) TimerEvent: {}
+[0.000748] (-) JobUnselected: {'identifier': 'illini_pose_estimator'}
+[0.001256] (-) JobUnselected: {'identifier': 'imu_tf_broadcaster'}
+[0.001547] (-) JobUnselected: {'identifier': 'orca_base'}
+[0.001642] (-) JobUnselected: {'identifier': 'orca_bringup'}
+[0.001714] (-) JobUnselected: {'identifier': 'orca_description'}
+[0.001781] (-) JobUnselected: {'identifier': 'orca_msgs'}
+[0.001842] (-) JobUnselected: {'identifier': 'orca_nav2'}
+[0.001903] (-) JobUnselected: {'identifier': 'orca_shared'}
+[0.001964] (-) JobUnselected: {'identifier': 'robosub_msgs'}
+[0.002025] (-) JobUnselected: {'identifier': 'vision_pkg'}
+[0.002092] (orca_zed_publisher) JobQueued: {'identifier': 'orca_zed_publisher', 'dependencies': OrderedDict()}
+[0.002163] (orca_zed_publisher) JobStarted: {'identifier': 'orca_zed_publisher'}
+[0.032833] (orca_zed_publisher) JobProgress: {'identifier': 'orca_zed_publisher', 'progress': 'cmake'}
+[0.034692] (orca_zed_publisher) Command: {'cmd': ['/home/robosub/.local/bin/cmake', '/home/robosub/Documents/orca4-robosub/zed_camera_publisher/orca_zed_publisher', '-DCMAKE_INSTALL_PREFIX=/home/robosub/Documents/orca4-robosub/install/orca_zed_publisher'], 'cwd': '/home/robosub/Documents/orca4-robosub/build/orca_zed_publisher', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'robosub'), ('XDG_SEAT', 'seat0'), ('SSH_AGENT_PID', '3488'), ('XDG_SESSION_TYPE', 'x11'), ('GIT_ASKPASS', '/usr/share/code/resources/app/extensions/git/dist/askpass.sh'), ('SHLVL', '2'), ('LD_LIBRARY_PATH', '/usr/local/cuda-12.6/lib64:/home/robosub/ros2_ws/install/zed_components/lib:/home/robosub/ros2_zedx_ws/install/zed_components/lib:/home/robosub/Documents/zedx_ws/install/zed_components/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib:/usr/local/cuda-12.6/lib64:'), ('HOME', '/home/robosub'), ('CHROME_DESKTOP', 'code.desktop'), ('OLDPWD', '/home/robosub/Documents/orca4-robosub/vision_testing'), ('TERM_PROGRAM_VERSION', '1.99.3'), ('DESKTOP_SESSION', 'xfce'), ('PANEL_GDK_CORE_DEVICE_EVENTS', '0'), ('ROS_PYTHON_VERSION', '3'), ('GTK_MODULES', 'gail:atk-bridge'), ('VSCODE_GIT_ASKPASS_MAIN', '/usr/share/code/resources/app/extensions/git/dist/askpass-main.js'), ('VSCODE_GIT_ASKPASS_NODE', '/usr/share/code/code'), ('PYDEVD_DISABLE_FILE_VALIDATION', '1'), ('SYSTEMD_EXEC_PID', '3077'), ('BUNDLED_DEBUGPY_PATH', '/home/robosub/.vscode/extensions/ms-python.debugpy-2026.6.0-linux-arm64/bundled/libs/debugpy'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('COLCON_PREFIX_PATH', '/home/robosub/ros2_ws/install:/home/robosub/ros2_zedx_ws/install:/home/robosub/Documents/zedx_ws/install:/home/robosub/ros_ws/install:/home/robosub/ros2_humble/install'), ('ROS_DISTRO', 'humble'), ('GTK_IM_MODULE', 'ibus'), ('LOGNAME', 'robosub'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'robosub'), ('TERM', 'xterm-256color'), ('XDG_SESSION_ID', '6'), ('ROS_LOCALHOST_ONLY', '0'), ('WINDOWPATH', '2'), ('PATH', '/usr/local/cuda-12.6/bin:/home/robosub/ros2_humble/install/rqt_gui/bin:/home/robosub/ros2_humble/install/rqt_graph/bin:/home/robosub/ros2_humble/install/rqt_bag/bin:/home/robosub/ros2_humble/install/rosidl_cli/bin:/home/robosub/ros2_humble/install/ros2cli/bin:/home/robosub/ros2_humble/install/launch_testing/bin:/home/robosub/ros2_humble/install/ament_xmllint/bin:/home/robosub/ros2_humble/install/ament_uncrustify/bin:/home/robosub/ros2_humble/install/ament_pyflakes/bin:/home/robosub/ros2_humble/install/ament_pycodestyle/bin:/home/robosub/ros2_humble/install/ament_pep257/bin:/home/robosub/ros2_humble/install/ament_pclint/bin:/home/robosub/ros2_humble/install/ament_mypy/bin:/home/robosub/ros2_humble/install/ament_lint_cmake/bin:/home/robosub/ros2_humble/install/ament_index_python/bin:/home/robosub/ros2_humble/install/ament_flake8/bin:/home/robosub/ros2_humble/install/ament_cpplint/bin:/home/robosub/ros2_humble/install/ament_cppcheck/bin:/home/robosub/ros2_humble/install/ament_copyright/bin:/home/robosub/ros2_humble/install/ament_clang_tidy/bin:/home/robosub/ros2_humble/install/ament_clang_format/bin:/opt/ros/humble/bin:/usr/local/cuda-12.6/bin:/home/robosub/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/home/robosub/.vscode/extensions/ms-python.debugpy-2026.6.0-linux-arm64/bundled/scripts/noConfigScripts'), ('SESSION_MANAGER', 'local/ubuntu:@/tmp/.ICE-unix/3297,unix/ubuntu:/tmp/.ICE-unix/3297'), ('XDG_MENU_PREFIX', 'xfce-'), ('GNOME_TERMINAL_SCREEN', '/org/gnome/Terminal/screen/bc387746_bc01_425a_90cd_742ee2a69d20'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('GDK_BACKEND', 'x11'), ('DISPLAY', ':1.0'), ('VSCODE_DEBUGPY_ADAPTER_ENDPOINTS', '/home/robosub/.vscode/extensions/ms-python.debugpy-2026.6.0-linux-arm64/.noConfigDebugAdapterEndpoints/endpoint-ec810fd25f26961e.txt'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'XFCE'), ('PYTHONSTARTUP', '/home/robosub/.config/Code/User/workspaceStorage/178945da02ff65eb1440797dcbce53fe/ms-python.python/pythonrc.py'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'xfce'), ('XAUTHORITY', '/run/user/1000/gdm/Xauthority'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('VSCODE_GIT_IPC_HANDLE', '/run/user/1000/vscode-git-31a0bea015.sock'), ('GNOME_TERMINAL_SERVICE', ':1.83'), ('TERM_PROGRAM', 'vscode'), ('SSH_AUTH_SOCK', '/tmp/ssh-XXXXXX7Z8pvZ/agent.3486'), ('AMENT_PREFIX_PATH', '/opt/ros/humble'), ('ORIGINAL_XDG_CURRENT_DESKTOP', 'XFCE'), ('SHELL', '/bin/bash'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'xfce'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('VSCODE_GIT_ASKPASS_EXTRA_ARGS', ''), ('QT_IM_MODULE', 'ibus'), ('XDG_VTNR', '2'), ('PWD', '/home/robosub/Documents/orca4-robosub/build/orca_zed_publisher'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-xfce:/etc/xdg:/etc/xdg'), ('CLUTTER_IM_MODULE', 'ibus'), ('XDG_DATA_DIRS', '/usr/share/xfce4:/usr/share/xfce:/usr/share/gnome:/home/robosub/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop:/usr/share'), ('PYTHONPATH', '/home/robosub/ros2_humble/build/tracetools_trace:/home/robosub/ros2_humble/install/tracetools_trace/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/tracetools_test:/home/robosub/ros2_humble/install/tracetools_test/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/tracetools_read:/home/robosub/ros2_humble/install/tracetools_read/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/tracetools_launch:/home/robosub/ros2_humble/install/tracetools_launch/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/topic_monitor:/home/robosub/ros2_humble/install/topic_monitor/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/tf2_tools:/home/robosub/ros2_humble/install/tf2_tools/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/tf2_ros_py:/home/robosub/ros2_humble/install/tf2_ros_py/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/test_tracetools_launch:/home/robosub/ros2_humble/install/test_tracetools_launch/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/test_launch_ros:/home/robosub/ros2_humble/install/test_launch_ros/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/sros2:/home/robosub/ros2_humble/install/sros2/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/sensor_msgs_py:/home/robosub/ros2_humble/install/sensor_msgs_py/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/rqt_topic/src:/home/robosub/ros2_humble/install/rqt_topic/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/rqt_srv/src:/home/robosub/ros2_humble/install/rqt_srv/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/rqt_shell/src:/home/robosub/ros2_humble/install/rqt_shell/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/rqt_service_caller/src:/home/robosub/ros2_humble/install/rqt_service_caller/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/rqt_reconfigure/src:/home/robosub/ros2_humble/install/rqt_reconfigure/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/rqt_py_console/src:/home/robosub/ros2_humble/install/rqt_py_console/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/rqt_publisher/src:/home/robosub/ros2_humble/install/rqt_publisher/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/rqt_plot/src:/home/robosub/ros2_humble/install/rqt_plot/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/rqt_msg/src:/home/robosub/ros2_humble/install/rqt_msg/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/rqt_gui_py/src:/home/robosub/ros2_humble/install/rqt_gui_py/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/rqt_gui/src:/home/robosub/ros2_humble/install/rqt_gui/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/rqt_graph/src:/home/robosub/ros2_humble/install/rqt_graph/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/rqt_console/src:/home/robosub/ros2_humble/install/rqt_console/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/rqt_bag_plugins/src:/home/robosub/ros2_humble/install/rqt_bag_plugins/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/rqt_bag/src:/home/robosub/ros2_humble/install/rqt_bag/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/rqt_action/src:/home/robosub/ros2_humble/install/rqt_action/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/rqt:/home/robosub/ros2_humble/install/rqt/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/rpyutils:/home/robosub/ros2_humble/install/rpyutils/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/rosidl_runtime_py:/home/robosub/ros2_humble/install/rosidl_runtime_py/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/rosidl_cli:/home/robosub/ros2_humble/install/rosidl_cli/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ros2trace:/home/robosub/ros2_humble/install/ros2trace/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ros2topic:/home/robosub/ros2_humble/install/ros2topic/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ros2test:/home/robosub/ros2_humble/install/ros2test/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ros2service:/home/robosub/ros2_humble/install/ros2service/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ros2run:/home/robosub/ros2_humble/install/ros2run/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ros2pkg:/home/robosub/ros2_humble/install/ros2pkg/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ros2param:/home/robosub/ros2_humble/install/ros2param/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ros2node:/home/robosub/ros2_humble/install/ros2node/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ros2multicast:/home/robosub/ros2_humble/install/ros2multicast/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ros2lifecycle:/home/robosub/ros2_humble/install/ros2lifecycle/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ros2launch:/home/robosub/ros2_humble/install/ros2launch/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ros2interface:/home/robosub/ros2_humble/install/ros2interface/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ros2doctor:/home/robosub/ros2_humble/install/ros2doctor/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ros2component:/home/robosub/ros2_humble/install/ros2component/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ros2bag:/home/robosub/ros2_humble/install/ros2bag/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ros2action:/home/robosub/ros2_humble/install/ros2action/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ros2cli:/home/robosub/ros2_humble/install/ros2cli/lib/python3.10/site-packages:/home/robosub/ros2_humble/install/resource_retriever/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/quality_of_service_demo_py:/home/robosub/ros2_humble/install/quality_of_service_demo_py/lib/python3.10/site-packages:/home/robosub/ros2_humble/install/qt_gui_py_common/lib/python3.10/site-packages:/home/robosub/ros2_humble/install/qt_gui_cpp/lib/python3.10/site-packages:/home/robosub/ros2_humble/install/qt_dotgraph/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/launch_ros:/home/robosub/ros2_humble/install/launch_ros/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/osrf_pycommon:/home/robosub/ros2_humble/install/osrf_pycommon/lib/python3.10/site-packages:/home/robosub/ros2_humble/install/message_filters/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/lifecycle_py:/home/robosub/ros2_humble/install/lifecycle_py/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/launch_yaml:/home/robosub/ros2_humble/install/launch_yaml/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/launch_xml:/home/robosub/ros2_humble/install/launch_xml/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/launch_testing_ros:/home/robosub/ros2_humble/install/launch_testing_ros/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/launch_testing_examples:/home/robosub/ros2_humble/install/launch_testing_examples/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/launch_testing:/home/robosub/ros2_humble/install/launch_testing/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/launch_pytest:/home/robosub/ros2_humble/install/launch_pytest/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/launch:/home/robosub/ros2_humble/install/launch/lib/python3.10/site-packages:/home/robosub/ros2_humble/install/kdl_parser_py/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/examples_tf2_py:/home/robosub/ros2_humble/install/examples_tf2_py/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/examples_rclpy_pointcloud_publisher:/home/robosub/ros2_humble/install/examples_rclpy_pointcloud_publisher/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/examples_rclpy_minimal_subscriber:/home/robosub/ros2_humble/install/examples_rclpy_minimal_subscriber/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/examples_rclpy_minimal_service:/home/robosub/ros2_humble/install/examples_rclpy_minimal_service/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/examples_rclpy_minimal_publisher:/home/robosub/ros2_humble/install/examples_rclpy_minimal_publisher/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/examples_rclpy_minimal_client:/home/robosub/ros2_humble/install/examples_rclpy_minimal_client/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/examples_rclpy_minimal_action_server:/home/robosub/ros2_humble/install/examples_rclpy_minimal_action_server/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/examples_rclpy_minimal_action_client:/home/robosub/ros2_humble/install/examples_rclpy_minimal_action_client/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/examples_rclpy_guard_conditions:/home/robosub/ros2_humble/install/examples_rclpy_guard_conditions/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/examples_rclpy_executors:/home/robosub/ros2_humble/install/examples_rclpy_executors/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/domain_coordinator:/home/robosub/ros2_humble/install/domain_coordinator/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/demo_nodes_py:/home/robosub/ros2_humble/install/demo_nodes_py/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/camera_info_manager_py:/home/robosub/ros2_humble/install/camera_info_manager_py/lib/python3.10/site-packages:/home/robosub/ros2_humble/install/camera_calibration_parsers/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ament_xmllint:/home/robosub/ros2_humble/install/ament_xmllint/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ament_uncrustify:/home/robosub/ros2_humble/install/ament_uncrustify/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ament_pyflakes:/home/robosub/ros2_humble/install/ament_pyflakes/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ament_pycodestyle:/home/robosub/ros2_humble/install/ament_pycodestyle/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ament_pep257:/home/robosub/ros2_humble/install/ament_pep257/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ament_pclint:/home/robosub/ros2_humble/install/ament_pclint/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ament_package:/home/robosub/ros2_humble/install/ament_package/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ament_mypy:/home/robosub/ros2_humble/install/ament_mypy/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ament_lint_cmake:/home/robosub/ros2_humble/install/ament_lint_cmake/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ament_lint:/home/robosub/ros2_humble/install/ament_lint/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ament_index_python:/home/robosub/ros2_humble/install/ament_index_python/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ament_flake8:/home/robosub/ros2_humble/install/ament_flake8/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ament_cpplint:/home/robosub/ros2_humble/install/ament_cpplint/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ament_cppcheck:/home/robosub/ros2_humble/install/ament_cppcheck/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ament_copyright:/home/robosub/ros2_humble/install/ament_copyright/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ament_clang_tidy:/home/robosub/ros2_humble/install/ament_clang_tidy/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ament_clang_format:/home/robosub/ros2_humble/install/ament_clang_format/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/action_tutorials_py:/home/robosub/ros2_humble/install/action_tutorials_py/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/home/robosub/ros2_ws/install/zed_wrapper:/home/robosub/ros2_ws/install/zed_ros2:/home/robosub/ros2_ws/install/zed_components:/home/robosub/ros2_zedx_ws/install/zed_wrapper:/home/robosub/ros2_zedx_ws/install/zed_ros2:/home/robosub/ros2_zedx_ws/install/zed_components:/home/robosub/Documents/zedx_ws/install/zed_wrapper:/home/robosub/Documents/zedx_ws/install/zed_ros2:/home/robosub/Documents/zedx_ws/install/zed_components')]), 'shell': False}
+[0.098685] (-) TimerEvent: {}
+[0.199360] (-) TimerEvent: {}
+[0.299997] (-) TimerEvent: {}
+[0.400609] (-) TimerEvent: {}
+[0.501253] (-) TimerEvent: {}
+[0.522603] (orca_zed_publisher) StdoutLine: {'line': b'-- The C compiler identification is GNU 11.4.0\n'}
+[0.601444] (-) TimerEvent: {}
+[0.655670] (orca_zed_publisher) StdoutLine: {'line': b'-- The CXX compiler identification is GNU 11.4.0\n'}
+[0.672571] (orca_zed_publisher) StdoutLine: {'line': b'-- Detecting C compiler ABI info\n'}
+[0.701619] (-) TimerEvent: {}
+[0.796660] (orca_zed_publisher) StdoutLine: {'line': b'-- Detecting C compiler ABI info - done\n'}
+[0.801669] (-) TimerEvent: {}
+[0.838335] (orca_zed_publisher) StdoutLine: {'line': b'-- Check for working C compiler: /usr/bin/cc - skipped\n'}
+[0.839045] (orca_zed_publisher) StdoutLine: {'line': b'-- Detecting C compile features\n'}
+[0.840287] (orca_zed_publisher) StdoutLine: {'line': b'-- Detecting C compile features - done\n'}
+[0.871305] (orca_zed_publisher) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info\n'}
+[0.902249] (-) TimerEvent: {}
+[1.003016] (-) TimerEvent: {}
+[1.010741] (orca_zed_publisher) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info - done\n'}
+[1.043382] (orca_zed_publisher) StdoutLine: {'line': b'-- Check for working CXX compiler: /usr/bin/c++ - skipped\n'}
+[1.044145] (orca_zed_publisher) StdoutLine: {'line': b'-- Detecting CXX compile features\n'}
+[1.045943] (orca_zed_publisher) StdoutLine: {'line': b'-- Detecting CXX compile features - done\n'}
+[1.080794] (orca_zed_publisher) StdoutLine: {'line': b'-- Found ament_cmake: 1.3.11 (/opt/ros/humble/share/ament_cmake/cmake)\n'}
+[1.103182] (-) TimerEvent: {}
+[1.204873] (-) TimerEvent: {}
+[1.305494] (-) TimerEvent: {}
+[1.406134] (-) TimerEvent: {}
+[1.506880] (-) TimerEvent: {}
+[1.608159] (-) TimerEvent: {}
+[1.708793] (-) TimerEvent: {}
+[1.809631] (-) TimerEvent: {}
+[1.910872] (-) TimerEvent: {}
+[1.993371] (orca_zed_publisher) StdoutLine: {'line': b'-- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter\n'}
+[2.011022] (-) TimerEvent: {}
+[2.111621] (-) TimerEvent: {}
+[2.212216] (-) TimerEvent: {}
+[2.312852] (-) TimerEvent: {}
+[2.413917] (-) TimerEvent: {}
+[2.515368] (-) TimerEvent: {}
+[2.616088] (-) TimerEvent: {}
+[2.678260] (orca_zed_publisher) StdoutLine: {'line': b'-- Found rclcpp: 16.0.12 (/opt/ros/humble/share/rclcpp/cmake)\n'}
+[2.716310] (-) TimerEvent: {}
+[2.817134] (-) TimerEvent: {}
+[2.917837] (-) TimerEvent: {}
+[2.928609] (orca_zed_publisher) StdoutLine: {'line': b'-- Found rosidl_generator_c: 3.1.6 (/opt/ros/humble/share/rosidl_generator_c/cmake)\n'}
+[2.971400] (orca_zed_publisher) StdoutLine: {'line': b'-- Found rosidl_adapter: 3.1.6 (/opt/ros/humble/share/rosidl_adapter/cmake)\n'}
+[3.018010] (-) TimerEvent: {}
+[3.018535] (orca_zed_publisher) StdoutLine: {'line': b'-- Found rosidl_generator_cpp: 3.1.6 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)\n'}
+[3.077078] (orca_zed_publisher) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[3.118191] (-) TimerEvent: {}
+[3.160740] (orca_zed_publisher) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[3.218417] (-) TimerEvent: {}
+[3.319159] (-) TimerEvent: {}
+[3.408056] (orca_zed_publisher) StdoutLine: {'line': b'-- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)\n'}
+[3.419376] (-) TimerEvent: {}
+[3.429690] (orca_zed_publisher) StdoutLine: {'line': b'-- Found rmw_fastrtps_cpp: 6.2.7 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)\n'}
+[3.519738] (-) TimerEvent: {}
+[3.622620] (-) TimerEvent: {}
+[3.723528] (-) TimerEvent: {}
+[3.801000] (orca_zed_publisher) StdoutLine: {'line': b'-- Found OpenSSL: /usr/lib/aarch64-linux-gnu/libcrypto.so (found version "3.0.2")\n'}
+[3.823801] (-) TimerEvent: {}
+[3.924555] (-) TimerEvent: {}
+[3.971490] (orca_zed_publisher) StdoutLine: {'line': b'-- Found FastRTPS: /opt/ros/humble/include\n'}
+[4.025368] (-) TimerEvent: {}
+[4.126061] (-) TimerEvent: {}
+[4.226976] (-) TimerEvent: {}
+[4.273868] (orca_zed_publisher) StdoutLine: {'line': b"-- Using RMW implementation 'rmw_fastrtps_cpp' as default\n"}
+[4.327130] (-) TimerEvent: {}
+[4.336982] (orca_zed_publisher) StdoutLine: {'line': b'-- Performing Test CMAKE_HAVE_LIBC_PTHREAD\n'}
+[4.427305] (-) TimerEvent: {}
+[4.462973] (orca_zed_publisher) StdoutLine: {'line': b'-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success\n'}
+[4.466455] (orca_zed_publisher) StdoutLine: {'line': b'-- Found Threads: TRUE\n'}
+[4.527516] (-) TimerEvent: {}
+[4.628343] (-) TimerEvent: {}
+[4.676610] (orca_zed_publisher) StdoutLine: {'line': b'-- Found sensor_msgs: 4.8.0 (/opt/ros/humble/share/sensor_msgs/cmake)\n'}
+[4.728543] (-) TimerEvent: {}
+[4.777100] (orca_zed_publisher) StdoutLine: {'line': b'-- Found nav_msgs: 4.8.0 (/opt/ros/humble/share/nav_msgs/cmake)\n'}
+[4.828747] (-) TimerEvent: {}
+[4.831364] (orca_zed_publisher) StdoutLine: {'line': b'-- Found tf2_ros: 0.25.12 (/opt/ros/humble/share/tf2_ros/cmake)\n'}
+[4.928941] (-) TimerEvent: {}
+[5.029751] (-) TimerEvent: {}
+[5.130569] (-) TimerEvent: {}
+[5.231402] (-) TimerEvent: {}
+[5.269927] (orca_zed_publisher) StdoutLine: {'line': b'-- Looking for sgemm_\n'}
+[5.331592] (-) TimerEvent: {}
+[5.390444] (orca_zed_publisher) StdoutLine: {'line': b'-- Looking for sgemm_ - not found\n'}
+[5.431795] (-) TimerEvent: {}
+[5.506704] (orca_zed_publisher) StdoutLine: {'line': b'-- Looking for sgemm_\n'}
+[5.532017] (-) TimerEvent: {}
+[5.632844] (-) TimerEvent: {}
+[5.684582] (orca_zed_publisher) StdoutLine: {'line': b'-- Looking for sgemm_ - found\n'}
+[5.687466] (orca_zed_publisher) StdoutLine: {'line': b'-- Found BLAS: /usr/lib/aarch64-linux-gnu/libopenblas.so\n'}
+[5.690796] (orca_zed_publisher) StderrLine: {'line': b'\x1b[33mCMake Warning (dev) at /usr/local/zed/zed-config.cmake:73 (find_package):\n'}
+[5.691313] (orca_zed_publisher) StderrLine: {'line': b'  Policy CMP0146 is not set: The FindCUDA module is removed.  Run "cmake\n'}
+[5.691549] (orca_zed_publisher) StderrLine: {'line': b'  --help-policy CMP0146" for policy details.  Use the cmake_policy command to\n'}
+[5.691736] (orca_zed_publisher) StderrLine: {'line': b'  set the policy and suppress this warning.\n'}
+[5.691905] (orca_zed_publisher) StderrLine: {'line': b'\n'}
+[5.692064] (orca_zed_publisher) StderrLine: {'line': b'Call Stack (most recent call first):\n'}
+[5.692227] (orca_zed_publisher) StderrLine: {'line': b'  CMakeLists.txt:20 (find_package)\n'}
+[5.692420] (orca_zed_publisher) StderrLine: {'line': b'This warning is for project developers.  Use -Wno-dev to suppress it.\n'}
+[5.692615] (orca_zed_publisher) StderrLine: {'line': b'\x1b[0m\n'}
+[5.733004] (-) TimerEvent: {}
+[5.787476] (orca_zed_publisher) StdoutLine: {'line': b'-- Found CUDA: /usr/local/cuda-12.6 (found suitable version "12.6", minimum required is "12.6")\n'}
+[5.789959] (orca_zed_publisher) StderrLine: {'line': b'\x1b[33mCMake Warning (dev) at /usr/local/zed/zed-config.cmake:78 (exec_program):\n'}
+[5.790371] (orca_zed_publisher) StderrLine: {'line': b'  Policy CMP0153 is not set: The exec_program command should not be called.\n'}
+[5.790653] (orca_zed_publisher) StderrLine: {'line': b'  Run "cmake --help-policy CMP0153" for policy details.  Use the cmake_policy\n'}
+[5.790874] (orca_zed_publisher) StderrLine: {'line': b'  command to set the policy and suppress this warning.\n'}
+[5.791089] (orca_zed_publisher) StderrLine: {'line': b'\n'}
+[5.791292] (orca_zed_publisher) StderrLine: {'line': b'  Use execute_process() instead.\n'}
+[5.791492] (orca_zed_publisher) StderrLine: {'line': b'Call Stack (most recent call first):\n'}
+[5.791690] (orca_zed_publisher) StderrLine: {'line': b'  CMakeLists.txt:20 (find_package)\n'}
+[5.791886] (orca_zed_publisher) StderrLine: {'line': b'This warning is for project developers.  Use -Wno-dev to suppress it.\n'}
+[5.792079] (orca_zed_publisher) StderrLine: {'line': b'\x1b[0m\n'}
+[5.796360] (orca_zed_publisher) StderrLine: {'line': b'\x1b[33mCMake Warning (dev) at /usr/local/zed/zed-config.cmake:79 (exec_program):\n'}
+[5.796739] (orca_zed_publisher) StderrLine: {'line': b'  Policy CMP0153 is not set: The exec_program command should not be called.\n'}
+[5.796955] (orca_zed_publisher) StderrLine: {'line': b'  Run "cmake --help-policy CMP0153" for policy details.  Use the cmake_policy\n'}
+[5.797198] (orca_zed_publisher) StderrLine: {'line': b'  command to set the policy and suppress this warning.\n'}
+[5.797409] (orca_zed_publisher) StderrLine: {'line': b'\n'}
+[5.797591] (orca_zed_publisher) StderrLine: {'line': b'  Use execute_process() instead.\n'}
+[5.797763] (orca_zed_publisher) StderrLine: {'line': b'Call Stack (most recent call first):\n'}
+[5.797922] (orca_zed_publisher) StderrLine: {'line': b'  CMakeLists.txt:20 (find_package)\n'}
+[5.798076] (orca_zed_publisher) StderrLine: {'line': b'This warning is for project developers.  Use -Wno-dev to suppress it.\n'}
+[5.798230] (orca_zed_publisher) StderrLine: {'line': b'\x1b[0m\n'}
+[5.802676] (orca_zed_publisher) StderrLine: {'line': b'\x1b[33mCMake Warning (dev) at /usr/local/zed/zed-config.cmake:95 (exec_program):\n'}
+[5.803039] (orca_zed_publisher) StderrLine: {'line': b'  Policy CMP0153 is not set: The exec_program command should not be called.\n'}
+[5.803290] (orca_zed_publisher) StderrLine: {'line': b'  Run "cmake --help-policy CMP0153" for policy details.  Use the cmake_policy\n'}
+[5.803524] (orca_zed_publisher) StderrLine: {'line': b'  command to set the policy and suppress this warning.\n'}
+[5.803757] (orca_zed_publisher) StderrLine: {'line': b'\n'}
+[5.803981] (orca_zed_publisher) StderrLine: {'line': b'  Use execute_process() instead.\n'}
+[5.804203] (orca_zed_publisher) StderrLine: {'line': b'Call Stack (most recent call first):\n'}
+[5.804423] (orca_zed_publisher) StderrLine: {'line': b'  CMakeLists.txt:20 (find_package)\n'}
+[5.804641] (orca_zed_publisher) StderrLine: {'line': b'This warning is for project developers.  Use -Wno-dev to suppress it.\n'}
+[5.804862] (orca_zed_publisher) StderrLine: {'line': b'\x1b[0m\n'}
+[5.806370] (orca_zed_publisher) StderrLine: {'line': b'\x1b[33mCMake Warning (dev) at /usr/local/zed/zed-config.cmake:123 (exec_program):\n'}
+[5.806764] (orca_zed_publisher) StderrLine: {'line': b'  Policy CMP0153 is not set: The exec_program command should not be called.\n'}
+[5.807050] (orca_zed_publisher) StderrLine: {'line': b'  Run "cmake --help-policy CMP0153" for policy details.  Use the cmake_policy\n'}
+[5.807284] (orca_zed_publisher) StderrLine: {'line': b'  command to set the policy and suppress this warning.\n'}
+[5.807507] (orca_zed_publisher) StderrLine: {'line': b'\n'}
+[5.807727] (orca_zed_publisher) StderrLine: {'line': b'  Use execute_process() instead.\n'}
+[5.807947] (orca_zed_publisher) StderrLine: {'line': b'Call Stack (most recent call first):\n'}
+[5.808168] (orca_zed_publisher) StderrLine: {'line': b'  CMakeLists.txt:20 (find_package)\n'}
+[5.808385] (orca_zed_publisher) StderrLine: {'line': b'This warning is for project developers.  Use -Wno-dev to suppress it.\n'}
+[5.808604] (orca_zed_publisher) StderrLine: {'line': b'\x1b[0m\n'}
+[5.813175] (orca_zed_publisher) StderrLine: {'line': b'\x1b[33mCMake Warning (dev) at CMakeLists.txt:21 (find_package):\n'}
+[5.813467] (orca_zed_publisher) StderrLine: {'line': b'  Policy CMP0146 is not set: The FindCUDA module is removed.  Run "cmake\n'}
+[5.813709] (orca_zed_publisher) StderrLine: {'line': b'  --help-policy CMP0146" for policy details.  Use the cmake_policy command to\n'}
+[5.813938] (orca_zed_publisher) StderrLine: {'line': b'  set the policy and suppress this warning.\n'}
+[5.814162] (orca_zed_publisher) StderrLine: {'line': b'\n'}
+[5.814413] (orca_zed_publisher) StderrLine: {'line': b'This warning is for project developers.  Use -Wno-dev to suppress it.\n'}
+[5.814663] (orca_zed_publisher) StderrLine: {'line': b'\x1b[0m\n'}
+[5.833207] (-) TimerEvent: {}
+[5.839710] (orca_zed_publisher) StdoutLine: {'line': b'-- Found CUDA: /usr/local/cuda-12.6 (found suitable version "12.6", minimum required is "12.6")\n'}
+[5.933372] (-) TimerEvent: {}
+[6.035100] (-) TimerEvent: {}
+[6.135744] (-) TimerEvent: {}
+[6.193084] (orca_zed_publisher) StdoutLine: {'line': b'-- Configuring done (5.8s)\n'}
+[6.233199] (orca_zed_publisher) StdoutLine: {'line': b'-- Generating done (0.0s)\n'}
+[6.236016] (-) TimerEvent: {}
+[6.241410] (orca_zed_publisher) StdoutLine: {'line': b'-- Build files have been written to: /home/robosub/Documents/orca4-robosub/build/orca_zed_publisher\n'}
+[6.272726] (orca_zed_publisher) CommandEnded: {'returncode': 0}
+[6.274649] (orca_zed_publisher) JobProgress: {'identifier': 'orca_zed_publisher', 'progress': 'build'}
+[6.277043] (orca_zed_publisher) Command: {'cmd': ['/home/robosub/.local/bin/cmake', '--build', '/home/robosub/Documents/orca4-robosub/build/orca_zed_publisher', '--', '-j8', '-l8'], 'cwd': '/home/robosub/Documents/orca4-robosub/build/orca_zed_publisher', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'robosub'), ('XDG_SEAT', 'seat0'), ('SSH_AGENT_PID', '3488'), ('XDG_SESSION_TYPE', 'x11'), ('GIT_ASKPASS', '/usr/share/code/resources/app/extensions/git/dist/askpass.sh'), ('SHLVL', '2'), ('LD_LIBRARY_PATH', '/usr/local/cuda-12.6/lib64:/home/robosub/ros2_ws/install/zed_components/lib:/home/robosub/ros2_zedx_ws/install/zed_components/lib:/home/robosub/Documents/zedx_ws/install/zed_components/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib:/usr/local/cuda-12.6/lib64:'), ('HOME', '/home/robosub'), ('CHROME_DESKTOP', 'code.desktop'), ('OLDPWD', '/home/robosub/Documents/orca4-robosub/vision_testing'), ('TERM_PROGRAM_VERSION', '1.99.3'), ('DESKTOP_SESSION', 'xfce'), ('PANEL_GDK_CORE_DEVICE_EVENTS', '0'), ('ROS_PYTHON_VERSION', '3'), ('GTK_MODULES', 'gail:atk-bridge'), ('VSCODE_GIT_ASKPASS_MAIN', '/usr/share/code/resources/app/extensions/git/dist/askpass-main.js'), ('VSCODE_GIT_ASKPASS_NODE', '/usr/share/code/code'), ('PYDEVD_DISABLE_FILE_VALIDATION', '1'), ('SYSTEMD_EXEC_PID', '3077'), ('BUNDLED_DEBUGPY_PATH', '/home/robosub/.vscode/extensions/ms-python.debugpy-2026.6.0-linux-arm64/bundled/libs/debugpy'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('COLCON_PREFIX_PATH', '/home/robosub/ros2_ws/install:/home/robosub/ros2_zedx_ws/install:/home/robosub/Documents/zedx_ws/install:/home/robosub/ros_ws/install:/home/robosub/ros2_humble/install'), ('ROS_DISTRO', 'humble'), ('GTK_IM_MODULE', 'ibus'), ('LOGNAME', 'robosub'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'robosub'), ('TERM', 'xterm-256color'), ('XDG_SESSION_ID', '6'), ('ROS_LOCALHOST_ONLY', '0'), ('WINDOWPATH', '2'), ('PATH', '/usr/local/cuda-12.6/bin:/home/robosub/ros2_humble/install/rqt_gui/bin:/home/robosub/ros2_humble/install/rqt_graph/bin:/home/robosub/ros2_humble/install/rqt_bag/bin:/home/robosub/ros2_humble/install/rosidl_cli/bin:/home/robosub/ros2_humble/install/ros2cli/bin:/home/robosub/ros2_humble/install/launch_testing/bin:/home/robosub/ros2_humble/install/ament_xmllint/bin:/home/robosub/ros2_humble/install/ament_uncrustify/bin:/home/robosub/ros2_humble/install/ament_pyflakes/bin:/home/robosub/ros2_humble/install/ament_pycodestyle/bin:/home/robosub/ros2_humble/install/ament_pep257/bin:/home/robosub/ros2_humble/install/ament_pclint/bin:/home/robosub/ros2_humble/install/ament_mypy/bin:/home/robosub/ros2_humble/install/ament_lint_cmake/bin:/home/robosub/ros2_humble/install/ament_index_python/bin:/home/robosub/ros2_humble/install/ament_flake8/bin:/home/robosub/ros2_humble/install/ament_cpplint/bin:/home/robosub/ros2_humble/install/ament_cppcheck/bin:/home/robosub/ros2_humble/install/ament_copyright/bin:/home/robosub/ros2_humble/install/ament_clang_tidy/bin:/home/robosub/ros2_humble/install/ament_clang_format/bin:/opt/ros/humble/bin:/usr/local/cuda-12.6/bin:/home/robosub/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/home/robosub/.vscode/extensions/ms-python.debugpy-2026.6.0-linux-arm64/bundled/scripts/noConfigScripts'), ('SESSION_MANAGER', 'local/ubuntu:@/tmp/.ICE-unix/3297,unix/ubuntu:/tmp/.ICE-unix/3297'), ('XDG_MENU_PREFIX', 'xfce-'), ('GNOME_TERMINAL_SCREEN', '/org/gnome/Terminal/screen/bc387746_bc01_425a_90cd_742ee2a69d20'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('GDK_BACKEND', 'x11'), ('DISPLAY', ':1.0'), ('VSCODE_DEBUGPY_ADAPTER_ENDPOINTS', '/home/robosub/.vscode/extensions/ms-python.debugpy-2026.6.0-linux-arm64/.noConfigDebugAdapterEndpoints/endpoint-ec810fd25f26961e.txt'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'XFCE'), ('PYTHONSTARTUP', '/home/robosub/.config/Code/User/workspaceStorage/178945da02ff65eb1440797dcbce53fe/ms-python.python/pythonrc.py'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'xfce'), ('XAUTHORITY', '/run/user/1000/gdm/Xauthority'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('VSCODE_GIT_IPC_HANDLE', '/run/user/1000/vscode-git-31a0bea015.sock'), ('GNOME_TERMINAL_SERVICE', ':1.83'), ('TERM_PROGRAM', 'vscode'), ('SSH_AUTH_SOCK', '/tmp/ssh-XXXXXX7Z8pvZ/agent.3486'), ('AMENT_PREFIX_PATH', '/opt/ros/humble'), ('ORIGINAL_XDG_CURRENT_DESKTOP', 'XFCE'), ('SHELL', '/bin/bash'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'xfce'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('VSCODE_GIT_ASKPASS_EXTRA_ARGS', ''), ('QT_IM_MODULE', 'ibus'), ('XDG_VTNR', '2'), ('PWD', '/home/robosub/Documents/orca4-robosub/build/orca_zed_publisher'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-xfce:/etc/xdg:/etc/xdg'), ('CLUTTER_IM_MODULE', 'ibus'), ('XDG_DATA_DIRS', '/usr/share/xfce4:/usr/share/xfce:/usr/share/gnome:/home/robosub/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop:/usr/share'), ('PYTHONPATH', '/home/robosub/ros2_humble/build/tracetools_trace:/home/robosub/ros2_humble/install/tracetools_trace/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/tracetools_test:/home/robosub/ros2_humble/install/tracetools_test/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/tracetools_read:/home/robosub/ros2_humble/install/tracetools_read/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/tracetools_launch:/home/robosub/ros2_humble/install/tracetools_launch/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/topic_monitor:/home/robosub/ros2_humble/install/topic_monitor/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/tf2_tools:/home/robosub/ros2_humble/install/tf2_tools/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/tf2_ros_py:/home/robosub/ros2_humble/install/tf2_ros_py/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/test_tracetools_launch:/home/robosub/ros2_humble/install/test_tracetools_launch/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/test_launch_ros:/home/robosub/ros2_humble/install/test_launch_ros/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/sros2:/home/robosub/ros2_humble/install/sros2/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/sensor_msgs_py:/home/robosub/ros2_humble/install/sensor_msgs_py/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/rqt_topic/src:/home/robosub/ros2_humble/install/rqt_topic/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/rqt_srv/src:/home/robosub/ros2_humble/install/rqt_srv/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/rqt_shell/src:/home/robosub/ros2_humble/install/rqt_shell/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/rqt_service_caller/src:/home/robosub/ros2_humble/install/rqt_service_caller/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/rqt_reconfigure/src:/home/robosub/ros2_humble/install/rqt_reconfigure/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/rqt_py_console/src:/home/robosub/ros2_humble/install/rqt_py_console/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/rqt_publisher/src:/home/robosub/ros2_humble/install/rqt_publisher/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/rqt_plot/src:/home/robosub/ros2_humble/install/rqt_plot/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/rqt_msg/src:/home/robosub/ros2_humble/install/rqt_msg/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/rqt_gui_py/src:/home/robosub/ros2_humble/install/rqt_gui_py/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/rqt_gui/src:/home/robosub/ros2_humble/install/rqt_gui/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/rqt_graph/src:/home/robosub/ros2_humble/install/rqt_graph/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/rqt_console/src:/home/robosub/ros2_humble/install/rqt_console/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/rqt_bag_plugins/src:/home/robosub/ros2_humble/install/rqt_bag_plugins/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/rqt_bag/src:/home/robosub/ros2_humble/install/rqt_bag/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/rqt_action/src:/home/robosub/ros2_humble/install/rqt_action/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/rqt:/home/robosub/ros2_humble/install/rqt/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/rpyutils:/home/robosub/ros2_humble/install/rpyutils/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/rosidl_runtime_py:/home/robosub/ros2_humble/install/rosidl_runtime_py/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/rosidl_cli:/home/robosub/ros2_humble/install/rosidl_cli/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ros2trace:/home/robosub/ros2_humble/install/ros2trace/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ros2topic:/home/robosub/ros2_humble/install/ros2topic/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ros2test:/home/robosub/ros2_humble/install/ros2test/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ros2service:/home/robosub/ros2_humble/install/ros2service/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ros2run:/home/robosub/ros2_humble/install/ros2run/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ros2pkg:/home/robosub/ros2_humble/install/ros2pkg/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ros2param:/home/robosub/ros2_humble/install/ros2param/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ros2node:/home/robosub/ros2_humble/install/ros2node/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ros2multicast:/home/robosub/ros2_humble/install/ros2multicast/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ros2lifecycle:/home/robosub/ros2_humble/install/ros2lifecycle/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ros2launch:/home/robosub/ros2_humble/install/ros2launch/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ros2interface:/home/robosub/ros2_humble/install/ros2interface/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ros2doctor:/home/robosub/ros2_humble/install/ros2doctor/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ros2component:/home/robosub/ros2_humble/install/ros2component/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ros2bag:/home/robosub/ros2_humble/install/ros2bag/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ros2action:/home/robosub/ros2_humble/install/ros2action/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ros2cli:/home/robosub/ros2_humble/install/ros2cli/lib/python3.10/site-packages:/home/robosub/ros2_humble/install/resource_retriever/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/quality_of_service_demo_py:/home/robosub/ros2_humble/install/quality_of_service_demo_py/lib/python3.10/site-packages:/home/robosub/ros2_humble/install/qt_gui_py_common/lib/python3.10/site-packages:/home/robosub/ros2_humble/install/qt_gui_cpp/lib/python3.10/site-packages:/home/robosub/ros2_humble/install/qt_dotgraph/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/launch_ros:/home/robosub/ros2_humble/install/launch_ros/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/osrf_pycommon:/home/robosub/ros2_humble/install/osrf_pycommon/lib/python3.10/site-packages:/home/robosub/ros2_humble/install/message_filters/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/lifecycle_py:/home/robosub/ros2_humble/install/lifecycle_py/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/launch_yaml:/home/robosub/ros2_humble/install/launch_yaml/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/launch_xml:/home/robosub/ros2_humble/install/launch_xml/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/launch_testing_ros:/home/robosub/ros2_humble/install/launch_testing_ros/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/launch_testing_examples:/home/robosub/ros2_humble/install/launch_testing_examples/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/launch_testing:/home/robosub/ros2_humble/install/launch_testing/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/launch_pytest:/home/robosub/ros2_humble/install/launch_pytest/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/launch:/home/robosub/ros2_humble/install/launch/lib/python3.10/site-packages:/home/robosub/ros2_humble/install/kdl_parser_py/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/examples_tf2_py:/home/robosub/ros2_humble/install/examples_tf2_py/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/examples_rclpy_pointcloud_publisher:/home/robosub/ros2_humble/install/examples_rclpy_pointcloud_publisher/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/examples_rclpy_minimal_subscriber:/home/robosub/ros2_humble/install/examples_rclpy_minimal_subscriber/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/examples_rclpy_minimal_service:/home/robosub/ros2_humble/install/examples_rclpy_minimal_service/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/examples_rclpy_minimal_publisher:/home/robosub/ros2_humble/install/examples_rclpy_minimal_publisher/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/examples_rclpy_minimal_client:/home/robosub/ros2_humble/install/examples_rclpy_minimal_client/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/examples_rclpy_minimal_action_server:/home/robosub/ros2_humble/install/examples_rclpy_minimal_action_server/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/examples_rclpy_minimal_action_client:/home/robosub/ros2_humble/install/examples_rclpy_minimal_action_client/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/examples_rclpy_guard_conditions:/home/robosub/ros2_humble/install/examples_rclpy_guard_conditions/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/examples_rclpy_executors:/home/robosub/ros2_humble/install/examples_rclpy_executors/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/domain_coordinator:/home/robosub/ros2_humble/install/domain_coordinator/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/demo_nodes_py:/home/robosub/ros2_humble/install/demo_nodes_py/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/camera_info_manager_py:/home/robosub/ros2_humble/install/camera_info_manager_py/lib/python3.10/site-packages:/home/robosub/ros2_humble/install/camera_calibration_parsers/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ament_xmllint:/home/robosub/ros2_humble/install/ament_xmllint/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ament_uncrustify:/home/robosub/ros2_humble/install/ament_uncrustify/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ament_pyflakes:/home/robosub/ros2_humble/install/ament_pyflakes/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ament_pycodestyle:/home/robosub/ros2_humble/install/ament_pycodestyle/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ament_pep257:/home/robosub/ros2_humble/install/ament_pep257/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ament_pclint:/home/robosub/ros2_humble/install/ament_pclint/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ament_package:/home/robosub/ros2_humble/install/ament_package/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ament_mypy:/home/robosub/ros2_humble/install/ament_mypy/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ament_lint_cmake:/home/robosub/ros2_humble/install/ament_lint_cmake/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ament_lint:/home/robosub/ros2_humble/install/ament_lint/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ament_index_python:/home/robosub/ros2_humble/install/ament_index_python/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ament_flake8:/home/robosub/ros2_humble/install/ament_flake8/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ament_cpplint:/home/robosub/ros2_humble/install/ament_cpplint/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ament_cppcheck:/home/robosub/ros2_humble/install/ament_cppcheck/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ament_copyright:/home/robosub/ros2_humble/install/ament_copyright/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ament_clang_tidy:/home/robosub/ros2_humble/install/ament_clang_tidy/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ament_clang_format:/home/robosub/ros2_humble/install/ament_clang_format/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/action_tutorials_py:/home/robosub/ros2_humble/install/action_tutorials_py/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/home/robosub/ros2_ws/install/zed_wrapper:/home/robosub/ros2_ws/install/zed_ros2:/home/robosub/ros2_ws/install/zed_components:/home/robosub/ros2_zedx_ws/install/zed_wrapper:/home/robosub/ros2_zedx_ws/install/zed_ros2:/home/robosub/ros2_zedx_ws/install/zed_components:/home/robosub/Documents/zedx_ws/install/zed_wrapper:/home/robosub/Documents/zedx_ws/install/zed_ros2:/home/robosub/Documents/zedx_ws/install/zed_components')]), 'shell': False}
+[6.336165] (-) TimerEvent: {}
+[6.436784] (-) TimerEvent: {}
+[6.537418] (-) TimerEvent: {}
+[6.638040] (-) TimerEvent: {}
+[6.738788] (-) TimerEvent: {}
+[6.801209] (orca_zed_publisher) StdoutLine: {'line': b'[ 50%] \x1b[32mBuilding CXX object CMakeFiles/zed_publisher_node.dir/src/zed_publisher_node.cpp.o\x1b[0m\n'}
+[6.838875] (-) TimerEvent: {}
+[6.939550] (-) TimerEvent: {}
+[7.040239] (-) TimerEvent: {}
+[7.140903] (-) TimerEvent: {}
+[7.241571] (-) TimerEvent: {}
+[7.342241] (-) TimerEvent: {}
+[7.442930] (-) TimerEvent: {}
+[7.543621] (-) TimerEvent: {}
+[7.644501] (-) TimerEvent: {}
+[7.745273] (-) TimerEvent: {}
+[7.846203] (-) TimerEvent: {}
+[7.947157] (-) TimerEvent: {}
+[8.048431] (-) TimerEvent: {}
+[8.149191] (-) TimerEvent: {}
+[8.249980] (-) TimerEvent: {}
+[8.350687] (-) TimerEvent: {}
+[8.451355] (-) TimerEvent: {}
+[8.552771] (-) TimerEvent: {}
+[8.653612] (-) TimerEvent: {}
+[8.754281] (-) TimerEvent: {}
+[8.854973] (-) TimerEvent: {}
+[8.955711] (-) TimerEvent: {}
+[9.056364] (-) TimerEvent: {}
+[9.157050] (-) TimerEvent: {}
+[9.257926] (-) TimerEvent: {}
+[9.358748] (-) TimerEvent: {}
+[9.459672] (-) TimerEvent: {}
+[9.560359] (-) TimerEvent: {}
+[9.661031] (-) TimerEvent: {}
+[9.761713] (-) TimerEvent: {}
+[9.863316] (-) TimerEvent: {}
+[9.964605] (-) TimerEvent: {}
+[10.065330] (-) TimerEvent: {}
+[10.166029] (-) TimerEvent: {}
+[10.266706] (-) TimerEvent: {}
+[10.367414] (-) TimerEvent: {}
+[10.468266] (-) TimerEvent: {}
+[10.569124] (-) TimerEvent: {}
+[10.669898] (-) TimerEvent: {}
+[10.770757] (-) TimerEvent: {}
+[10.871620] (-) TimerEvent: {}
+[10.972468] (-) TimerEvent: {}
+[11.073203] (-) TimerEvent: {}
+[11.174038] (-) TimerEvent: {}
+[11.275174] (-) TimerEvent: {}
+[11.375950] (-) TimerEvent: {}
+[11.476764] (-) TimerEvent: {}
+[11.577448] (-) TimerEvent: {}
+[11.678269] (-) TimerEvent: {}
+[11.779093] (-) TimerEvent: {}
+[11.879772] (-) TimerEvent: {}
+[11.980596] (-) TimerEvent: {}
+[12.081409] (-) TimerEvent: {}
+[12.182245] (-) TimerEvent: {}
+[12.283104] (-) TimerEvent: {}
+[12.383887] (-) TimerEvent: {}
+[12.484632] (-) TimerEvent: {}
+[12.585477] (-) TimerEvent: {}
+[12.686309] (-) TimerEvent: {}
+[12.787182] (-) TimerEvent: {}
+[12.888012] (-) TimerEvent: {}
+[12.988839] (-) TimerEvent: {}
+[13.089936] (-) TimerEvent: {}
+[13.190661] (-) TimerEvent: {}
+[13.291480] (-) TimerEvent: {}
+[13.392503] (-) TimerEvent: {}
+[13.493171] (-) TimerEvent: {}
+[13.593873] (-) TimerEvent: {}
+[13.694537] (-) TimerEvent: {}
+[13.795219] (-) TimerEvent: {}
+[13.897061] (-) TimerEvent: {}
+[13.997736] (-) TimerEvent: {}
+[14.098453] (-) TimerEvent: {}
+[14.199126] (-) TimerEvent: {}
+[14.299809] (-) TimerEvent: {}
+[14.400473] (-) TimerEvent: {}
+[14.501150] (-) TimerEvent: {}
+[14.601814] (-) TimerEvent: {}
+[14.702506] (-) TimerEvent: {}
+[14.803177] (-) TimerEvent: {}
+[14.903843] (-) TimerEvent: {}
+[15.004513] (-) TimerEvent: {}
+[15.105189] (-) TimerEvent: {}
+[15.205856] (-) TimerEvent: {}
+[15.306541] (-) TimerEvent: {}
+[15.407215] (-) TimerEvent: {}
+[15.507882] (-) TimerEvent: {}
+[15.608559] (-) TimerEvent: {}
+[15.709246] (-) TimerEvent: {}
+[15.809922] (-) TimerEvent: {}
+[15.910609] (-) TimerEvent: {}
+[16.011276] (-) TimerEvent: {}
+[16.111937] (-) TimerEvent: {}
+[16.212634] (-) TimerEvent: {}
+[16.313278] (-) TimerEvent: {}
+[16.413941] (-) TimerEvent: {}
+[16.514621] (-) TimerEvent: {}
+[16.615306] (-) TimerEvent: {}
+[16.716048] (-) TimerEvent: {}
+[16.816830] (-) TimerEvent: {}
+[16.917523] (-) TimerEvent: {}
+[17.018181] (-) TimerEvent: {}
+[17.118869] (-) TimerEvent: {}
+[17.219540] (-) TimerEvent: {}
+[17.320738] (-) TimerEvent: {}
+[17.421411] (-) TimerEvent: {}
+[17.522073] (-) TimerEvent: {}
+[17.622763] (-) TimerEvent: {}
+[17.723420] (-) TimerEvent: {}
+[17.824107] (-) TimerEvent: {}
+[17.924794] (-) TimerEvent: {}
+[18.025468] (-) TimerEvent: {}
+[18.126152] (-) TimerEvent: {}
+[18.226830] (-) TimerEvent: {}
+[18.327514] (-) TimerEvent: {}
+[18.428203] (-) TimerEvent: {}
+[18.528878] (-) TimerEvent: {}
+[18.629519] (-) TimerEvent: {}
+[18.730153] (-) TimerEvent: {}
+[18.830810] (-) TimerEvent: {}
+[18.931473] (-) TimerEvent: {}
+[19.032102] (-) TimerEvent: {}
+[19.132749] (-) TimerEvent: {}
+[19.233383] (-) TimerEvent: {}
+[19.334017] (-) TimerEvent: {}
+[19.434674] (-) TimerEvent: {}
+[19.535317] (-) TimerEvent: {}
+[19.636033] (-) TimerEvent: {}
+[19.736661] (-) TimerEvent: {}
+[19.837783] (-) TimerEvent: {}
+[19.938670] (-) TimerEvent: {}
+[20.039297] (-) TimerEvent: {}
+[20.139946] (-) TimerEvent: {}
+[20.240592] (-) TimerEvent: {}
+[20.341226] (-) TimerEvent: {}
+[20.441873] (-) TimerEvent: {}
+[20.542565] (-) TimerEvent: {}
+[20.643205] (-) TimerEvent: {}
+[20.743883] (-) TimerEvent: {}
+[20.845502] (-) TimerEvent: {}
+[20.946302] (-) TimerEvent: {}
+[21.046985] (-) TimerEvent: {}
+[21.147736] (-) TimerEvent: {}
+[21.248428] (-) TimerEvent: {}
+[21.349080] (-) TimerEvent: {}
+[21.449847] (-) TimerEvent: {}
+[21.550954] (-) TimerEvent: {}
+[21.651926] (-) TimerEvent: {}
+[21.752660] (-) TimerEvent: {}
+[21.853798] (-) TimerEvent: {}
+[21.954488] (-) TimerEvent: {}
+[22.055207] (-) TimerEvent: {}
+[22.156681] (-) TimerEvent: {}
+[22.257538] (-) TimerEvent: {}
+[22.358647] (-) TimerEvent: {}
+[22.459550] (-) TimerEvent: {}
+[22.560583] (-) TimerEvent: {}
+[22.661546] (-) TimerEvent: {}
+[22.763570] (-) TimerEvent: {}
+[22.864748] (-) TimerEvent: {}
+[22.965472] (-) TimerEvent: {}
+[23.066161] (-) TimerEvent: {}
+[23.167461] (-) TimerEvent: {}
+[23.268305] (-) TimerEvent: {}
+[23.368944] (-) TimerEvent: {}
+[23.469588] (-) TimerEvent: {}
+[23.570220] (-) TimerEvent: {}
+[23.670902] (-) TimerEvent: {}
+[23.772047] (-) TimerEvent: {}
+[23.872669] (-) TimerEvent: {}
+[23.973354] (-) TimerEvent: {}
+[24.073994] (-) TimerEvent: {}
+[24.174664] (-) TimerEvent: {}
+[24.275311] (-) TimerEvent: {}
+[24.375991] (-) TimerEvent: {}
+[24.476643] (-) TimerEvent: {}
+[24.577328] (-) TimerEvent: {}
+[24.677998] (-) TimerEvent: {}
+[24.778695] (-) TimerEvent: {}
+[24.879372] (-) TimerEvent: {}
+[24.980076] (-) TimerEvent: {}
+[25.080760] (-) TimerEvent: {}
+[25.181464] (-) TimerEvent: {}
+[25.282124] (-) TimerEvent: {}
+[25.382842] (-) TimerEvent: {}
+[25.483503] (-) TimerEvent: {}
+[25.584200] (-) TimerEvent: {}
+[25.684905] (-) TimerEvent: {}
+[25.785752] (-) TimerEvent: {}
+[25.886657] (-) TimerEvent: {}
+[25.987520] (-) TimerEvent: {}
+[26.088365] (-) TimerEvent: {}
+[26.189239] (-) TimerEvent: {}
+[26.290119] (-) TimerEvent: {}
+[26.390851] (-) TimerEvent: {}
+[26.491736] (-) TimerEvent: {}
+[26.592614] (-) TimerEvent: {}
+[26.693500] (-) TimerEvent: {}
+[26.794740] (-) TimerEvent: {}
+[26.895941] (-) TimerEvent: {}
+[26.996694] (-) TimerEvent: {}
+[27.098261] (-) TimerEvent: {}
+[27.199699] (-) TimerEvent: {}
+[27.300644] (-) TimerEvent: {}
+[27.401498] (-) TimerEvent: {}
+[27.502508] (-) TimerEvent: {}
+[27.603306] (-) TimerEvent: {}
+[27.704007] (-) TimerEvent: {}
+[27.804850] (-) TimerEvent: {}
+[27.905711] (-) TimerEvent: {}
+[28.006562] (-) TimerEvent: {}
+[28.107399] (-) TimerEvent: {}
+[28.208237] (-) TimerEvent: {}
+[28.309090] (-) TimerEvent: {}
+[28.409931] (-) TimerEvent: {}
+[28.510861] (-) TimerEvent: {}
+[28.611753] (-) TimerEvent: {}
+[28.712639] (-) TimerEvent: {}
+[28.813483] (-) TimerEvent: {}
+[28.914453] (-) TimerEvent: {}
+[29.015317] (-) TimerEvent: {}
+[29.116176] (-) TimerEvent: {}
+[29.217038] (-) TimerEvent: {}
+[29.317925] (-) TimerEvent: {}
+[29.418896] (-) TimerEvent: {}
+[29.519789] (-) TimerEvent: {}
+[29.620721] (-) TimerEvent: {}
+[29.721636] (-) TimerEvent: {}
+[29.822617] (-) TimerEvent: {}
+[29.923567] (-) TimerEvent: {}
+[30.024473] (-) TimerEvent: {}
+[30.125371] (-) TimerEvent: {}
+[30.226254] (-) TimerEvent: {}
+[30.327147] (-) TimerEvent: {}
+[30.428029] (-) TimerEvent: {}
+[30.529088] (-) TimerEvent: {}
+[30.630095] (-) TimerEvent: {}
+[30.731006] (-) TimerEvent: {}
+[30.831966] (-) TimerEvent: {}
+[30.932889] (-) TimerEvent: {}
+[30.952140] (orca_zed_publisher) StdoutLine: {'line': b'[100%] \x1b[32m\x1b[1mLinking CXX executable zed_publisher_node\x1b[0m\n'}
+[31.033066] (-) TimerEvent: {}
+[31.133742] (-) TimerEvent: {}
+[31.234441] (-) TimerEvent: {}
+[31.335172] (-) TimerEvent: {}
+[31.435941] (-) TimerEvent: {}
+[31.538572] (-) TimerEvent: {}
+[31.639322] (-) TimerEvent: {}
+[31.740012] (-) TimerEvent: {}
+[31.840689] (-) TimerEvent: {}
+[31.941408] (-) TimerEvent: {}
+[32.042070] (-) TimerEvent: {}
+[32.137293] (orca_zed_publisher) StdoutLine: {'line': b'[100%] Built target zed_publisher_node\n'}
+[32.142189] (-) TimerEvent: {}
+[32.152064] (orca_zed_publisher) CommandEnded: {'returncode': 0}
+[32.156319] (orca_zed_publisher) JobProgress: {'identifier': 'orca_zed_publisher', 'progress': 'install'}
+[32.242453] (-) TimerEvent: {}
+[32.343328] (-) TimerEvent: {}
+[32.444169] (-) TimerEvent: {}
+[32.544997] (-) TimerEvent: {}
+[32.602654] (orca_zed_publisher) Command: {'cmd': ['/home/robosub/.local/bin/cmake', '--install', '/home/robosub/Documents/orca4-robosub/build/orca_zed_publisher'], 'cwd': '/home/robosub/Documents/orca4-robosub/build/orca_zed_publisher', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'robosub'), ('XDG_SEAT', 'seat0'), ('SSH_AGENT_PID', '3488'), ('XDG_SESSION_TYPE', 'x11'), ('GIT_ASKPASS', '/usr/share/code/resources/app/extensions/git/dist/askpass.sh'), ('SHLVL', '2'), ('LD_LIBRARY_PATH', '/usr/local/cuda-12.6/lib64:/home/robosub/ros2_ws/install/zed_components/lib:/home/robosub/ros2_zedx_ws/install/zed_components/lib:/home/robosub/Documents/zedx_ws/install/zed_components/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib:/usr/local/cuda-12.6/lib64:'), ('HOME', '/home/robosub'), ('CHROME_DESKTOP', 'code.desktop'), ('OLDPWD', '/home/robosub/Documents/orca4-robosub/vision_testing'), ('TERM_PROGRAM_VERSION', '1.99.3'), ('DESKTOP_SESSION', 'xfce'), ('PANEL_GDK_CORE_DEVICE_EVENTS', '0'), ('ROS_PYTHON_VERSION', '3'), ('GTK_MODULES', 'gail:atk-bridge'), ('VSCODE_GIT_ASKPASS_MAIN', '/usr/share/code/resources/app/extensions/git/dist/askpass-main.js'), ('VSCODE_GIT_ASKPASS_NODE', '/usr/share/code/code'), ('PYDEVD_DISABLE_FILE_VALIDATION', '1'), ('SYSTEMD_EXEC_PID', '3077'), ('BUNDLED_DEBUGPY_PATH', '/home/robosub/.vscode/extensions/ms-python.debugpy-2026.6.0-linux-arm64/bundled/libs/debugpy'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('COLCON_PREFIX_PATH', '/home/robosub/ros2_ws/install:/home/robosub/ros2_zedx_ws/install:/home/robosub/Documents/zedx_ws/install:/home/robosub/ros_ws/install:/home/robosub/ros2_humble/install'), ('ROS_DISTRO', 'humble'), ('GTK_IM_MODULE', 'ibus'), ('LOGNAME', 'robosub'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'robosub'), ('TERM', 'xterm-256color'), ('XDG_SESSION_ID', '6'), ('ROS_LOCALHOST_ONLY', '0'), ('WINDOWPATH', '2'), ('PATH', '/usr/local/cuda-12.6/bin:/home/robosub/ros2_humble/install/rqt_gui/bin:/home/robosub/ros2_humble/install/rqt_graph/bin:/home/robosub/ros2_humble/install/rqt_bag/bin:/home/robosub/ros2_humble/install/rosidl_cli/bin:/home/robosub/ros2_humble/install/ros2cli/bin:/home/robosub/ros2_humble/install/launch_testing/bin:/home/robosub/ros2_humble/install/ament_xmllint/bin:/home/robosub/ros2_humble/install/ament_uncrustify/bin:/home/robosub/ros2_humble/install/ament_pyflakes/bin:/home/robosub/ros2_humble/install/ament_pycodestyle/bin:/home/robosub/ros2_humble/install/ament_pep257/bin:/home/robosub/ros2_humble/install/ament_pclint/bin:/home/robosub/ros2_humble/install/ament_mypy/bin:/home/robosub/ros2_humble/install/ament_lint_cmake/bin:/home/robosub/ros2_humble/install/ament_index_python/bin:/home/robosub/ros2_humble/install/ament_flake8/bin:/home/robosub/ros2_humble/install/ament_cpplint/bin:/home/robosub/ros2_humble/install/ament_cppcheck/bin:/home/robosub/ros2_humble/install/ament_copyright/bin:/home/robosub/ros2_humble/install/ament_clang_tidy/bin:/home/robosub/ros2_humble/install/ament_clang_format/bin:/opt/ros/humble/bin:/usr/local/cuda-12.6/bin:/home/robosub/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/home/robosub/.vscode/extensions/ms-python.debugpy-2026.6.0-linux-arm64/bundled/scripts/noConfigScripts'), ('SESSION_MANAGER', 'local/ubuntu:@/tmp/.ICE-unix/3297,unix/ubuntu:/tmp/.ICE-unix/3297'), ('XDG_MENU_PREFIX', 'xfce-'), ('GNOME_TERMINAL_SCREEN', '/org/gnome/Terminal/screen/bc387746_bc01_425a_90cd_742ee2a69d20'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('GDK_BACKEND', 'x11'), ('DISPLAY', ':1.0'), ('VSCODE_DEBUGPY_ADAPTER_ENDPOINTS', '/home/robosub/.vscode/extensions/ms-python.debugpy-2026.6.0-linux-arm64/.noConfigDebugAdapterEndpoints/endpoint-ec810fd25f26961e.txt'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'XFCE'), ('PYTHONSTARTUP', '/home/robosub/.config/Code/User/workspaceStorage/178945da02ff65eb1440797dcbce53fe/ms-python.python/pythonrc.py'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'xfce'), ('XAUTHORITY', '/run/user/1000/gdm/Xauthority'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('VSCODE_GIT_IPC_HANDLE', '/run/user/1000/vscode-git-31a0bea015.sock'), ('GNOME_TERMINAL_SERVICE', ':1.83'), ('TERM_PROGRAM', 'vscode'), ('SSH_AUTH_SOCK', '/tmp/ssh-XXXXXX7Z8pvZ/agent.3486'), ('AMENT_PREFIX_PATH', '/opt/ros/humble'), ('ORIGINAL_XDG_CURRENT_DESKTOP', 'XFCE'), ('SHELL', '/bin/bash'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'xfce'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('VSCODE_GIT_ASKPASS_EXTRA_ARGS', ''), ('QT_IM_MODULE', 'ibus'), ('XDG_VTNR', '2'), ('PWD', '/home/robosub/Documents/orca4-robosub/build/orca_zed_publisher'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-xfce:/etc/xdg:/etc/xdg'), ('CLUTTER_IM_MODULE', 'ibus'), ('XDG_DATA_DIRS', '/usr/share/xfce4:/usr/share/xfce:/usr/share/gnome:/home/robosub/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop:/usr/share'), ('PYTHONPATH', '/home/robosub/ros2_humble/build/tracetools_trace:/home/robosub/ros2_humble/install/tracetools_trace/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/tracetools_test:/home/robosub/ros2_humble/install/tracetools_test/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/tracetools_read:/home/robosub/ros2_humble/install/tracetools_read/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/tracetools_launch:/home/robosub/ros2_humble/install/tracetools_launch/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/topic_monitor:/home/robosub/ros2_humble/install/topic_monitor/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/tf2_tools:/home/robosub/ros2_humble/install/tf2_tools/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/tf2_ros_py:/home/robosub/ros2_humble/install/tf2_ros_py/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/test_tracetools_launch:/home/robosub/ros2_humble/install/test_tracetools_launch/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/test_launch_ros:/home/robosub/ros2_humble/install/test_launch_ros/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/sros2:/home/robosub/ros2_humble/install/sros2/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/sensor_msgs_py:/home/robosub/ros2_humble/install/sensor_msgs_py/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/rqt_topic/src:/home/robosub/ros2_humble/install/rqt_topic/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/rqt_srv/src:/home/robosub/ros2_humble/install/rqt_srv/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/rqt_shell/src:/home/robosub/ros2_humble/install/rqt_shell/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/rqt_service_caller/src:/home/robosub/ros2_humble/install/rqt_service_caller/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/rqt_reconfigure/src:/home/robosub/ros2_humble/install/rqt_reconfigure/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/rqt_py_console/src:/home/robosub/ros2_humble/install/rqt_py_console/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/rqt_publisher/src:/home/robosub/ros2_humble/install/rqt_publisher/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/rqt_plot/src:/home/robosub/ros2_humble/install/rqt_plot/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/rqt_msg/src:/home/robosub/ros2_humble/install/rqt_msg/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/rqt_gui_py/src:/home/robosub/ros2_humble/install/rqt_gui_py/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/rqt_gui/src:/home/robosub/ros2_humble/install/rqt_gui/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/rqt_graph/src:/home/robosub/ros2_humble/install/rqt_graph/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/rqt_console/src:/home/robosub/ros2_humble/install/rqt_console/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/rqt_bag_plugins/src:/home/robosub/ros2_humble/install/rqt_bag_plugins/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/rqt_bag/src:/home/robosub/ros2_humble/install/rqt_bag/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/rqt_action/src:/home/robosub/ros2_humble/install/rqt_action/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/rqt:/home/robosub/ros2_humble/install/rqt/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/rpyutils:/home/robosub/ros2_humble/install/rpyutils/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/rosidl_runtime_py:/home/robosub/ros2_humble/install/rosidl_runtime_py/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/rosidl_cli:/home/robosub/ros2_humble/install/rosidl_cli/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ros2trace:/home/robosub/ros2_humble/install/ros2trace/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ros2topic:/home/robosub/ros2_humble/install/ros2topic/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ros2test:/home/robosub/ros2_humble/install/ros2test/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ros2service:/home/robosub/ros2_humble/install/ros2service/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ros2run:/home/robosub/ros2_humble/install/ros2run/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ros2pkg:/home/robosub/ros2_humble/install/ros2pkg/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ros2param:/home/robosub/ros2_humble/install/ros2param/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ros2node:/home/robosub/ros2_humble/install/ros2node/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ros2multicast:/home/robosub/ros2_humble/install/ros2multicast/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ros2lifecycle:/home/robosub/ros2_humble/install/ros2lifecycle/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ros2launch:/home/robosub/ros2_humble/install/ros2launch/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ros2interface:/home/robosub/ros2_humble/install/ros2interface/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ros2doctor:/home/robosub/ros2_humble/install/ros2doctor/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ros2component:/home/robosub/ros2_humble/install/ros2component/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ros2bag:/home/robosub/ros2_humble/install/ros2bag/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ros2action:/home/robosub/ros2_humble/install/ros2action/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ros2cli:/home/robosub/ros2_humble/install/ros2cli/lib/python3.10/site-packages:/home/robosub/ros2_humble/install/resource_retriever/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/quality_of_service_demo_py:/home/robosub/ros2_humble/install/quality_of_service_demo_py/lib/python3.10/site-packages:/home/robosub/ros2_humble/install/qt_gui_py_common/lib/python3.10/site-packages:/home/robosub/ros2_humble/install/qt_gui_cpp/lib/python3.10/site-packages:/home/robosub/ros2_humble/install/qt_dotgraph/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/launch_ros:/home/robosub/ros2_humble/install/launch_ros/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/osrf_pycommon:/home/robosub/ros2_humble/install/osrf_pycommon/lib/python3.10/site-packages:/home/robosub/ros2_humble/install/message_filters/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/lifecycle_py:/home/robosub/ros2_humble/install/lifecycle_py/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/launch_yaml:/home/robosub/ros2_humble/install/launch_yaml/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/launch_xml:/home/robosub/ros2_humble/install/launch_xml/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/launch_testing_ros:/home/robosub/ros2_humble/install/launch_testing_ros/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/launch_testing_examples:/home/robosub/ros2_humble/install/launch_testing_examples/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/launch_testing:/home/robosub/ros2_humble/install/launch_testing/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/launch_pytest:/home/robosub/ros2_humble/install/launch_pytest/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/launch:/home/robosub/ros2_humble/install/launch/lib/python3.10/site-packages:/home/robosub/ros2_humble/install/kdl_parser_py/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/examples_tf2_py:/home/robosub/ros2_humble/install/examples_tf2_py/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/examples_rclpy_pointcloud_publisher:/home/robosub/ros2_humble/install/examples_rclpy_pointcloud_publisher/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/examples_rclpy_minimal_subscriber:/home/robosub/ros2_humble/install/examples_rclpy_minimal_subscriber/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/examples_rclpy_minimal_service:/home/robosub/ros2_humble/install/examples_rclpy_minimal_service/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/examples_rclpy_minimal_publisher:/home/robosub/ros2_humble/install/examples_rclpy_minimal_publisher/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/examples_rclpy_minimal_client:/home/robosub/ros2_humble/install/examples_rclpy_minimal_client/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/examples_rclpy_minimal_action_server:/home/robosub/ros2_humble/install/examples_rclpy_minimal_action_server/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/examples_rclpy_minimal_action_client:/home/robosub/ros2_humble/install/examples_rclpy_minimal_action_client/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/examples_rclpy_guard_conditions:/home/robosub/ros2_humble/install/examples_rclpy_guard_conditions/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/examples_rclpy_executors:/home/robosub/ros2_humble/install/examples_rclpy_executors/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/domain_coordinator:/home/robosub/ros2_humble/install/domain_coordinator/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/demo_nodes_py:/home/robosub/ros2_humble/install/demo_nodes_py/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/camera_info_manager_py:/home/robosub/ros2_humble/install/camera_info_manager_py/lib/python3.10/site-packages:/home/robosub/ros2_humble/install/camera_calibration_parsers/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ament_xmllint:/home/robosub/ros2_humble/install/ament_xmllint/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ament_uncrustify:/home/robosub/ros2_humble/install/ament_uncrustify/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ament_pyflakes:/home/robosub/ros2_humble/install/ament_pyflakes/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ament_pycodestyle:/home/robosub/ros2_humble/install/ament_pycodestyle/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ament_pep257:/home/robosub/ros2_humble/install/ament_pep257/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ament_pclint:/home/robosub/ros2_humble/install/ament_pclint/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ament_package:/home/robosub/ros2_humble/install/ament_package/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ament_mypy:/home/robosub/ros2_humble/install/ament_mypy/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ament_lint_cmake:/home/robosub/ros2_humble/install/ament_lint_cmake/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ament_lint:/home/robosub/ros2_humble/install/ament_lint/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ament_index_python:/home/robosub/ros2_humble/install/ament_index_python/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ament_flake8:/home/robosub/ros2_humble/install/ament_flake8/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ament_cpplint:/home/robosub/ros2_humble/install/ament_cpplint/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ament_cppcheck:/home/robosub/ros2_humble/install/ament_cppcheck/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ament_copyright:/home/robosub/ros2_humble/install/ament_copyright/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ament_clang_tidy:/home/robosub/ros2_humble/install/ament_clang_tidy/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/ament_clang_format:/home/robosub/ros2_humble/install/ament_clang_format/lib/python3.10/site-packages:/home/robosub/ros2_humble/build/action_tutorials_py:/home/robosub/ros2_humble/install/action_tutorials_py/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/home/robosub/ros2_ws/install/zed_wrapper:/home/robosub/ros2_ws/install/zed_ros2:/home/robosub/ros2_ws/install/zed_components:/home/robosub/ros2_zedx_ws/install/zed_wrapper:/home/robosub/ros2_zedx_ws/install/zed_ros2:/home/robosub/ros2_zedx_ws/install/zed_components:/home/robosub/Documents/zedx_ws/install/zed_wrapper:/home/robosub/Documents/zedx_ws/install/zed_ros2:/home/robosub/Documents/zedx_ws/install/zed_components')]), 'shell': False}
+[32.645146] (-) TimerEvent: {}
+[32.745879] (-) TimerEvent: {}
+[32.846696] (-) TimerEvent: {}
+[32.947462] (-) TimerEvent: {}
+[32.951795] (orca_zed_publisher) StdoutLine: {'line': b'-- Install configuration: ""\n'}
+[32.952424] (orca_zed_publisher) StdoutLine: {'line': b'-- Installing: /home/robosub/Documents/orca4-robosub/install/orca_zed_publisher/lib/orca_zed_publisher/zed_publisher_node\n'}
+[32.958636] (orca_zed_publisher) StdoutLine: {'line': b'-- Set non-toolchain portion of runtime path of "/home/robosub/Documents/orca4-robosub/install/orca_zed_publisher/lib/orca_zed_publisher/zed_publisher_node" to ""\n'}
+[32.959311] (orca_zed_publisher) StdoutLine: {'line': b'-- Installing: /home/robosub/Documents/orca4-robosub/install/orca_zed_publisher/share/orca_zed_publisher/launch\n'}
+[32.959759] (orca_zed_publisher) StdoutLine: {'line': b'-- Installing: /home/robosub/Documents/orca4-robosub/install/orca_zed_publisher/share/orca_zed_publisher/launch/zed_publisher_launch.py\n'}
+[32.960108] (orca_zed_publisher) StdoutLine: {'line': b'-- Installing: /home/robosub/Documents/orca4-robosub/install/orca_zed_publisher/share/orca_zed_publisher/config\n'}
+[32.960434] (orca_zed_publisher) StdoutLine: {'line': b'-- Installing: /home/robosub/Documents/orca4-robosub/install/orca_zed_publisher/share/orca_zed_publisher/config/zed_publisher.yaml\n'}
+[32.960779] (orca_zed_publisher) StdoutLine: {'line': b'-- Installing: /home/robosub/Documents/orca4-robosub/install/orca_zed_publisher/share/orca_zed_publisher/README.md\n'}
+[32.961054] (orca_zed_publisher) StdoutLine: {'line': b'-- Installing: /home/robosub/Documents/orca4-robosub/install/orca_zed_publisher/share/ament_index/resource_index/package_run_dependencies/orca_zed_publisher\n'}
+[32.961440] (orca_zed_publisher) StdoutLine: {'line': b'-- Installing: /home/robosub/Documents/orca4-robosub/install/orca_zed_publisher/share/ament_index/resource_index/parent_prefix_path/orca_zed_publisher\n'}
+[32.961795] (orca_zed_publisher) StdoutLine: {'line': b'-- Installing: /home/robosub/Documents/orca4-robosub/install/orca_zed_publisher/share/orca_zed_publisher/environment/ament_prefix_path.sh\n'}
+[32.962140] (orca_zed_publisher) StdoutLine: {'line': b'-- Installing: /home/robosub/Documents/orca4-robosub/install/orca_zed_publisher/share/orca_zed_publisher/environment/ament_prefix_path.dsv\n'}
+[32.962491] (orca_zed_publisher) StdoutLine: {'line': b'-- Installing: /home/robosub/Documents/orca4-robosub/install/orca_zed_publisher/share/orca_zed_publisher/environment/path.sh\n'}
+[32.962833] (orca_zed_publisher) StdoutLine: {'line': b'-- Installing: /home/robosub/Documents/orca4-robosub/install/orca_zed_publisher/share/orca_zed_publisher/environment/path.dsv\n'}
+[32.963245] (orca_zed_publisher) StdoutLine: {'line': b'-- Installing: /home/robosub/Documents/orca4-robosub/install/orca_zed_publisher/share/orca_zed_publisher/local_setup.bash\n'}
+[32.963643] (orca_zed_publisher) StdoutLine: {'line': b'-- Installing: /home/robosub/Documents/orca4-robosub/install/orca_zed_publisher/share/orca_zed_publisher/local_setup.sh\n'}
+[32.963888] (orca_zed_publisher) StdoutLine: {'line': b'-- Installing: /home/robosub/Documents/orca4-robosub/install/orca_zed_publisher/share/orca_zed_publisher/local_setup.zsh\n'}
+[32.964122] (orca_zed_publisher) StdoutLine: {'line': b'-- Installing: /home/robosub/Documents/orca4-robosub/install/orca_zed_publisher/share/orca_zed_publisher/local_setup.dsv\n'}
+[32.964357] (orca_zed_publisher) StdoutLine: {'line': b'-- Installing: /home/robosub/Documents/orca4-robosub/install/orca_zed_publisher/share/orca_zed_publisher/package.dsv\n'}
+[32.964585] (orca_zed_publisher) StdoutLine: {'line': b'-- Installing: /home/robosub/Documents/orca4-robosub/install/orca_zed_publisher/share/ament_index/resource_index/packages/orca_zed_publisher\n'}
+[32.964932] (orca_zed_publisher) StdoutLine: {'line': b'-- Installing: /home/robosub/Documents/orca4-robosub/install/orca_zed_publisher/share/orca_zed_publisher/cmake/orca_zed_publisherConfig.cmake\n'}
+[32.965963] (orca_zed_publisher) StdoutLine: {'line': b'-- Installing: /home/robosub/Documents/orca4-robosub/install/orca_zed_publisher/share/orca_zed_publisher/cmake/orca_zed_publisherConfig-version.cmake\n'}
+[32.967004] (orca_zed_publisher) StdoutLine: {'line': b'-- Installing: /home/robosub/Documents/orca4-robosub/install/orca_zed_publisher/share/orca_zed_publisher/package.xml\n'}
+[32.968901] (orca_zed_publisher) CommandEnded: {'returncode': 0}
+[33.035935] (orca_zed_publisher) JobEnded: {'identifier': 'orca_zed_publisher', 'rc': 0}
+[33.037691] (-) EventReactorShutdown: {}

@@ -1,0 +1,126 @@
+[0.042s] Invoking command in '/home/robosub/Documents/orca4-robosub/build/orca_zed_publisher': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /home/robosub/.local/bin/cmake /home/robosub/Documents/orca4-robosub/zed_camera_publisher/orca_zed_publisher -DCMAKE_INSTALL_PREFIX=/home/robosub/Documents/orca4-robosub/install/orca_zed_publisher
+[0.519s] -- The C compiler identification is GNU 11.4.0
+[0.765s] -- The CXX compiler identification is GNU 11.4.0
+[0.782s] -- Detecting C compiler ABI info
+[0.906s] -- Detecting C compiler ABI info - done
+[0.940s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.940s] -- Detecting C compile features
+[0.941s] -- Detecting C compile features - done
+[0.971s] -- Detecting CXX compiler ABI info
+[1.098s] -- Detecting CXX compiler ABI info - done
+[1.130s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[1.130s] -- Detecting CXX compile features
+[1.131s] -- Detecting CXX compile features - done
+[1.157s] -- Found ament_cmake: 1.3.11 (/opt/ros/humble/share/ament_cmake/cmake)
+[2.076s] -- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter
+[2.637s] -- Found rclcpp: 16.0.12 (/opt/ros/humble/share/rclcpp/cmake)
+[2.830s] -- Found rosidl_generator_c: 3.1.6 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[2.855s] -- Found rosidl_adapter: 3.1.6 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[2.888s] -- Found rosidl_generator_cpp: 3.1.6 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[2.936s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[2.995s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[3.175s] -- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[3.189s] -- Found rmw_fastrtps_cpp: 6.2.7 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[3.536s] -- Found OpenSSL: /usr/lib/aarch64-linux-gnu/libcrypto.so (found version "3.0.2")
+[3.729s] -- Found FastRTPS: /opt/ros/humble/include
+[4.024s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[4.071s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+[4.198s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+[4.201s] -- Found Threads: TRUE
+[4.378s] -- Found sensor_msgs: 4.8.0 (/opt/ros/humble/share/sensor_msgs/cmake)
+[4.463s] -- Found nav_msgs: 4.8.0 (/opt/ros/humble/share/nav_msgs/cmake)
+[4.510s] -- Found tf2_ros: 0.25.12 (/opt/ros/humble/share/tf2_ros/cmake)
+[4.879s] -- Looking for sgemm_
+[4.995s] -- Looking for sgemm_ - not found
+[5.138s] -- Looking for sgemm_
+[5.314s] -- Looking for sgemm_ - found
+[5.316s] -- Found BLAS: /usr/lib/aarch64-linux-gnu/libopenblas.so
+[5.318s] CMake Warning (dev) at /usr/local/zed/zed-config.cmake:73 (find_package):
+[5.318s]   Policy CMP0146 is not set: The FindCUDA module is removed.  Run "cmake
+[5.318s]   --help-policy CMP0146" for policy details.  Use the cmake_policy command to
+[5.318s]   set the policy and suppress this warning.
+[5.318s] 
+[5.318s] Call Stack (most recent call first):
+[5.318s]   CMakeLists.txt:20 (find_package)
+[5.318s] This warning is for project developers.  Use -Wno-dev to suppress it.
+[5.319s] 
+[5.414s] -- Found CUDA: /usr/local/cuda-12.6 (found suitable version "12.6", minimum required is "12.6")
+[5.418s] CMake Warning (dev) at /usr/local/zed/zed-config.cmake:78 (exec_program):
+[5.419s]   Policy CMP0153 is not set: The exec_program command should not be called.
+[5.419s]   Run "cmake --help-policy CMP0153" for policy details.  Use the cmake_policy
+[5.419s]   command to set the policy and suppress this warning.
+[5.419s] 
+[5.419s]   Use execute_process() instead.
+[5.420s] Call Stack (most recent call first):
+[5.420s]   CMakeLists.txt:20 (find_package)
+[5.420s] This warning is for project developers.  Use -Wno-dev to suppress it.
+[5.420s] 
+[5.425s] CMake Warning (dev) at /usr/local/zed/zed-config.cmake:79 (exec_program):
+[5.425s]   Policy CMP0153 is not set: The exec_program command should not be called.
+[5.425s]   Run "cmake --help-policy CMP0153" for policy details.  Use the cmake_policy
+[5.426s]   command to set the policy and suppress this warning.
+[5.426s] 
+[5.426s]   Use execute_process() instead.
+[5.426s] Call Stack (most recent call first):
+[5.427s]   CMakeLists.txt:20 (find_package)
+[5.427s] This warning is for project developers.  Use -Wno-dev to suppress it.
+[5.427s] 
+[5.431s] CMake Warning (dev) at /usr/local/zed/zed-config.cmake:95 (exec_program):
+[5.431s]   Policy CMP0153 is not set: The exec_program command should not be called.
+[5.431s]   Run "cmake --help-policy CMP0153" for policy details.  Use the cmake_policy
+[5.431s]   command to set the policy and suppress this warning.
+[5.432s] 
+[5.432s]   Use execute_process() instead.
+[5.433s] Call Stack (most recent call first):
+[5.433s]   CMakeLists.txt:20 (find_package)
+[5.433s] This warning is for project developers.  Use -Wno-dev to suppress it.
+[5.433s] 
+[5.440s] CMake Warning (dev) at /usr/local/zed/zed-config.cmake:123 (exec_program):
+[5.440s]   Policy CMP0153 is not set: The exec_program command should not be called.
+[5.440s]   Run "cmake --help-policy CMP0153" for policy details.  Use the cmake_policy
+[5.441s]   command to set the policy and suppress this warning.
+[5.441s] 
+[5.441s]   Use execute_process() instead.
+[5.441s] Call Stack (most recent call first):
+[5.441s]   CMakeLists.txt:20 (find_package)
+[5.441s] This warning is for project developers.  Use -Wno-dev to suppress it.
+[5.441s] 
+[5.449s] CMake Warning (dev) at CMakeLists.txt:21 (find_package):
+[5.449s]   Policy CMP0146 is not set: The FindCUDA module is removed.  Run "cmake
+[5.449s]   --help-policy CMP0146" for policy details.  Use the cmake_policy command to
+[5.449s]   set the policy and suppress this warning.
+[5.450s] 
+[5.450s] This warning is for project developers.  Use -Wno-dev to suppress it.
+[5.450s] 
+[5.477s] -- Found CUDA: /usr/local/cuda-12.6 (found suitable version "12.6", minimum required is "12.6")
+[5.837s] -- Configuring done (5.4s)
+[5.885s] -- Generating done (0.0s)
+[5.896s] -- Build files have been written to: /home/robosub/Documents/orca4-robosub/build/orca_zed_publisher
+[5.936s] Invoked command in '/home/robosub/Documents/orca4-robosub/build/orca_zed_publisher' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /home/robosub/.local/bin/cmake /home/robosub/Documents/orca4-robosub/zed_camera_publisher/orca_zed_publisher -DCMAKE_INSTALL_PREFIX=/home/robosub/Documents/orca4-robosub/install/orca_zed_publisher
+[5.944s] Invoking command in '/home/robosub/Documents/orca4-robosub/build/orca_zed_publisher': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /home/robosub/.local/bin/cmake --build /home/robosub/Documents/orca4-robosub/build/orca_zed_publisher -- -j8 -l8
+[6.398s] [100%] Built target zed_publisher_node
+[6.408s] Invoked command in '/home/robosub/Documents/orca4-robosub/build/orca_zed_publisher' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /home/robosub/.local/bin/cmake --build /home/robosub/Documents/orca4-robosub/build/orca_zed_publisher -- -j8 -l8
+[6.838s] Invoking command in '/home/robosub/Documents/orca4-robosub/build/orca_zed_publisher': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /home/robosub/.local/bin/cmake --install /home/robosub/Documents/orca4-robosub/build/orca_zed_publisher
+[7.279s] -- Install configuration: ""
+[7.279s] -- Up-to-date: /home/robosub/Documents/orca4-robosub/install/orca_zed_publisher/lib/orca_zed_publisher/zed_publisher_node
+[7.281s] -- Up-to-date: /home/robosub/Documents/orca4-robosub/install/orca_zed_publisher/share/orca_zed_publisher/launch
+[7.281s] -- Up-to-date: /home/robosub/Documents/orca4-robosub/install/orca_zed_publisher/share/orca_zed_publisher/launch/zed_publisher_launch.py
+[7.281s] -- Up-to-date: /home/robosub/Documents/orca4-robosub/install/orca_zed_publisher/share/orca_zed_publisher/config
+[7.281s] -- Up-to-date: /home/robosub/Documents/orca4-robosub/install/orca_zed_publisher/share/orca_zed_publisher/config/zed_publisher.yaml
+[7.282s] -- Up-to-date: /home/robosub/Documents/orca4-robosub/install/orca_zed_publisher/share/orca_zed_publisher/README.md
+[7.282s] -- Up-to-date: /home/robosub/Documents/orca4-robosub/install/orca_zed_publisher/share/ament_index/resource_index/package_run_dependencies/orca_zed_publisher
+[7.282s] -- Up-to-date: /home/robosub/Documents/orca4-robosub/install/orca_zed_publisher/share/ament_index/resource_index/parent_prefix_path/orca_zed_publisher
+[7.282s] -- Up-to-date: /home/robosub/Documents/orca4-robosub/install/orca_zed_publisher/share/orca_zed_publisher/environment/ament_prefix_path.sh
+[7.282s] -- Installing: /home/robosub/Documents/orca4-robosub/install/orca_zed_publisher/share/orca_zed_publisher/environment/ament_prefix_path.dsv
+[7.282s] -- Up-to-date: /home/robosub/Documents/orca4-robosub/install/orca_zed_publisher/share/orca_zed_publisher/environment/path.sh
+[7.282s] -- Installing: /home/robosub/Documents/orca4-robosub/install/orca_zed_publisher/share/orca_zed_publisher/environment/path.dsv
+[7.282s] -- Up-to-date: /home/robosub/Documents/orca4-robosub/install/orca_zed_publisher/share/orca_zed_publisher/local_setup.bash
+[7.282s] -- Up-to-date: /home/robosub/Documents/orca4-robosub/install/orca_zed_publisher/share/orca_zed_publisher/local_setup.sh
+[7.283s] -- Up-to-date: /home/robosub/Documents/orca4-robosub/install/orca_zed_publisher/share/orca_zed_publisher/local_setup.zsh
+[7.283s] -- Installing: /home/robosub/Documents/orca4-robosub/install/orca_zed_publisher/share/orca_zed_publisher/local_setup.dsv
+[7.283s] -- Installing: /home/robosub/Documents/orca4-robosub/install/orca_zed_publisher/share/orca_zed_publisher/package.dsv
+[7.283s] -- Up-to-date: /home/robosub/Documents/orca4-robosub/install/orca_zed_publisher/share/ament_index/resource_index/packages/orca_zed_publisher
+[7.284s] -- Up-to-date: /home/robosub/Documents/orca4-robosub/install/orca_zed_publisher/share/orca_zed_publisher/cmake/orca_zed_publisherConfig.cmake
+[7.285s] -- Up-to-date: /home/robosub/Documents/orca4-robosub/install/orca_zed_publisher/share/orca_zed_publisher/cmake/orca_zed_publisherConfig-version.cmake
+[7.286s] -- Up-to-date: /home/robosub/Documents/orca4-robosub/install/orca_zed_publisher/share/orca_zed_publisher/package.xml
+[7.287s] Invoked command in '/home/robosub/Documents/orca4-robosub/build/orca_zed_publisher' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /home/robosub/.local/bin/cmake --install /home/robosub/Documents/orca4-robosub/build/orca_zed_publisher

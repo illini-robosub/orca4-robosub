@@ -1,0 +1,31 @@
+# config/zed_publisher.yaml
+zed_publisher:
+  ros__parameters:
+    # Camera selection
+    serial_number: 0              # 0 = first camera found
+    svo_file: ""                  # path to a .svo recording to play instead of the live camera
+
+    # Image / depth settings
+    resolution: "AUTO"            # AUTO, HD1200, HD1080, SVGA (ZED X), HD2K, HD720, VGA (USB ZEDs)
+    fps: 30
+    depth_mode: "NEURAL_LIGHT"    # PERFORMANCE, QUALITY, ULTRA, NEURAL_LIGHT, NEURAL, NEURAL_PLUS
+    depth_min: 0.3                # meters
+    depth_max: 20.0               # meters
+    confidence_threshold: 95      # 1-100, lower = drop more uncertain depth
+    texture_confidence_threshold: 100
+    downscale: 2                  # output = camera resolution / downscale
+
+    # Extras
+    publish_right: false          # also publish the right camera image
+    enable_sensors: true          # IMU, magnetometer, barometer, temperatures
+    sensor_rate: 200.0            # Hz
+    enable_tracking: false        # ZED visual odometry on ~/odom
+    publish_odom_tf: false        # also broadcast odom -> camera TF
+
+    # TF frame names
+    camera_frame: "zed_left_camera_frame"
+    left_optical_frame: "zed_left_camera_optical_frame"
+    right_optical_frame: "zed_right_camera_optical_frame"
+    odom_frame: "zed_odom"
+
+    sensor_qos: false             # true = best-effort QoS
