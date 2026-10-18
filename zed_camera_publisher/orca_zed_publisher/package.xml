@@ -4,7 +4,7 @@
   <name>orca_zed_publisher</name>
   <version>0.0.0</version>
   <description>Publishes an XYZ point cloud with an aligned color buffer, depth, confidence, camera info, IMU/sensor data and (optionally) visual odometry directly from a ZED camera using the ZED SDK C++ API.</description>
-  <maintainer email="dillon.barnes004@gmail.com">dillonkbarnes</maintainer>
+  <maintainer email="ramanar2@illinois.edu">ramanaramachandran</maintainer>
   <license>MIT</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
