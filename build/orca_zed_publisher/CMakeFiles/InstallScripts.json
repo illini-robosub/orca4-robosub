@@ -1,7 +1,0 @@
-{
-	"InstallScripts" : 
-	[
-		"/home/robosub/Documents/orca4-robosub/build/orca_zed_publisher/cmake_install.cmake"
-	],
-	"Parallel" : false
-}

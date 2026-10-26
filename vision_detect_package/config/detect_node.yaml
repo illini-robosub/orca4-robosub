@@ -1,0 +1,17 @@
+# config/detect_node.yaml
+vision_detect:
+  ros__parameters:
+    # Empty = <install>/share/vision_detect_package/weights/best.onnx
+    # (put your model in vision_detect_package/weights/best.onnx and rebuild)
+    onnx_path: ""
+    # Empty = same as onnx_path but ending in .engine. Built automatically on
+    # first start (takes a few minutes). Delete it after changing the model.
+    engine_path: ""
+    image_topic: "/zed_publisher/left/image_rect_color"
+    conf_threshold: 0.5   # 0-1, drop detections below this confidence
+    nms_threshold: 0.7    # 0-1, how much two boxes of the same class may overlap
+    fp16: true            # half precision engine (faster on Jetson)
+
+    # Class names in the same order as training (see the dataset's data.yaml).
+    # Without this, labels show up as class_0, class_1, ...
+    # class_names: ["10C", "10D", "10H", "10S", "2C", "2D", ...]

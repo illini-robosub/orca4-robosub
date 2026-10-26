@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>vision_detect_package</name>
+  <version>0.0.0</version>
+  <description>Runs YOLO (TensorRT) on the ZED left image, draws detection boxes and publishes box centers</description>
+  <maintainer email="ramanaramachandran14@gmail.com">RamanaR-2006</maintainer>
+  <license>MIT</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <depend>ament_index_cpp</depend>
+  <depend>rclcpp</depend>
+  <depend>sensor_msgs</depend>
+  <depend>geometry_msgs</depend>
+  <depend>cv_bridge</depend>
+  <depend>robosub_msgs</depend>
+  <depend>libopencv-dev</depend>
+  <!-- CUDA and TensorRT come with JetPack, not rosdep -->
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>
