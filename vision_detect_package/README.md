@@ -10,9 +10,9 @@ left color image from [`orca_zed_publisher`](../zed_camera_publisher/orca_zed_pu
 The model is an Ultralytics `.onnx` file. On first start the node turns it into a TensorRT `.engine`
 file optimized for this Jetson's GPU (takes a few minutes), and reuses that engine on every start after.
 
-> **The node needs `weights/best.onnx`, not `best.pt`.** The repo currently has only `best.pt`, so
-> export it first (see [Getting a model](#getting-a-model)). Without a model the node still runs and
-> republishes the camera image, just with no detections.
+> **The node loads `weights/best.onnx`** (the card detection model), not `best.pt`. To use a different
+> model, export it to `.onnx` and replace that file (see [Getting a model](#getting-a-model)). Without
+> a model the node still runs and republishes the camera image, just with no detections.
 
 ---
 
